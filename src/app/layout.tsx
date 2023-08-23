@@ -1,8 +1,17 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Space_Grotesk, Inter } from "next/font/google";
+import Navbar from "./components/Navbar";
 
-const inter = Inter({ subsets: ["latin"] });
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
+  variable: "--display-font",
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--body-font",
+});
 
 export const metadata: Metadata = {
   title: "Next Shop",
@@ -16,7 +25,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={`${spaceGrotesk.variable} ${inter.variable}`}>
+        <Navbar />
+        {children}
+      </body>
     </html>
   );
 }
