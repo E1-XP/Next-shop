@@ -39,14 +39,14 @@ const Navbar = () => {
 
   return (
     <nav className="h-[72px] border border-black flex items-center">
-      <div className="wrapper w-full mx-auto flex justify-between items-center">
+      <div className="wrapper w-full flex justify-between items-center">
         <Link href="/">
           <h1 className="text-xl font-display font-semibold -tracking-[0.7px] whitespace-nowrap">
             {data.logoText}
           </h1>
         </Link>
         <div
-          className={`bg-white max-sm:transition-opacity flex max-sm:gap-16 max-sm:pt-16 sm:justify-between w-full max-sm:flex-col max-sm:absolute max-sm:top-[72px] max-sm:left-0 max-sm:h-[calc(100%_-_72px)] ${
+          className={`z-40 bg-white max-sm:transition-opacity flex max-sm:gap-16 max-sm:pt-16 sm:justify-between w-full max-sm:flex-col max-sm:absolute max-sm:top-[72px] max-sm:left-0 max-sm:h-[calc(100%_-_72px)] ${
             isMenuOpen ? "" : "max-sm:opacity-0 max-sm:pointer-events-none"
           }`}
         >
