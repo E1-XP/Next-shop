@@ -11,8 +11,8 @@ interface Props {
 }
 
 const Dropdown = ({ options, showIndicator = true }: Props) => {
-  const [referenceElement, setReferenceElement] = React.useState(null);
-  const [popperElement, setPopperElement] = React.useState(null);
+  const [referenceElement, setReferenceElement] = React.useState<any>(null);
+  const [popperElement, setPopperElement] = React.useState<any>(null);
 
   const { styles, attributes, update } = usePopper(
     referenceElement,

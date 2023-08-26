@@ -18,6 +18,7 @@ const config: Config = {
         grayWhite: "#bcbcbc",
         medGray: "#000000a6",
         darkGray: "#212529",
+        orange: "#ffa726",
       },
     },
   },

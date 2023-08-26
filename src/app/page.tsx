@@ -1,9 +1,17 @@
-import prisma from "./../../prisma/client";
+import prisma from "@/../prisma/client";
 import { Product } from "@prisma/client";
 
-export default async function Home() {
-  const products: Product[] = []; //(await prisma.product.findMany()) || [];
-  const item = (products.length && products[0].name) || "Nothing found.";
+import ProductList from "./components/ProductList";
 
-  return <main className="">{item}</main>;
+export default async function Home() {
+  const p: Product[] = (await prisma.product.findMany()) || [];
+  const products = Array(8)
+    .fill(null)
+    .map((_, i) => p[i % 2 ? 1 : 0]);
+
+  return (
+    <main className="">
+      <ProductList products={products} />
+    </main>
+  );
 }
