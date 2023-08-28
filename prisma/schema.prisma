@@ -8,20 +8,24 @@ datasource db {
 }
 
 model Product {
-  id        Int      @id @default(autoincrement())
-  modelId   String
-  productId String
-  name      String
-  brand     String
-  price     Int
-  oldPrice  Int
-  rating    Int
-  color     String
-  xs        Int
-  sm        Int
-  md        Int
-  lg        Int
-  xl        Int
-  xxl       Int
-  images    String[]
+  id            Int      @id @default(autoincrement())
+  modelId       String
+  productId     String
+  gender        Int // 0 => "man", 1 => "woman", 2 => "unisex"
+  category      Int // like 0 => "T-Shirts"
+  name          String
+  brand         String
+  price         Int
+  oldPrice      Int
+  rating        Int
+  color         String // hex code
+  xs            Int
+  sm            Int
+  md            Int
+  lg            Int
+  xl            Int
+  xxl           Int
+  descriptionEN String
+  descriptionPL String
+  images        String[]
 }
