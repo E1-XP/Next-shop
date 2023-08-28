@@ -38,7 +38,7 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
   return (
-    <nav className="h-[72px] border border-black flex items-center">
+    <nav className="h-[72px] flex items-center">
       <div className="wrapper w-full flex justify-between items-center">
         <Link href="/">
           <h1 className="text-xl font-display font-semibold -tracking-[0.7px] whitespace-nowrap">

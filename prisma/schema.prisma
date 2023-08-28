@@ -9,6 +9,7 @@ datasource db {
 
 model Product {
   id        Int      @id @default(autoincrement())
+  modelId   String
   productId String
   name      String
   brand     String
@@ -16,5 +17,11 @@ model Product {
   oldPrice  Int
   rating    Int
   color     String
+  xs        Int
+  sm        Int
+  md        Int
+  lg        Int
+  xl        Int
+  xxl       Int
   images    String[]
 }
