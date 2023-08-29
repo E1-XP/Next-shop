@@ -12,14 +12,13 @@ interface Props {
 
 const Breadcrumbs = ({ data }: Props) => {
   return (
-    <p className="flex gap-2">
+    <p className="flex gap-3 font-body font-normal text-sm text-grayWhite">
       {data.map((item, i, arr) => (
-        <Link
-          key={item.text}
-          href={item.link}
-          className="hover:opacity-70 transition"
-        >
-          {item.text} {i !== arr.length - 1 && ">"}
+        <Link key={item.text} href={item.link}>
+          <span className="hover:text-darkGray transition mr-1">
+            {item.text}
+          </span>{" "}
+          {i !== arr.length - 1 && ">"}
         </Link>
       ))}
     </p>

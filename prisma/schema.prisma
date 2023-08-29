@@ -20,9 +20,9 @@ model Product {
   rating        Int
   color         String // hex code
   xs            Int
-  sm            Int
-  md            Int
-  lg            Int
+  s             Int
+  m             Int
+  l             Int
   xl            Int
   xxl           Int
   descriptionEN String

@@ -1,6 +1,5 @@
 import * as React from "react";
 import { notFound } from "next/navigation";
-import { PageProps } from "../../../../.next/types/app/page";
 
 import prisma from "@/../prisma/client";
 import { Product } from "@prisma/client";
@@ -18,12 +17,19 @@ import HeartIcon from "@/app/components/icons/Heart";
 import QuestionCircleIcon from "@/app/components/icons/QuestionCircle";
 import ShareIcon from "@/app/components/icons/Share";
 
-const ProductPage = async ({ params }: PageProps) => {
-  const modelProducts: Product[] = await prisma.product.findMany({
-    where: { modelId: params.id },
-  });
+interface Props {
+  params: { id: string };
+}
 
-  const product = modelProducts.find((product) => product.id);
+const ProductPage = async ({ params }: Props) => {
+  const id = Number(params.id);
+
+  const product = await prisma.product.findUnique({
+    where: { id },
+  });
+  const modelProducts: Product[] = await prisma.product.findMany({
+    where: { modelId: product?.modelId },
+  });
 
   if (!product) {
     return notFound();
@@ -45,7 +51,7 @@ const ProductPage = async ({ params }: PageProps) => {
   ];
 
   const colorData = [product].concat(
-    // current product is always first
+    // current product variant is always first
     modelProducts.filter((item) => item.id !== product.id)
   );
 
@@ -69,19 +75,25 @@ const ProductPage = async ({ params }: PageProps) => {
   return (
     <div className="wrapper flex flex-wrap">
       <div className="basis-3/5">gal</div>
-      <div className="basis-2/5">
+      <div className="basis-2/5 flex flex-col gap-4">
         <Breadcrumbs data={breadcrumbsData} />
-        <p>{product?.brand}</p>
-        <p>{product?.name}</p>
+        <p className="font-display text-[34px] leading-[38px] font-normal -tracking-[0.6px]">
+          {product.brand}
+        </p>
+        <p className="font-display text-[34px] leading-[38px] font-medium -tracking-[0.6px]">
+          {product.name}
+        </p>
         <Rating rate={product.rating} />
-        <p className="flex gap-3 text-lg">
-          <span className="font-bold font-display">${product.price}</span>
-          <span className="line-through opacity-70 font-display">
+        <p className="flex gap-3 text-lg items-center">
+          <span className="block font-bold font-display text-[26px]">
+            ${product.price}
+          </span>
+          <span className="block line-through opacity-70 font-display text-base">
             ${product.oldPrice}
           </span>
         </p>
         <ColorSelector data={colorData} />
-        <SizeSelector />
+        <SizeSelector data={product} />
         <QuantityInput className="w-full" />
         <Button className="w-full">Add to Cart</Button>
         <div className="flex gap-4 md:gap-8">

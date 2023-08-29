@@ -10,7 +10,7 @@ interface Props {
 }
 
 const QuantityInput = ({ className }: Props) => {
-  const [count, setCount] = React.useState(0);
+  const [count, setCount] = React.useState(1);
 
   return (
     <div
@@ -21,7 +21,7 @@ const QuantityInput = ({ className }: Props) => {
     >
       <button
         className="w-1/3 px-3 py-1.5"
-        onClick={() => setCount(Math.max(0, count - 1))}
+        onClick={() => setCount(Math.max(1, count - 1))}
       >
         <MinusIcon className="stroke-darkGray w-5 h-5" />
       </button>
