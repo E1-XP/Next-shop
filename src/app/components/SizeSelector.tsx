@@ -4,13 +4,14 @@ import { Product } from "@prisma/client";
 import * as React from "react";
 import { twMerge } from "tailwind-merge";
 
+type sizeKeys = "xs" | "s" | "m" | "l" | "xl" | "xxl";
 interface Props {
   className?: string;
   data: Product;
 }
 
 const SizeSelector = ({ className, data }: Props) => {
-  const sizes = ["xs", "s", "m", "l", "xl", "xxl"];
+  const sizes = ["xs", "s", "m", "l", "xl", "xxl"] as sizeKeys[];
 
   const [selectedSize, setSelectedSize] = React.useState<string | null>(null);
 
