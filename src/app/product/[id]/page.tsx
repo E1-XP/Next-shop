@@ -12,7 +12,8 @@ import QuantityInput from "@/app/components/QuantityInput";
 import Breadcrumbs from "@/app/components/Breadcrumbs";
 import ColorSelector from "@/app/components/ColorSelector";
 import SizeSelector from "@/app/components/SizeSelector";
-import ProductTabs from "@/app/components/ProductTabs";
+import ProductTabs from "@/app//product/[id]/ProductTabs";
+import ProductGallery from "./ProductGallery";
 
 import HeartIcon from "@/app/components/icons/Heart";
 import QuestionCircleIcon from "@/app/components/icons/QuestionCircle";
@@ -86,7 +87,9 @@ const ProductPage = async ({ params }: Props) => {
 
   return (
     <div className="wrapper flex flex-wrap mt-8 mb-8 gap-y-[110px]">
-      <div className="basis-3/5">gal</div>
+      <div className="basis-3/5">
+        <ProductGallery data={product} />
+      </div>
       <div className="basis-2/5 flex flex-col gap-4">
         <Breadcrumbs data={breadcrumbsData} />
         <p className="font-display text-[34px] leading-[38px] font-normal -tracking-[0.6px]">
