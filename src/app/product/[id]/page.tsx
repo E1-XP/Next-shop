@@ -2,7 +2,7 @@ import * as React from "react";
 import { notFound } from "next/navigation";
 
 import prisma from "@/../prisma/client";
-import { Product } from "@prisma/client";
+import { Product, Review } from "@prisma/client";
 
 import { Categories, GenderPlurals } from "@/app/constants";
 
@@ -12,6 +12,7 @@ import QuantityInput from "@/app/components/QuantityInput";
 import Breadcrumbs from "@/app/components/Breadcrumbs";
 import ColorSelector from "@/app/components/ColorSelector";
 import SizeSelector from "@/app/components/SizeSelector";
+import ProductTabs from "@/app/components/ProductTabs";
 
 import HeartIcon from "@/app/components/icons/Heart";
 import QuestionCircleIcon from "@/app/components/icons/QuestionCircle";
@@ -29,6 +30,10 @@ const ProductPage = async ({ params }: Props) => {
   });
   const modelProducts: Product[] = await prisma.product.findMany({
     where: { modelId: product?.modelId },
+  });
+
+  const productReviews: Review[] = await prisma.review.findMany({
+    where: { productId: product?.id },
   });
 
   if (!product) {
@@ -70,10 +75,17 @@ const ProductPage = async ({ params }: Props) => {
         icon: ShareIcon,
       },
     ],
+    tabs: [
+      { tabName: "Description", content: product.descriptionEN },
+      {
+        tabName: "Reviews",
+        content: "No reviews found. Be the first to write one!",
+      },
+    ],
   };
 
   return (
-    <div className="wrapper flex flex-wrap">
+    <div className="wrapper flex flex-wrap mt-8 mb-8 gap-y-[110px]">
       <div className="basis-3/5">gal</div>
       <div className="basis-2/5 flex flex-col gap-4">
         <Breadcrumbs data={breadcrumbsData} />
@@ -108,7 +120,9 @@ const ProductPage = async ({ params }: Props) => {
           ))}
         </div>
       </div>
-      <div className="w-full">txt</div>
+      <div className="w-full">
+        <ProductTabs data={data.tabs} />
+      </div>
     </div>
   );
 };
