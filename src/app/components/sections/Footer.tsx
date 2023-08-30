@@ -30,7 +30,12 @@ const Footer = () => {
     },
   };
 
-  const isFlagDropdown = (i: number) => i === 0;
+  type LanguageDropdown = typeof data.dropdowns.language;
+  type Dropdowns = LanguageDropdown | typeof data.dropdowns.currency;
+
+  const isLanguageDropdown = (
+    dropdown: Dropdowns
+  ): dropdown is LanguageDropdown => dropdown === data.dropdowns.language;
 
   return (
     <footer className="bg-whiteGray w-full">
@@ -54,7 +59,7 @@ const Footer = () => {
             <Dropdown
               key={i}
               options={
-                isFlagDropdown(i)
+                isLanguageDropdown(options)
                   ? options.map((option) => (
                       <>
                         {

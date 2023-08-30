@@ -19,7 +19,7 @@ model Product {
   oldPrice      Int
   rating        Int
   color         String // hex code
-  xs            Int
+  xs            Int // number of products in storage
   s             Int
   m             Int
   l             Int
