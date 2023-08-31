@@ -1,13 +1,15 @@
 import * as React from "react";
 import StarIcon from "./icons/Star";
+import { twMerge } from "tailwind-merge";
 
 interface Props {
   rate: number;
+  className?: string;
 }
 
-const Rating = ({ rate }: Props) => {
+const Rating = ({ rate, className }: Props) => {
   return (
-    <div className="flex">
+    <div className={twMerge("flex", className)}>
       {Array(5)
         .fill(null)
         .map((_, i) => (

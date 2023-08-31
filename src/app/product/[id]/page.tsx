@@ -86,41 +86,41 @@ const ProductPage = async ({ params }: Props) => {
   };
 
   return (
-    <div className="wrapper flex flex-wrap mt-8 mb-8 gap-y-[110px]">
-      <div className="basis-3/5">
+    <div className="wrapper flex flex-col mt-8 mb-8 gap-y-[110px]">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-[82px]">
         <ProductGallery data={product} />
-      </div>
-      <div className="basis-2/5 flex flex-col gap-4">
-        <Breadcrumbs data={breadcrumbsData} />
-        <p className="font-display text-[34px] leading-[38px] font-normal -tracking-[0.6px]">
-          {product.brand}
-        </p>
-        <p className="font-display text-[34px] leading-[38px] font-medium -tracking-[0.6px]">
-          {product.name}
-        </p>
-        <Rating rate={product.rating} />
-        <p className="flex gap-3 text-lg items-center">
-          <span className="block font-bold font-display text-[26px]">
-            ${product.price}
-          </span>
-          <span className="block line-through opacity-70 font-display text-base">
-            ${product.oldPrice}
-          </span>
-        </p>
-        <ColorSelector data={colorData} />
-        <SizeSelector data={product} />
-        <QuantityInput className="w-full" />
-        <Button className="w-full">Add to Cart</Button>
-        <div className="flex gap-4 md:gap-8">
-          {data.iconsBar.map((item) => (
-            <button
-              key={item.text}
-              className="flex gap-1 items-center font-display font-medium text-sm md:text-base leading-7 -tracking-[0.4px] hover:opacity-70 transition"
-            >
-              <item.icon className="w-[18px] h-[18px] md:h-5 md:w-5" />
-              {item.text}
-            </button>
-          ))}
+        <div className="basis-2/5 flex flex-col gap-4">
+          <Breadcrumbs data={breadcrumbsData} />
+          <p className="font-display text-[34px] leading-[38px] font-normal -tracking-[0.6px] mt-4">
+            {product.brand}
+          </p>
+          <p className="font-display text-[34px] leading-[38px] font-medium -tracking-[0.6px]">
+            {product.name}
+          </p>
+          <Rating rate={product.rating} className="mt-4" />
+          <p className="flex gap-3 text-lg items-center mt-4">
+            <span className="block font-bold font-display text-[26px]">
+              ${product.price}
+            </span>
+            <span className="block line-through opacity-70 font-display text-base">
+              ${product.oldPrice}
+            </span>
+          </p>
+          <ColorSelector data={colorData} className="mt-4" />
+          <SizeSelector data={product} className="mt-4" />
+          <QuantityInput className="w-full mt-4" />
+          <Button className="w-full">Add to Cart</Button>
+          <div className="flex gap-4 md:gap-8">
+            {data.iconsBar.map((item) => (
+              <button
+                key={item.text}
+                className="flex gap-1 items-center font-display font-medium text-sm md:text-base leading-7 -tracking-[0.4px] hover:opacity-70 transition"
+              >
+                <item.icon className="w-[18px] h-[18px] md:h-5 md:w-5" />
+                {item.text}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
       <div className="w-full">
