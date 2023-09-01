@@ -3,6 +3,7 @@
 import { Product } from "@prisma/client";
 import Image from "next/image";
 import * as React from "react";
+import GalleryModal from "./GalleryModal";
 
 interface Props {
   data: Product;
@@ -10,8 +11,9 @@ interface Props {
 
 const ProductGallery = ({ data }: Props) => {
   const [activeIdx, setActiveIdx] = React.useState(0);
-  const [coords, setCoords] = React.useState({ x: 50, y: 50 });
+  const [coords, setCoords] = React.useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = React.useState(false);
+  const [isModalOpen, setIsModalOpen] = React.useState(false);
 
   const galleryWrapper = React.useRef<HTMLDivElement | null>(null);
 
@@ -29,48 +31,56 @@ const ProductGallery = ({ data }: Props) => {
   };
 
   return (
-    <div className="flex flex-col md:flex-row gap-4">
-      <div className="flex md:flex-col gap-4 basis-1/6">
-        {data.images.map((img, i) => (
-          <button
-            key={img}
-            className={`border-2 ${
-              activeIdx === i ? "border-darkGray" : "border-transparent"
-            }`}
-            onClick={() => setActiveIdx(i)}
-            onMouseOver={() => setActiveIdx(i)}
-          >
-            <Image
-              src={img}
-              alt={data.name}
-              width={1800}
-              height={2600}
-              className="pointer-events-none"
-            />
-          </button>
-        ))}
+    <>
+      <div className="flex flex-col md:flex-row gap-4">
+        <div className="flex md:flex-col gap-4 basis-1/6">
+          {data.images.map((img, i) => (
+            <button
+              key={img}
+              className={`border-2 ${
+                activeIdx === i ? "border-darkGray" : "border-transparent"
+              }`}
+              onClick={() => setActiveIdx(i)}
+              onMouseOver={() => setActiveIdx(i)}
+            >
+              <Image
+                src={img}
+                alt={data.name}
+                width={1800}
+                height={2600}
+                className="pointer-events-none"
+              />
+            </button>
+          ))}
+        </div>
+        <div
+          className="basis-5/6 max-md:-order-1 overflow-hidden group cursor-zoom-in"
+          onMouseMove={onMouseMove}
+          onMouseEnter={() => setIsHovering(true)}
+          onMouseLeave={() => setIsHovering(false)}
+          onClick={() => setIsModalOpen(true)}
+          ref={galleryWrapper}
+        >
+          <Image
+            src={data.images[activeIdx]}
+            alt={data.name}
+            width={1800}
+            height={2600}
+            className="pointer-events-none group-hover:object-none"
+            style={{
+              objectPosition: isHovering
+                ? `${coords.x}% ${coords.y}%`
+                : undefined,
+            }}
+          />
+        </div>
       </div>
-      <div
-        className="basis-5/6 max-md:-order-1 overflow-hidden group cursor-zoom-in"
-        onMouseMove={onMouseMove}
-        onMouseEnter={() => setIsHovering(true)}
-        onMouseLeave={() => setIsHovering(false)}
-        ref={galleryWrapper}
-      >
-        <Image
-          src={data.images[activeIdx]}
-          alt={data.name}
-          width={1800}
-          height={2600}
-          className="pointer-events-none group-hover:object-none"
-          style={{
-            objectPosition: isHovering
-              ? `${coords.x}% ${coords.y}%`
-              : undefined,
-          }}
-        />
-      </div>
-    </div>
+      <GalleryModal
+        isOpen={isModalOpen}
+        closeModal={() => setIsModalOpen(false)}
+        data={data}
+      />
+    </>
   );
 };
 

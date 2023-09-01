@@ -34,6 +34,7 @@ export default function RootLayout({
         <Navbar />
         <main>{children}</main>
         <Footer />
+        <div id="modals" />
       </body>
     </html>
   );

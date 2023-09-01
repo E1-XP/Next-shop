@@ -21,3 +21,14 @@
     }
   }
 }
+
+#gallery-modal.ReactModal__Content--after-open {
+  overflow-y: scroll;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+}
+
+#gallery-modal.ReactModal__Content--after-open::-webkit-scrollbar {
+  /* WebKit */
+  width: 0px;
+}
