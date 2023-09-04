@@ -88,8 +88,8 @@ const ProductPage = async ({ params }: Props) => {
   return (
     <div className="wrapper flex flex-col mt-8 mb-8 gap-y-[110px]">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-[82px]">
-        <ProductGallery data={product} />
-        <div className="basis-2/5 flex flex-col gap-4">
+        <ProductGallery data={product} className="max-sm:-mx-4" />
+        <div className="flex flex-col gap-4">
           <Breadcrumbs data={breadcrumbsData} />
           <p className="font-display text-[34px] leading-[38px] font-normal -tracking-[0.6px] mt-4">
             {product.brand}

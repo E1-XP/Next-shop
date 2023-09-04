@@ -6,7 +6,11 @@ import Modal from "react-modal";
 
 import { Product } from "@prisma/client";
 
+import ModalNav from "./ModalNav";
+
 import PlusIcon from "@/app/components/icons/Plus";
+
+import { useWindowSize } from "@/app/hooks/useWindowSize";
 
 Modal.setAppElement("#modals");
 
@@ -14,16 +18,28 @@ interface Props {
   isOpen: boolean;
   closeModal: () => void;
   data: Product;
+  activeIdx: number;
+  setActiveIdx: (i: number) => void;
 }
 
-const GalleryModal = ({ isOpen, closeModal, data }: Props) => {
-  const [activeIdx, setActiveIdx] = React.useState(0);
-  const [isMainImgZoomed, setIsMainImgZoomed] = React.useState(false);
+const GalleryModal = ({
+  isOpen,
+  closeModal,
+  data,
+  activeIdx,
+  setActiveIdx,
+}: Props) => {
+  const [isMainImgZoomed, setIsMainImgZoomed] = React.useState(true);
 
   const galleryWrapper = React.useRef<HTMLDivElement | null>(null);
   const modalRef = React.useRef<HTMLDivElement | null>(null);
 
+  const { width } = useWindowSize();
+  const BP_SM = 640;
+
   const onMainImgClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (width < BP_SM) return;
+
     setIsMainImgZoomed(!isMainImgZoomed);
     if (!galleryWrapper.current) return;
 
@@ -46,9 +62,14 @@ const GalleryModal = ({ isOpen, closeModal, data }: Props) => {
     if (isOpen) document.body.style.overflow = "hidden";
     else {
       document.body.style.overflow = "auto";
-      setIsMainImgZoomed(false);
     }
+
+    setIsMainImgZoomed(true);
   }, [isOpen]);
+
+  React.useEffect(() => {
+    if (width < BP_SM) closeModal();
+  }, [width]);
 
   return (
     <Modal
@@ -65,11 +86,14 @@ const GalleryModal = ({ isOpen, closeModal, data }: Props) => {
         overlay: { zIndex: "999" },
       }}
     >
-      <button onClick={closeModal} className="fixed right-4 top-4 z-40">
+      <button
+        onClick={closeModal}
+        className="hidden lg:block fixed right-4 top-4 z-40"
+      >
         <PlusIcon className="rotate-45 h-8 w-8 opacity-60 hover:opacity-100 transition" />
       </button>
       <div className="">
-        <div className="flex md:flex-col gap-4 fixed w-[125px] p-6 z-40">
+        <div className="hidden lg:flex flex-col gap-4 fixed w-[125px] p-6 z-40">
           {data.images.map((img, i) => (
             <button
               key={img}
@@ -77,7 +101,7 @@ const GalleryModal = ({ isOpen, closeModal, data }: Props) => {
                 activeIdx === i ? "border-darkGray" : "border-transparent"
               }`}
               onClick={() => setActiveIdx(i)}
-              onMouseOver={() => setActiveIdx(i)}
+              onMouseMove={() => setActiveIdx(i)}
             >
               <Image
                 src={img}
@@ -89,11 +113,17 @@ const GalleryModal = ({ isOpen, closeModal, data }: Props) => {
             </button>
           ))}
         </div>
+        <ModalNav
+          data={data}
+          closeModal={closeModal}
+          activeIdx={activeIdx}
+          setActiveIdx={setActiveIdx}
+        />
         <div
           className={
             isMainImgZoomed
-              ? "cursor-zoom-out h-full overflow-hidden"
-              : "cursor-zoom-in h-screen"
+              ? "sm:cursor-zoom-out h-full overflow-hidden"
+              : "sm:cursor-zoom-in h-screen"
           }
           ref={galleryWrapper}
           onClick={onMainImgClick}
