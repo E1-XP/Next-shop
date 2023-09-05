@@ -21,9 +21,9 @@ const SizeSelector = ({ className, data }: Props) => {
         <button
           key={size}
           disabled={data[size] <= 0}
-          className={`font-body text-sm font-normal leading-[22px] px-[15px] py-1 border  rounded-[4px] hover:opacity-70 disabled:cursor-not-allowed disabled:opacity-60 ${
+          className={`font-body text-sm font-normal leading-[22px] w-12 py-1 border  rounded-[4px] hover:opacity-70 disabled:cursor-not-allowed disabled:opacity-40 ${
             selectedSize === size
-              ? "border-darkGray2"
+              ? "border-darkGray2 ring-darkGray2 ring-1"
               : "border-grayWhite opacity-90"
           }`}
           onClick={() => setSelectedSize(size)}

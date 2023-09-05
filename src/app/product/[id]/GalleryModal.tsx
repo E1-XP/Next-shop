@@ -118,13 +118,14 @@ const GalleryModal = ({
           closeModal={closeModal}
           activeIdx={activeIdx}
           setActiveIdx={setActiveIdx}
+          className="lg:hidden"
         />
         <div
-          className={
+          className={`max-lg:mb-[72px] ${
             isMainImgZoomed
               ? "sm:cursor-zoom-out h-full overflow-hidden"
               : "sm:cursor-zoom-in h-screen"
-          }
+          }`}
           ref={galleryWrapper}
           onClick={onMainImgClick}
         >

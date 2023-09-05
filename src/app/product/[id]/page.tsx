@@ -85,6 +85,14 @@ const ProductPage = async ({ params }: Props) => {
     ],
   };
 
+  const formatPrice = (num: number) =>
+    num.toLocaleString("en-US", {
+      maximumFractionDigits: 2,
+      minimumFractionDigits: 2,
+      style: "currency",
+      currency: "USD",
+    });
+
   return (
     <div className="wrapper flex flex-col mt-8 mb-8 gap-y-[110px]">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-[82px]">
@@ -100,10 +108,10 @@ const ProductPage = async ({ params }: Props) => {
           <Rating rate={product.rating} className="mt-4" />
           <p className="flex gap-3 text-lg items-center mt-4">
             <span className="block font-bold font-display text-[26px]">
-              ${product.price}
+              {formatPrice(product.price)}
             </span>
             <span className="block line-through opacity-70 font-display text-base">
-              ${product.oldPrice}
+              {formatPrice(product.oldPrice)}
             </span>
           </p>
           <ColorSelector data={colorData} className="mt-4" />

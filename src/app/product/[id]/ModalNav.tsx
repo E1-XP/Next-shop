@@ -1,4 +1,5 @@
 import * as React from "react";
+import { twMerge } from "tailwind-merge";
 
 import PlusIcon from "@/app/components/icons/Plus";
 import ChevronRightIcon from "@/app/components/icons/ChevronRight";
@@ -10,16 +11,28 @@ interface Props {
   data: Product;
   closeModal: () => void;
   setActiveIdx: (i: number) => void;
+  className?: string;
 }
 
-const ModalNav = ({ activeIdx, data, closeModal, setActiveIdx }: Props) => {
+const ModalNav = ({
+  activeIdx,
+  data,
+  closeModal,
+  setActiveIdx,
+  className,
+}: Props) => {
   const prevImg = () =>
     setActiveIdx(activeIdx - 1 < 0 ? data.images.length - 1 : activeIdx - 1);
   const nextImg = () =>
     setActiveIdx(activeIdx + 1 > data.images.length - 1 ? 0 : activeIdx + 1);
 
   return (
-    <div className="lg:hidden bg-white fixed z-40 bottom-0 left-0 w-full h-[72px] flex justify-between items-center p-4 border-y border-whiteGray2">
+    <div
+      className={twMerge(
+        "bg-white fixed z-40 bottom-0 left-0 w-full h-[72px] flex justify-between items-center p-4 border-y border-whiteGray2",
+        className
+      )}
+    >
       <span className="font-body text-darkGray">
         {activeIdx + 1} / {data.images.length}
       </span>
