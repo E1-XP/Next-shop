@@ -80,7 +80,7 @@ const CartSummary = ({ className }: Props) => {
           {formatPrice(0)}
         </span>
       </p>
-      <Button className="mt-6 md:mt-8">{data.btnText}</Button>
+      <Button className="mt-6 md:mt-8 rounded-md">{data.btnText}</Button>
     </div>
   );
 };
