@@ -32,6 +32,10 @@
       @apply text-sm text-darkGray font-body;
     }
 
+    .button-large {
+      @apply text-darkGray font-display text-[22px] font-medium leading-[34px];
+    }
+
     .button-small {
       @apply font-display text-darkGray text-base font-medium leading-7 -tracking-[0.4px];
     }

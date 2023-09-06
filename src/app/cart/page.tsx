@@ -1,8 +1,10 @@
 import * as React from "react";
-import ProductTable from "./ProductTable";
 
 import prisma from "../../../prisma/client";
 import { Product } from "@prisma/client";
+
+import ProductTable from "./ProductTable";
+import CartSummary from "./CartSummary";
 
 const CartPage = async () => {
   const cartItems: Product[] =
@@ -16,6 +18,10 @@ const CartPage = async () => {
         <h2 className="heading-2 md:heading-1">{data.heading}</h2>
       </header>
       <ProductTable data={cartItems} className="content" />
+      <div className="grid md:grid-cols-2 content mt-[52px] w-full">
+        <div>ok</div>
+        <CartSummary />
+      </div>
     </div>
   );
 };

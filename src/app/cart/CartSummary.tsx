@@ -1,0 +1,82 @@
+"use client";
+
+import * as React from "react";
+
+import Button from "../components/Button";
+import Input from "../components/Input";
+
+import { formatPrice } from "../helpers";
+
+const CartSummary = () => {
+  const data = {
+    heading: "Cart summary",
+    shippingOptions: [
+      { name: "Standard shipping", price: 0 },
+      { name: "Express shipping", price: 15 },
+    ],
+    subtotalText: "Subtotal",
+    totalText: "Total",
+    btnText: "Checkout",
+  };
+
+  const [activeOption, setActiveOption] = React.useState(
+    data.shippingOptions[0].price
+  );
+
+  const onOptionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(e.target.value);
+
+    setActiveOption(Number(e.target.value));
+  };
+
+  return (
+    <div className="flex flex-col p-4 md:p-6 rounded-md border border-whiteGray3">
+      <h3 className="button-large">{data.heading}</h3>
+      <fieldset className="gap-3 flex flex-col mt-4">
+        {data.shippingOptions.map((option) => (
+          <div
+            key={option.name}
+            className={`flex px-4 py-[13px] border ${
+              activeOption === option.price
+                ? "border-darkGray"
+                : "border-whiteGray3"
+            } rounded gap-3 items-center`}
+          >
+            <Input
+              type="radio"
+              id={option.name}
+              value={option.price}
+              className="accent-darkGray cursor-pointer"
+              onChange={onOptionChange}
+              checked={activeOption === option.price}
+            />
+            <label
+              htmlFor={option.name}
+              className="flex justify-between items- w-full text leading-[26px]"
+            >
+              {option.name}
+              <span className="ml-auto">{formatPrice(option.price)}</span>
+            </label>
+          </div>
+        ))}
+      </fieldset>
+      <p className="flex items-center justify-between mt-[29px] py-[13px]">
+        <span className="text leading-[26px]">{data.subtotalText}</span>
+        <span className="text leading-[26px] font-semibold">
+          {formatPrice(0)}
+        </span>
+      </p>
+      <p className="flex items-center justify-between py-[13px] border-t border-whiteGray3 border-opacity-60">
+        <span className="text text-lg font-semibold leading-[30px]">
+          {data.totalText}
+        </span>
+        <span className="text text-lg font-semibold leading-[30px]">
+          {formatPrice(0)}
+        </span>
+      </p>
+      <Button className="mt-6 md:mt-8">{data.btnText}</Button>
+    </div>
+  );
+};
+
+export default CartSummary;
