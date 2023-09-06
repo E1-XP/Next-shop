@@ -1,13 +1,18 @@
 "use client";
 
 import * as React from "react";
+import { twMerge } from "tailwind-merge";
 
 import Button from "../components/Button";
 import Input from "../components/Input";
 
 import { formatPrice } from "../helpers";
 
-const CartSummary = () => {
+interface Props {
+  className?: string;
+}
+
+const CartSummary = ({ className }: Props) => {
   const data = {
     heading: "Cart summary",
     shippingOptions: [
@@ -24,13 +29,16 @@ const CartSummary = () => {
   );
 
   const onOptionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.value);
-
     setActiveOption(Number(e.target.value));
   };
 
   return (
-    <div className="flex flex-col p-4 md:p-6 rounded-md border border-whiteGray3">
+    <div
+      className={twMerge(
+        "flex flex-col p-4 md:p-6 rounded-md border border-whiteGray3",
+        className
+      )}
+    >
       <h3 className="button-large">{data.heading}</h3>
       <fieldset className="gap-3 flex flex-col mt-4">
         {data.shippingOptions.map((option) => (
@@ -52,7 +60,7 @@ const CartSummary = () => {
             />
             <label
               htmlFor={option.name}
-              className="flex justify-between items- w-full text leading-[26px]"
+              className="flex gap-2 justify-between items-center w-full text"
             >
               {option.name}
               <span className="ml-auto">{formatPrice(option.price)}</span>
@@ -61,10 +69,8 @@ const CartSummary = () => {
         ))}
       </fieldset>
       <p className="flex items-center justify-between mt-[29px] py-[13px]">
-        <span className="text leading-[26px]">{data.subtotalText}</span>
-        <span className="text leading-[26px] font-semibold">
-          {formatPrice(0)}
-        </span>
+        <span className="text">{data.subtotalText}</span>
+        <span className="text font-semibold">{formatPrice(0)}</span>
       </p>
       <p className="flex items-center justify-between py-[13px] border-t border-whiteGray3 border-opacity-60">
         <span className="text text-lg font-semibold leading-[30px]">

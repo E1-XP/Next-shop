@@ -21,7 +21,7 @@
     }
 
     .text {
-      @apply font-body text-darkGray text-base font-normal leading-6;
+      @apply font-body text-darkGray text-base font-normal leading-[26px];
     }
 
     .paragraph {
