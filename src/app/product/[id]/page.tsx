@@ -19,6 +19,8 @@ import HeartIcon from "@/app/components/icons/Heart";
 import QuestionCircleIcon from "@/app/components/icons/QuestionCircle";
 import ShareIcon from "@/app/components/icons/Share";
 
+import { formatPrice } from "@/app/helpers";
+
 interface Props {
   params: { id: string };
 }
@@ -84,14 +86,6 @@ const ProductPage = async ({ params }: Props) => {
       },
     ],
   };
-
-  const formatPrice = (num: number) =>
-    num.toLocaleString("en-US", {
-      maximumFractionDigits: 2,
-      minimumFractionDigits: 2,
-      style: "currency",
-      currency: "USD",
-    });
 
   return (
     <div className="wrapper flex flex-col mt-8 mb-8 gap-y-[110px]">

@@ -8,12 +8,36 @@
       @apply max-w-[1432px] mx-auto px-4;
     }
 
+    .content {
+      @apply max-w-[1140px] mx-auto;
+    }
+
+    .heading-1 {
+      @apply font-display font-medium text-darkGray text-[54px] leading-[58px] -tracking-[1px];
+    }
+
+    .heading-2 {
+      @apply font-display font-medium text-darkGray text-[40px] leading-[44px] -tracking-[1px];
+    }
+
+    .text {
+      @apply font-body text-darkGray text-base font-normal leading-6;
+    }
+
     .paragraph {
       @apply text-base text-darkGray font-body;
     }
 
     .paragraph-small {
       @apply text-sm text-darkGray font-body;
+    }
+
+    .button-small {
+      @apply font-display text-darkGray text-base font-medium leading-7 -tracking-[0.4px];
+    }
+
+    .button-xsmall {
+      @apply font-display text-grayWhite text-sm font-medium leading-6;
     }
 
     .link {

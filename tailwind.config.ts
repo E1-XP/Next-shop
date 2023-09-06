@@ -16,6 +16,7 @@ const config: Config = {
         white: "#ffffff",
         whiteGray: "#fafafb",
         whiteGray2: "#f5f5f5",
+        whiteGray3: "#CBCBCB",
         grayWhite: "#605F5F",
         medGray: "#000000a6",
         darkGray: "#212529",
