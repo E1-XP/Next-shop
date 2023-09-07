@@ -3,12 +3,12 @@
 import Link from "next/link";
 import * as React from "react";
 
-import Hamburger from "./Hamburger";
-import SearchIcon from "./icons/Search";
-import ProfileIcon from "./icons/Profile";
-import ShoppingBagIcon from "./icons/ShoppingBag";
+import Hamburger from "../Hamburger";
+import SearchIcon from "../icons/Search";
+import ProfileIcon from "../icons/Profile";
+import ShoppingBagIcon from "../icons/ShoppingBag";
 
-const Navbar = () => {
+const Header = () => {
   const cartItemsCount = 2;
 
   const data = {
@@ -38,14 +38,14 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
   return (
-    <nav className="h-[72px] flex items-center bg-white">
+    <header className="h-[72px] flex items-center bg-white z-40">
       <div className="wrapper w-full flex justify-between items-center">
         <Link href="/">
           <h1 className="text-xl font-display font-semibold -tracking-[0.7px] whitespace-nowrap text-darkGray">
             {data.logoText}
           </h1>
         </Link>
-        <div
+        <nav
           className={`z-40 bg-white max-sm:transition-opacity flex max-sm:gap-16 max-sm:pt-16 sm:justify-between w-full max-sm:flex-col max-sm:absolute max-sm:top-[72px] max-sm:left-0 max-sm:h-[calc(100%_-_72px)] ${
             isMenuOpen ? "" : "max-sm:opacity-0 max-sm:pointer-events-none"
           }`}
@@ -80,15 +80,15 @@ const Navbar = () => {
               </li>
             ))}
           </ul>
-        </div>
+        </nav>
         <Hamburger
           className="sm:hidden"
           isOpen={isMenuOpen}
           setIsOpen={setIsMenuOpen}
         />
       </div>
-    </nav>
+    </header>
   );
 };
 
-export default Navbar;
+export default Header;
