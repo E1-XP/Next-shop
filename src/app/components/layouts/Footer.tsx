@@ -9,8 +9,8 @@ import InstagramIcon from "../icons/Instagram";
 import TwitterIcon from "../icons/Twitter";
 import EmailIcon from "../icons/Email";
 
-import USAFlag from "./../../../../public/USAFlag.svg";
-import PolishFlag from "./../../../../public/PolishFlag.svg";
+import USAFlag from "@/../public/USAFlag.svg";
+import PolishFlag from "@/../public/PolishFlag.svg";
 
 const Footer = () => {
   const data = {
