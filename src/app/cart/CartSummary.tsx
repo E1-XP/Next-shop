@@ -39,7 +39,7 @@ const CartSummary = ({ className }: Props) => {
         className
       )}
     >
-      <h3 className="button-large">{data.heading}</h3>
+      <p className="button-large">{data.heading}</p>
       <fieldset className="gap-3 flex flex-col mt-4">
         {data.shippingOptions.map((option) => (
           <div

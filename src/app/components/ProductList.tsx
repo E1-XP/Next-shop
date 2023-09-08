@@ -15,7 +15,7 @@ const ProductList = ({ products }: Props) => {
   };
 
   return (
-    <div className="wrapper flex flex-col gap-12">
+    <section className="wrapper flex flex-col gap-12">
       <div className="flex items-center justify-between mx-auto pt-16">
         <h2 className="font-display text-2xl font-normal">{data.heading}</h2>
       </div>
@@ -26,7 +26,7 @@ const ProductList = ({ products }: Props) => {
             ))
           : "Nothing found."}
       </div>
-    </div>
+    </section>
   );
 };
 

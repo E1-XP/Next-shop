@@ -14,7 +14,7 @@ const CouponInput = ({ className }: Props) => {
 
   return (
     <div className={className}>
-      <h3 className="button-large">{data.heading}</h3>
+      <p className="button-large">{data.heading}</p>
       <p className="text text-grayWhite mt-[7px]">{data.paragraph}</p>
       <Input
         className="mt-4"
