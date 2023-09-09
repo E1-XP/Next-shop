@@ -7,16 +7,16 @@ import { Autoplay, Pagination } from "swiper/modules";
 import swiper from "swiper";
 
 import Button from "../components/Button";
+import ArrowRightIcon from "../components/icons/ArrowRight";
 
 import { useWindowSize } from "@/app/hooks/useWindowSize";
 
 import "swiper/css";
 import "swiper/css/pagination";
 
-import slide1 from "@/../public/pexels-nicolas-postiglioni-1080118.webp";
-import slide2 from "@/../public/pexels-david-fagundes-1894263.webp";
-import slide3 from "@/../public/wesley-tingey-3mGnYRUNIck-unsplash.jpg";
-import ArrowRightIcon from "../components/icons/ArrowRight";
+import slide1 from "@/../public/images/pexels-nicolas-postiglioni-1080118.webp";
+import slide2 from "@/../public/images/pexels-david-fagundes-1894263.webp";
+import slide3 from "@/../public/images/wesley-tingey-3mgnyrunick-unsplash-64fc37ee1c3bb.webp";
 
 const HeroSection = () => {
   const data = {
@@ -81,13 +81,15 @@ const HeroSection = () => {
         {data.slides.map((item, i) => (
           <SwiperSlide key={item.heading}>
             <div className="relative flex flex-col h-full">
-              <Image
-                src={item.img}
-                alt="Product campaign photo"
-                className={`pointer-events-none w-full h-full object-cover object-center md:object-[10%_48%] mask-image max-sm:!basis-1/2 ${
-                  i === 2 ? "max-sm:object-center max-md:object-left" : ""
-                }`}
-              />
+              <div className="h-full overflow-hidden">
+                <Image
+                  src={item.img}
+                  alt="Product campaign photo"
+                  className={`pointer-events-none w-full h-full object-cover object-center md:object-[10%_48%] mask-image max-sm:!basis-1/2 max-sm:scale-110 max-sm:translate-x-[-5%] max-sm:translate-y-[-1%] ${
+                    i === 2 ? "max-sm:object-center max-md:object-left" : ""
+                  }`}
+                />
+              </div>
               <div className="max-sm:wrapper max-sm:h-[305px] max-[400px]:h-[320px] max-sm:mb-10 max-sm:justify-center sm:absolute top-[50%] sm:top-[10%] md:top-[12%] inset-4 sm:left-10 lg:left-14 sm:w-[400px] lg:w-[545px] flex flex-col items-start gap-4">
                 <p className="heading-3 max-sm:text-[32px] max-sm:leading-9 sm:heading-2 lg:heading-1 uppercase !text-white">
                   {item.heading}
