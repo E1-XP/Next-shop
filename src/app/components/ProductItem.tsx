@@ -3,14 +3,16 @@ import Image from "next/image";
 import * as React from "react";
 import Rating from "./Rating";
 import Link from "next/link";
+import { twMerge } from "tailwind-merge";
 
 interface Props {
   data: Product;
+  className?: string;
 }
 
-const ProductItem = ({ data }: Props) => {
+const ProductItem = ({ data, className }: Props) => {
   return (
-    <div className="relative group">
+    <div className={twMerge("relative group", className)}>
       <Image
         src={data.images[0]}
         alt={data.name}

@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --scrollbar-width: 0px;
+}
+
 @layer components {
   @layer base {
     .wrapper {
@@ -22,6 +26,10 @@
 
     .heading-3 {
       @apply font-display font-medium text-darkGray text-4xl -tracking-[1px];
+    }
+
+    .heading-4 {
+      @apply font-display font-medium text-darkGray text-3xl -tracking-[1px];
     }
 
     .text {
