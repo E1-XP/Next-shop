@@ -1,9 +1,10 @@
 import prisma from "@/../prisma/client";
-import { Product } from "@prisma/client";
 
 import HeroSection from "./Hero";
 import ProductList from "../components/ProductList";
 import ScrollableSlider from "./ScrollableSlider";
+import NewsletterSection from "./Newsletter";
+import InstagramSection from "./Instagram";
 
 export default async function Home() {
   const products =
@@ -28,6 +29,8 @@ export default async function Home() {
           .concat(...products, ...products)
           .filter((_, i) => i < 10)}
       />
+      <NewsletterSection />
+      <InstagramSection />
     </main>
   );
 }

@@ -21,9 +21,7 @@ const ProductList = ({ products }: Props) => {
       </div>
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 justify-center">
         {products.length
-          ? products.map((product) => (
-              <ProductItem key={product.id} data={product} />
-            ))
+          ? products.map((product, i) => <ProductItem key={i} data={product} />)
           : "Nothing found."}
       </div>
     </section>

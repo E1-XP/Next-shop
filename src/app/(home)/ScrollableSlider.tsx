@@ -59,8 +59,8 @@ const ScrollableSlider = ({
         modules={[Mousewheel]}
         className="w-full !px-[max(16px,(100vw_-_(1432px_+_var(--scrollbar-width)))_/_2)]"
       >
-        {data.map((item) => (
-          <SwiperSlide key={item.id}>
+        {data.map((item, i) => (
+          <SwiperSlide key={i}>
             <ProductItem data={item} className={itemClassName} />
           </SwiperSlide>
         ))}
