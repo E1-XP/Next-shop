@@ -17,7 +17,7 @@ const ProductList = ({ products }: Props) => {
   return (
     <section className="wrapper flex flex-col gap-12 py-16">
       <div className="flex items-center justify-between mx-auto">
-        <h2 className="font-display text-2xl font-normal">{data.heading}</h2>
+        <h2 className="heading-2">{data.heading}</h2>
       </div>
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 justify-center">
         {products.length

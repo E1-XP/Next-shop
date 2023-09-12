@@ -17,19 +17,20 @@ const InstagramSection = () => {
   };
 
   return (
-    <section className="mt-[52px] text-center">
+    <section className="my-[52px] text-center wrapper">
       <Link href="#" className="text font-semibold transition hover:opacity-70">
         {data.preHeading}
       </Link>
       <h2 className="heading-2 mt-2">{data.heading}</h2>
-      <div className="mt-8 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
+      <div className="mt-8 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2">
         {data.images.map((img, i) => (
-          <Image
-            key={i}
-            src={img}
-            alt="Instagram photo from Next-shop account presenting new fashion"
-            className="object-cover object-center aspect-square pointer-events-none"
-          />
+          <Link href="#" key={i} className="group">
+            <Image
+              src={img}
+              alt="Instagram photo from Next-shop account presenting new fashion"
+              className="object-cover object-center aspect-square pointer-events-none group-hover:opacity-90 transition"
+            />
+          </Link>
         ))}
       </div>
     </section>
