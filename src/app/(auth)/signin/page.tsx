@@ -5,23 +5,25 @@ import Image from "next/image";
 import Button from "@/app/components/Button";
 import Input, { Types } from "@/app/components/Input";
 
-import img from "@/../public/images/chris-ghinda-NYQyBIUCs_A-unsplash.webp";
+import img from "@/../public/images/chris-ghinda-n4L__DFy43s-unsplash.webp";
 
 const SignUpPage = () => {
   const data = {
-    heading: "Sign up",
-    paragraph: "Already have an account?",
-    paragraphLinkText: "Sign in",
-    paragraphLinkHref: "/auth/login",
+    heading: "Sign in",
+    paragraph: "Don’t have an accout yet? ",
+    paragraphLinkText: "Sign up",
+    paragraphLinkHref: "/auth/signup",
     inputs: [
-      { type: "text", placeholder: "Your name", label: "Name" },
-      { type: "text", placeholder: "Username", label: "User name" },
       { type: "email", placeholder: "Email address", label: "Email" },
       { type: "password", placeholder: "Password", label: "Password" },
     ] as { type: Types; placeholder: string; label: string }[],
-    confirmationInput: { type: "checkbox" as Types, label: "Terms of service" },
-    confirmationText: ["I agree with", "Privacy Policy", "and", "Terms of Use"],
-    btnText: "Signup",
+    rememberMeInput: {
+      type: "checkbox" as Types,
+      label: "Remember me",
+    },
+    rememberMeText: "Remember me",
+    resetPasswordText: "Forgot password?",
+    btnText: "Sign in",
   };
 
   return (
@@ -55,29 +57,20 @@ const SignUpPage = () => {
             />
           ))}
         </div>
-        <div className="flex items-center">
+        <div className="flex justify-between items-center flex-wrap">
           <Input
-            type={data.confirmationInput.type}
-            id={data.confirmationInput.label}
-            label={data.confirmationInput.label}
+            type={data.rememberMeInput.type}
+            id={data.rememberMeInput.label}
+            label={data.rememberMeInput.label}
             className="mr-3"
           />
-          <p className="text">
-            {data.confirmationText.map((txt, i) =>
-              i % 2 ? (
-                <Link
-                  key={txt}
-                  href="#"
-                  className="text font-semibold hover:opacity-70 transition"
-                >
-                  &nbsp;
-                  {txt}&nbsp;
-                </Link>
-              ) : (
-                txt
-              )
-            )}
-          </p>
+          <p className="text mr-auto">{data.rememberMeText}</p>
+          <Link
+            href="#"
+            className="text font-semibold hover:opacity-70 transition ml-1"
+          >
+            {data.resetPasswordText}
+          </Link>
         </div>
         <Button className="rounded-md">{data.btnText}</Button>
       </div>
