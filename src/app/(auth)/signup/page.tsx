@@ -5,7 +5,7 @@ import Input, { Types } from "@/app/components/Input";
 import Link from "next/link";
 import Image from "next/image";
 
-import img from "@/../public/images/wesley-tingey-JOhjfzjeJLw-unsplash.webp";
+import img from "@/../public/images/chris-ghinda-NYQyBIUCs_A-unsplash.webp";
 
 const SignUpPage = () => {
   const data = {
@@ -14,25 +14,25 @@ const SignUpPage = () => {
     paragraphLinkText: "Sign in",
     paragraphLinkHref: "/auth/login",
     inputs: [
-      { type: "text", placeholder: "Your name" },
-      { type: "text", placeholder: "Username" },
-      { type: "email", placeholder: "Email address" },
-      { type: "password", placeholder: "Password" },
-    ] as { type: Types; placeholder: string }[],
+      { type: "text", placeholder: "Your name", label: "Name" },
+      { type: "text", placeholder: "Username", label: "User name" },
+      { type: "email", placeholder: "Email address", label: "Email" },
+      { type: "password", placeholder: "Password", label: "Password" },
+    ] as { type: Types; placeholder: string; label: string }[],
     confirmationText: ["I agree with", "Privacy Policy", "and", "Terms of Use"],
     btnText: "Signup",
   };
 
   return (
-    <div className="flex flex-col lg:flex-row">
-      <div className="basis-1/2">
+    <div className="flex flex-col lg:flex-row min-h-[calc(100vh_-_72px_-_104px)] justify-center">
+      <div className="hidden lg:block lg:basis-1/2 overflow-hidden">
         <Image
           src={img}
           alt="Model presenting latest fashion"
-          className="pointer-events-none h-auto object-cover"
+          className="pointer-events-none object-cover object-[50%_75%] h-full w-full"
         />
       </div>
-      <div className="basis-1/2 flex flex-col justify-center gap-8 max-w-[456px] mx-auto">
+      <div className="lg:basis-1/2 flex flex-col justify-center gap-8 wrapper max-w-[456px] my-8 mx-auto">
         <h2 className="heading-2">{data.heading}</h2>
         <p className="text">
           {data.paragraph}&nbsp;
@@ -49,6 +49,8 @@ const SignUpPage = () => {
               key={data.placeholder}
               type={data.type}
               placeholder={data.placeholder}
+              id={data.label}
+              label={data.label}
             />
           ))}
         </div>
