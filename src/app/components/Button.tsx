@@ -4,12 +4,14 @@ import { twMerge } from "tailwind-merge";
 interface Props {
   alt?: boolean;
   className?: string;
+  onClick?: (e: React.MouseEvent) => void;
 }
 
 const Button = ({
   children,
   className,
   alt = false,
+  onClick,
 }: React.PropsWithChildren<Props>) => {
   const standardClassName = "bg-darkGray2 text-white";
   const altClassName = "bg-white text-darkGray2";
@@ -21,6 +23,7 @@ const Button = ({
         alt ? altClassName : standardClassName,
         className
       )}
+      onClick={onClick}
     >
       {children}
     </button>

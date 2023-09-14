@@ -6,6 +6,8 @@ import { Space_Grotesk, Inter } from "next/font/google";
 import Header from "./components/layouts/Header";
 import Footer from "./components/layouts/Footer";
 
+import { AuthProvider } from "./providers";
+
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
   variable: "--display-font",
@@ -31,10 +33,12 @@ export default function RootLayout({
       <body
         className={`${spaceGrotesk.variable} ${inter.variable} flex flex-col min-h-screen [&>footer]:mt-auto relative`}
       >
-        <Header />
-        <main>{children}</main>
-        <Footer />
-        <div id="modals" />
+        <AuthProvider>
+          <Header />
+          <main>{children}</main>
+          <Footer />
+          <div id="modals" />
+        </AuthProvider>
       </body>
     </html>
   );

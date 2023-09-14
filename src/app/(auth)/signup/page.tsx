@@ -12,7 +12,7 @@ const SignUpPage = () => {
     heading: "Sign up",
     paragraph: "Already have an account?",
     paragraphLinkText: "Sign in",
-    paragraphLinkHref: "/auth/login",
+    paragraphLinkHref: "/signin",
     inputs: [
       { type: "text", placeholder: "Your name", label: "Name" },
       { type: "text", placeholder: "Username", label: "User name" },
@@ -33,7 +33,7 @@ const SignUpPage = () => {
           className="pointer-events-none object-cover object-[50%_75%] h-full w-full"
         />
       </div>
-      <div className="lg:basis-1/2 flex flex-col justify-center gap-8 wrapper w-full max-w-[456px] my-8 mx-auto">
+      <form className="lg:basis-1/2 flex flex-col justify-center gap-8 wrapper w-full max-w-[456px] my-8 mx-auto">
         <h2 className="heading-2">{data.heading}</h2>
         <p className="text">
           {data.paragraph}&nbsp;
@@ -80,7 +80,7 @@ const SignUpPage = () => {
           </p>
         </div>
         <Button className="rounded-md">{data.btnText}</Button>
-      </div>
+      </form>
     </div>
   );
 };
