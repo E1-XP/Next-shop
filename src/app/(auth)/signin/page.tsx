@@ -12,7 +12,7 @@ import Input, { Types } from "@/app/components/Input";
 import img from "@/../public/images/chris-ghinda-n4L__DFy43s-unsplash.webp";
 import GithubIcon from "@/app/components/icons/Github";
 
-const SignUpPage = () => {
+const SignInPage = () => {
   const data = {
     heading: "Sign in",
     paragraph: "Don’t have an accout yet? ",
@@ -38,25 +38,20 @@ const SignUpPage = () => {
   const [passwordValue, setPasswordValue] = React.useState("");
   const [passwordMessage, setPasswordMessage] = React.useState("");
 
-  const signUpSchema = z.object({
-    email: z.string().email().nonempty(),
-    password: z.string().nonempty(),
+  const signInSchema = z.object({
+    email: z.string().email().nonempty().trim(),
+    password: z.string().nonempty().trim(),
   });
 
   const onSubmit = () => {
     const inputsData = { email: emailValue, password: passwordValue };
-    const result = signUpSchema.safeParse(inputsData);
+    const result = signInSchema.safeParse(inputsData);
 
     if (!result.success) {
       const errorMessages = result.error.format();
 
-      const formatError = (s: string[] | undefined) =>
-        s
-          ? s.map((str, i) => (i ? str.toLowerCase() : str)).join(", ")
-          : undefined;
-
-      setEmailMessage(formatError(errorMessages.email?._errors) || "");
-      setPasswordMessage(formatError(errorMessages.password?._errors) || "");
+      setEmailMessage(errorMessages.email?._errors[0] || "");
+      setPasswordMessage(errorMessages.password?._errors[0] || "");
     } else {
       console.log("ok");
     }
@@ -150,4 +145,4 @@ const SignUpPage = () => {
   );
 };
 
-export default SignUpPage;
+export default SignInPage;

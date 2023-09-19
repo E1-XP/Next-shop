@@ -119,7 +119,7 @@ const input = ({
           />
           <button
             className="absolute right-4 top-1/2 -translate-y-1/2 hover:opacity-70 transition"
-            onClick={() => setIsvisible(!isVisible)}
+            onClick={(e) => (e.preventDefault(), setIsvisible(!isVisible))}
           >
             <span>{isVisible ? <EyeClosedIcon /> : <EyeIcon />}</span>
           </button>
