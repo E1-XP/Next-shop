@@ -4,6 +4,7 @@ import * as React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { signIn } from "next-auth/react";
+import { z } from "zod";
 
 import Button from "@/app/components/Button";
 import Input, { Types } from "@/app/components/Input";
@@ -31,6 +32,36 @@ const SignUpPage = () => {
     btnText: "Sign in",
   };
 
+  const [emailValue, setEmailValue] = React.useState("");
+  const [emailMessage, setEmailMessage] = React.useState("");
+
+  const [passwordValue, setPasswordValue] = React.useState("");
+  const [passwordMessage, setPasswordMessage] = React.useState("");
+
+  const signUpSchema = z.object({
+    email: z.string().email().nonempty(),
+    password: z.string().nonempty(),
+  });
+
+  const onSubmit = () => {
+    const inputsData = { email: emailValue, password: passwordValue };
+    const result = signUpSchema.safeParse(inputsData);
+
+    if (!result.success) {
+      const errorMessages = result.error.format();
+
+      const formatError = (s: string[] | undefined) =>
+        s
+          ? s.map((str, i) => (i ? str.toLowerCase() : str)).join(", ")
+          : undefined;
+
+      setEmailMessage(formatError(errorMessages.email?._errors) || "");
+      setPasswordMessage(formatError(errorMessages.password?._errors) || "");
+    } else {
+      console.log("ok");
+    }
+  };
+
   return (
     <div className="flex flex-col lg:flex-row min-h-[calc(100vh_-_72px_-_104px)] justify-center">
       <div className="hidden lg:block lg:basis-1/2 overflow-hidden">
@@ -42,7 +73,8 @@ const SignUpPage = () => {
       </div>
       <form
         className="lg:basis-1/2 flex flex-col justify-center gap-8 wrapper w-full max-w-[456px] my-8 mx-auto"
-        onSubmit={(e) => e.preventDefault()}
+        onSubmit={(e) => (e.preventDefault(), onSubmit())}
+        noValidate={true}
       >
         <h2 className="heading-2">{data.heading}</h2>
         <p className="text">
@@ -67,14 +99,34 @@ const SignUpPage = () => {
           <span className="border-dashed border-b border-whiteGray3 block grow mt-1"></span>
         </div>
         <div className="flex flex-col gap-8">
-          {data.inputs.map((data) => (
-            <Input
-              key={data.placeholder}
-              type={data.type}
-              placeholder={data.placeholder}
-              id={data.label}
-              label={data.label}
-            />
+          {data.inputs.map((data, i) => (
+            <div key={data.placeholder} className="relative">
+              <Input
+                type={data.type}
+                placeholder={data.placeholder}
+                id={data.label}
+                label={data.label}
+                value={i === 0 ? emailValue : passwordValue}
+                onChange={(e) => (
+                  (i === 0 ? setEmailValue : setPasswordValue).call(
+                    this,
+                    e.target.value
+                  ),
+                  (i === 0 ? setEmailMessage : setPasswordMessage).call(
+                    this,
+                    ""
+                  )
+                )}
+                className={`w-full ${
+                  i === 0
+                    ? emailMessage.length && "border-red-500 outline-red-500"
+                    : passwordMessage.length && "border-red-500 outline-red-500"
+                }`}
+              />
+              <p className="text-red-500 font-body text-sm absolute -bottom-[26px] left-0">
+                {i === 0 ? emailMessage : passwordMessage}
+              </p>
+            </div>
           ))}
         </div>
         <div className="flex justify-between items-center flex-wrap">

@@ -6,7 +6,7 @@ import { Space_Grotesk, Inter } from "next/font/google";
 import Header from "./components/layouts/Header";
 import Footer from "./components/layouts/Footer";
 
-import { AuthProvider } from "./providers";
+import { AuthProvider } from "./providers/AuthProvider";
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],

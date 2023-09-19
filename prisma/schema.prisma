@@ -28,8 +28,9 @@ model Product {
   descriptionEN String
   descriptionPL String
   images        String[]
-  Review        Review[]
+  reviews       Review[]
   createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 }
 
 model User {
@@ -38,6 +39,7 @@ model User {
   email     String   @unique
   reviews   Review[]
   createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Review {
@@ -49,4 +51,5 @@ model Review {
   authorName String
   text       String
   createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 }
