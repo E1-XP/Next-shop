@@ -4,13 +4,16 @@ import * as React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { signIn } from "next-auth/react";
-import { z } from "zod";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 import Button from "@/app/components/Button";
 import Input, { Types } from "@/app/components/Input";
 
 import img from "@/../public/images/chris-ghinda-n4L__DFy43s-unsplash.webp";
 import GithubIcon from "@/app/components/icons/Github";
+
+import { SchemaKeys, SchemaType, signInSchema } from "./validation";
 
 const SignInPage = () => {
   const data = {
@@ -20,41 +23,41 @@ const SignInPage = () => {
     paragraphLinkHref: "/signup",
     githubBtnText: "Sign in with Github",
     inputs: [
-      { type: "email", placeholder: "Email address", label: "Email" },
-      { type: "password", placeholder: "Password", label: "Password" },
-    ] as { type: Types; placeholder: string; label: string }[],
+      {
+        type: "email",
+        placeholder: "Email address",
+        label: "Email",
+        id: "email",
+      },
+      {
+        type: "password",
+        placeholder: "Password",
+        label: "Password",
+        id: "password",
+      },
+    ] as { type: Types; placeholder: string; label: string; id: SchemaKeys }[],
     rememberMeInput: {
       type: "checkbox" as Types,
       label: "Remember me",
+      id: "rememberMe",
     },
     rememberMeText: "Remember me",
     resetPasswordText: "Forgot password?",
     btnText: "Sign in",
   };
 
-  const [emailValue, setEmailValue] = React.useState("");
-  const [emailMessage, setEmailMessage] = React.useState("");
-
-  const [passwordValue, setPasswordValue] = React.useState("");
-  const [passwordMessage, setPasswordMessage] = React.useState("");
-
-  const signInSchema = z.object({
-    email: z.string().email().nonempty().trim(),
-    password: z.string().nonempty().trim(),
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<SchemaType>({
+    mode: "onChange",
+    reValidateMode: "onChange",
+    resolver: zodResolver(signInSchema),
   });
 
-  const onSubmit = () => {
-    const inputsData = { email: emailValue, password: passwordValue };
-    const result = signInSchema.safeParse(inputsData);
-
-    if (!result.success) {
-      const errorMessages = result.error.format();
-
-      setEmailMessage(errorMessages.email?._errors[0] || "");
-      setPasswordMessage(errorMessages.password?._errors[0] || "");
-    } else {
-      console.log("ok");
-    }
+  const onSubmit: SubmitHandler<SchemaType> = (data) => {
+    console.log(data);
   };
 
   return (
@@ -68,8 +71,7 @@ const SignInPage = () => {
       </div>
       <form
         className="lg:basis-1/2 flex flex-col justify-center gap-8 wrapper w-full max-w-[456px] my-8 mx-auto"
-        onSubmit={(e) => (e.preventDefault(), onSubmit())}
-        noValidate={true}
+        onSubmit={handleSubmit(onSubmit)}
       >
         <h2 className="heading-2">{data.heading}</h2>
         <p className="text">
@@ -99,27 +101,15 @@ const SignInPage = () => {
               <Input
                 type={data.type}
                 placeholder={data.placeholder}
-                id={data.label}
+                id={data.id}
                 label={data.label}
-                value={i === 0 ? emailValue : passwordValue}
-                onChange={(e) => (
-                  (i === 0 ? setEmailValue : setPasswordValue).call(
-                    this,
-                    e.target.value
-                  ),
-                  (i === 0 ? setEmailMessage : setPasswordMessage).call(
-                    this,
-                    ""
-                  )
-                )}
+                register={register}
                 className={`w-full ${
-                  i === 0
-                    ? emailMessage.length && "border-red-500 outline-red-500"
-                    : passwordMessage.length && "border-red-500 outline-red-500"
+                  errors[data.id]?.message && "border-red-500 outline-red-500"
                 }`}
               />
               <p className="text-red-500 font-body text-sm absolute -bottom-[26px] left-0">
-                {i === 0 ? emailMessage : passwordMessage}
+                {errors[data.id]?.message}
               </p>
             </div>
           ))}
@@ -127,7 +117,7 @@ const SignInPage = () => {
         <div className="flex justify-between items-center flex-wrap">
           <Input
             type={data.rememberMeInput.type}
-            id={data.rememberMeInput.label}
+            id={data.rememberMeInput.id}
             label={data.rememberMeInput.label}
             className="mr-3"
           />
@@ -139,7 +129,9 @@ const SignInPage = () => {
             {data.resetPasswordText}
           </Link>
         </div>
-        <Button className="rounded-md">{data.btnText}</Button>
+        <Button className="rounded-md" type="submit" disabled={isSubmitting}>
+          {data.btnText}
+        </Button>
       </form>
     </div>
   );

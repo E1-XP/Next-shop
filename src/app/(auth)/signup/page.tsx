@@ -3,12 +3,15 @@
 import * as React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { z } from "zod";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 import Button from "@/app/components/Button";
 import Input, { Types } from "@/app/components/Input";
 
 import img from "@/../public/images/chris-ghinda-NYQyBIUCs_A-unsplash.webp";
+
+import { SchemaKeys, SchemaType, signUpSchema } from "./validation";
 
 const SignUpPage = () => {
   const data = {
@@ -17,131 +20,53 @@ const SignUpPage = () => {
     paragraphLinkText: "Sign in",
     paragraphLinkHref: "/signin",
     inputs: [
-      { type: "text", placeholder: "Your name", label: "Name" },
-      { type: "text", placeholder: "Username", label: "User name" },
-      { type: "email", placeholder: "Email address", label: "Email" },
-      { type: "password", placeholder: "Password", label: "Password" },
+      { type: "text", placeholder: "Your name", label: "Name", id: "name" },
+      {
+        type: "text",
+        placeholder: "Username",
+        label: "Username",
+        id: "username",
+      },
+      {
+        type: "email",
+        placeholder: "Email address",
+        label: "Email",
+        id: "email",
+      },
+      {
+        type: "password",
+        placeholder: "Password",
+        label: "Password",
+        id: "password",
+      },
       {
         type: "password",
         placeholder: "Confirm password",
         label: "Confirm password",
+        id: "confirmPassword",
       },
-    ] as { type: Types; placeholder: string; label: string }[],
-    confirmationInput: { type: "checkbox" as Types, label: "Terms of service" },
+    ] as { type: Types; placeholder: string; label: string; id: SchemaKeys }[],
+    confirmationInput: {
+      type: "checkbox" as Types,
+      label: "Terms of service",
+      id: "termsConfirmation",
+    },
     confirmationText: ["I agree with", "Privacy Policy", "and", "Terms of Use"],
     btnText: "Signup",
   };
 
-  const [nameValue, setNameValue] = React.useState("");
-  const [nameMessage, setNameMessage] = React.useState("");
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<SchemaType>({
+    mode: "onChange",
+    reValidateMode: "onChange",
+    resolver: zodResolver(signUpSchema),
+  });
 
-  const [userNameValue, setUserNameValue] = React.useState("");
-  const [userNameMessage, setUserNameMessage] = React.useState("");
-
-  const [emailValue, setEmailValue] = React.useState("");
-  const [emailMessage, setEmailMessage] = React.useState("");
-
-  const [passwordValue, setPasswordValue] = React.useState("");
-  const [passwordMessage, setPasswordMessage] = React.useState("");
-
-  const [confirmPasswordValue, setConfirmPasswordValue] = React.useState("");
-  const [confirmPasswordMessage, setConfirmPasswordMessage] =
-    React.useState("");
-
-  const [termsConfirmationValue, setTermsConfirmationValue] =
-    React.useState(false);
-  const [termsConfirmationMessage, setTermsConfirmationMessage] =
-    React.useState("");
-
-  const inputSetters = [
-    [setNameValue, setNameMessage],
-    [setUserNameValue, setUserNameMessage],
-    [setEmailValue, setEmailMessage],
-    [setPasswordValue, setPasswordMessage],
-    [setConfirmPasswordValue, setConfirmPasswordMessage],
-  ];
-
-  const inputGetters = [
-    [nameValue, nameMessage],
-    [userNameValue, userNameMessage],
-    [emailValue, emailMessage],
-    [passwordValue, passwordMessage],
-    [confirmPasswordValue, confirmPasswordMessage],
-  ];
-
-  const signUpSchema = z
-    .object({
-      name: z
-        .string()
-        .min(2)
-        .max(24)
-        .regex(
-          new RegExp(/^[a-zA-Z\s]*\s+[a-zA-Z\s]*$/),
-          "Write your name and surname divided by space"
-        )
-        .trim(),
-      userName: z
-        .string()
-        .min(2)
-        .max(24)
-        .regex(
-          new RegExp(/^[a-zA-Z0-9-_]+$/),
-          "Alphanumeric, underscores or dash characters only"
-        )
-        .trim(),
-      email: z.string().email().nonempty().trim(),
-      password: z
-        .string()
-        .min(8)
-        .max(32)
-        .regex(
-          new RegExp(
-            /^(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\/\-=|]).*(?=.*[a-zA-Z]).*(?=.*\d).+$/
-          ),
-          "Please combine numbers, letters and special characters"
-        )
-        .trim(),
-      confirmPassword: z.string().min(8).trim(),
-      termsConfirmation: z.literal(true),
-    })
-    .superRefine(({ confirmPassword, password }, ctx) => {
-      if (confirmPassword !== password) {
-        ctx.addIssue({
-          code: "custom",
-          message: "The passwords did not match",
-          path: ["confirmPassword"],
-        });
-      }
-    });
-
-  const onSubmit = () => {
-    const inputsData = {
-      name: nameValue,
-      userName: userNameValue,
-      email: emailValue,
-      password: passwordValue,
-      confirmPassword: confirmPasswordValue,
-      termsConfirmation: termsConfirmationValue,
-    };
-
-    const result = signUpSchema.safeParse(inputsData);
-
-    if (!result.success) {
-      const errorMessages = result.error.format();
-
-      setNameMessage(errorMessages.name?._errors[0] || "");
-      setUserNameMessage(errorMessages.userName?._errors[0] || "");
-      setEmailMessage(errorMessages.email?._errors[0] || "");
-      setPasswordMessage(errorMessages.password?._errors[0] || "");
-      setConfirmPasswordMessage(
-        errorMessages.confirmPassword?._errors[0] || ""
-      );
-      setTermsConfirmationMessage(
-        errorMessages.termsConfirmation?._errors[0] || ""
-      );
-    } else {
-      console.log("ok");
-    }
+  const onSubmit: SubmitHandler<SchemaType> = (data) => {
+    console.log(data);
   };
 
   return (
@@ -155,8 +80,7 @@ const SignUpPage = () => {
       </div>
       <form
         className="lg:basis-1/2 flex flex-col justify-center gap-8 wrapper w-full max-w-[456px] my-8 mx-auto"
-        onSubmit={(e) => (e.preventDefault(), onSubmit())}
-        noValidate={true}
+        onSubmit={handleSubmit(onSubmit)}
       >
         <h2 className="heading-2">{data.heading}</h2>
         <p className="text">
@@ -174,17 +98,15 @@ const SignUpPage = () => {
               <Input
                 type={data.type}
                 placeholder={data.placeholder}
-                id={data.label}
+                id={data.id}
                 label={data.label}
-                onChange={(e) => (
-                  inputSetters[i][0](e.target.value), inputSetters[i][1]("")
-                )}
+                register={register}
                 className={`w-full ${
-                  inputGetters[i][1].length && "border-red-500 outline-red-500"
+                  errors[data.id]?.message && "border-red-500 outline-red-500"
                 }`}
               />
               <p className="text-red-500 font-body text-sm absolute -bottom-[26px] left-0">
-                {inputGetters[i][1]}
+                {errors[data.id]?.message}
               </p>
             </div>
           ))}
@@ -192,21 +114,17 @@ const SignUpPage = () => {
         <div className="flex items-center">
           <Input
             type={data.confirmationInput.type}
-            id={data.confirmationInput.label}
+            id={data.confirmationInput.id}
             label={data.confirmationInput.label}
             className={`mr-3 ${
-              termsConfirmationMessage.length &&
+              errors.termsConfirmation?.message &&
               "ring-red-500 ring-1 ring-inset"
             }`}
-            checked={termsConfirmationValue}
-            onChange={(e) => (
-              setTermsConfirmationValue(!termsConfirmationValue),
-              !termsConfirmationValue && setTermsConfirmationMessage("")
-            )}
+            register={register}
           />
           <p
             className={`text ${
-              termsConfirmationMessage.length && "text-red-500"
+              errors.termsConfirmation?.message && "text-red-500"
             }`}
           >
             {data.confirmationText.map((txt, i) =>
@@ -225,7 +143,9 @@ const SignUpPage = () => {
             )}
           </p>
         </div>
-        <Button className="rounded-md">{data.btnText}</Button>
+        <Button type="submit" className="rounded-md" disabled={isSubmitting}>
+          {data.btnText}
+        </Button>
       </form>
     </div>
   );

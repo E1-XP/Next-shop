@@ -9,6 +9,7 @@ const CouponInput = ({ className }: Props) => {
     heading: "Have a coupon?",
     paragraph: "Add your code for an instant cart discount",
     inputPlaceholder: "Enter code",
+    inputLabel: "Coupons",
     inputBtnText: "Apply",
   };
 
@@ -20,6 +21,8 @@ const CouponInput = ({ className }: Props) => {
         className="mt-4"
         placeholder={data.inputPlaceholder}
         withSubmitButton={data.inputBtnText}
+        label={data.inputLabel}
+        id={data.inputLabel}
       />
     </div>
   );

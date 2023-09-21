@@ -53,6 +53,7 @@ const CartSummary = ({ className }: Props) => {
             <Input
               type="radio"
               id={option.name}
+              label={option.name}
               value={option.price}
               className="accent-darkGray cursor-pointer"
               onChange={onOptionChange}

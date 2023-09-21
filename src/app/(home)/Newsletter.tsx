@@ -6,6 +6,7 @@ const NewsletterSection = () => {
     heading: "Join Our Newsletter",
     paragraph: "Big discounts and right to your inbox.",
     inputPlaceholder: "Email address",
+    inputLabel: "Newsletter",
     inputBtnText: "Signup",
   };
 
@@ -18,6 +19,8 @@ const NewsletterSection = () => {
           placeholder={data.inputPlaceholder}
           withSubmitButton={data.inputBtnText}
           className="mt-8 w-full"
+          label={data.inputLabel}
+          id={data.inputLabel}
         />
       </div>
     </section>
