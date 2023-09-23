@@ -52,7 +52,7 @@ const SignUpPage = () => {
       id: "termsConfirmation",
     },
     confirmationText: ["I agree with", "Privacy Policy", "and", "Terms of Use"],
-    btnText: "Signup",
+    btnText: "Sign up",
   };
 
   const {
@@ -65,8 +65,20 @@ const SignUpPage = () => {
     resolver: zodResolver(signUpSchema),
   });
 
-  const onSubmit: SubmitHandler<SchemaType> = (data) => {
+  const onSubmit: SubmitHandler<SchemaType> = async (data) => {
     console.log(data);
+
+    const request = await fetch("api/signup", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    const toJson = request.json();
+
+    console.log(toJson);
   };
 
   return (

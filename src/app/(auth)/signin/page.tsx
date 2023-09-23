@@ -14,6 +14,7 @@ import img from "@/../public/images/chris-ghinda-n4L__DFy43s-unsplash.webp";
 import GithubIcon from "@/app/components/icons/Github";
 
 import { SchemaKeys, SchemaType, signInSchema } from "./validation";
+import { useRouter } from "next/navigation";
 
 const SignInPage = () => {
   const data = {
@@ -56,8 +57,17 @@ const SignInPage = () => {
     resolver: zodResolver(signInSchema),
   });
 
+  const router = useRouter();
+
   const onSubmit: SubmitHandler<SchemaType> = (data) => {
     console.log(data);
+
+    signIn("credentials", {
+      ...data,
+      redirect: false,
+    });
+
+    router.push("/");
   };
 
   return (

@@ -3,7 +3,7 @@ import { z } from "zod";
 export type SchemaType = z.infer<typeof signUpSchema>;
 export type SchemaKeys = keyof SchemaType;
 
-const userRegex = /^[a-zA-Z\s]*\s+[a-zA-Z\s]*$/;
+const userRegex = /^[a-zA-Z]+( [a-zA-Z]+)+$/;
 const userNameRegex = /^[a-zA-Z0-9-_]+$/;
 const passwordRegex =
   /^(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\/\-=|]).*(?=.*[a-zA-Z]).*(?=.*\d).+$/;
