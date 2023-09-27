@@ -7,6 +7,7 @@ import Header from "./components/layouts/Header";
 import Footer from "./components/layouts/Footer";
 
 import { AuthProvider } from "./providers/AuthProvider";
+import { QueryProvider } from "./providers/QueryProvider";
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -33,12 +34,14 @@ export default function RootLayout({
       <body
         className={`${spaceGrotesk.variable} ${inter.variable} flex flex-col min-h-screen [&>footer]:mt-auto relative`}
       >
-        <AuthProvider>
-          <Header />
-          <main>{children}</main>
-          <Footer />
-          <div id="modals" />
-        </AuthProvider>
+        <QueryProvider>
+          <AuthProvider>
+            <Header />
+            <main>{children}</main>
+            <Footer />
+            <div id="modals" />
+          </AuthProvider>
+        </QueryProvider>
       </body>
     </html>
   );

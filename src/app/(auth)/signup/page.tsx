@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useMutation } from "@tanstack/react-query";
 
 import Button from "@/app/components/Button";
 import Input, { Types } from "@/app/components/Input";
@@ -65,21 +66,19 @@ const SignUpPage = () => {
     resolver: zodResolver(signUpSchema),
   });
 
-  const onSubmit: SubmitHandler<SchemaType> = async (data) => {
-    console.log(data);
+  const { mutateAsync: createUser } = useMutation({
+    mutationFn: async (data: SchemaType) => {
+      const request = await fetch("api/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
 
-    const request = await fetch("api/signup", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
-
-    const toJson = request.json();
-
-    console.log(toJson);
-  };
+      return request.json();
+    },
+  });
 
   return (
     <div className="flex flex-col lg:flex-row min-h-[calc(100vh_-_72px_-_104px)] justify-center">
@@ -92,7 +91,7 @@ const SignUpPage = () => {
       </div>
       <form
         className="lg:basis-1/2 flex flex-col justify-center gap-8 wrapper w-full max-w-[456px] my-8 mx-auto"
-        onSubmit={handleSubmit(onSubmit)}
+        onSubmit={handleSubmit((data) => createUser(data))}
       >
         <h2 className="heading-2">{data.heading}</h2>
         <p className="text">
