@@ -60,8 +60,6 @@ const SignInPage = () => {
   const router = useRouter();
 
   const onSubmit: SubmitHandler<SchemaType> = (data) => {
-    console.log(data);
-
     signIn("credentials", {
       ...data,
       redirect: false,

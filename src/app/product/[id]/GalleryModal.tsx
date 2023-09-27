@@ -11,6 +11,7 @@ import ModalNav from "./ModalNav";
 import PlusIcon from "@/app/components/icons/Plus";
 
 import { useWindowSize } from "@/app/hooks/useWindowSize";
+import { breakPoints } from "@/app/styles/constants";
 
 Modal.setAppElement("#modals");
 
@@ -35,10 +36,9 @@ const GalleryModal = ({
   const modalRef = React.useRef<HTMLDivElement | null>(null);
 
   const { width } = useWindowSize();
-  const BP_SM = 640;
 
   const onMainImgClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (width < BP_SM) return;
+    if (width < breakPoints.SM) return;
 
     setIsMainImgZoomed(!isMainImgZoomed);
     if (!galleryWrapper.current) return;
@@ -68,7 +68,7 @@ const GalleryModal = ({
   }, [isOpen]);
 
   React.useEffect(() => {
-    if (width < BP_SM) closeModal();
+    if (width < breakPoints.SM) closeModal();
   }, [width]);
 
   return (

@@ -10,6 +10,7 @@ import Button from "../components/Button";
 import ArrowRightIcon from "../components/icons/ArrowRight";
 
 import { useWindowSize } from "@/app/hooks/useWindowSize";
+import { breakPoints } from "../styles/constants";
 
 import "swiper/css";
 import "swiper/css/pagination";
@@ -52,8 +53,7 @@ const HeroSection = () => {
   const onSlideChange = (instance: swiper) => setSlideIdx(instance.realIndex);
 
   const { width } = useWindowSize();
-  const BP_SM = 640;
-  const isMobile = width < BP_SM;
+  const isMobile = width < breakPoints.SM;
 
   return (
     <section

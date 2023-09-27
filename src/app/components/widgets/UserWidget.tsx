@@ -8,11 +8,7 @@ import ProfileIcon from "../icons/Profile";
 import Button from "../Button";
 import { useRouter } from "next/navigation";
 
-interface Props {
-  className?: string;
-}
-
-const UserWidget = ({ className }: Props) => {
+const UserWidget = () => {
   const session = useSession();
   const router = useRouter();
 
