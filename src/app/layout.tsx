@@ -7,7 +7,7 @@ import Header from "./components/layouts/Header";
 import Footer from "./components/layouts/Footer";
 
 import { AuthProvider } from "./providers/AuthProvider";
-import { QueryProvider } from "./providers/QueryProvider";
+import { TrpcQueryProvider } from "./providers/TrpcQueryProvider";
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -34,14 +34,14 @@ export default function RootLayout({
       <body
         className={`${spaceGrotesk.variable} ${inter.variable} flex flex-col min-h-screen [&>footer]:mt-auto relative`}
       >
-        <QueryProvider>
+        <TrpcQueryProvider>
           <AuthProvider>
             <Header />
             <main>{children}</main>
             <Footer />
             <div id="modals" />
           </AuthProvider>
-        </QueryProvider>
+        </TrpcQueryProvider>
       </body>
     </html>
   );
