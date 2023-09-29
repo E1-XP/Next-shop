@@ -5,6 +5,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
 
 import Button from "@/app/components/Button";
 import Input, { Types } from "@/app/components/Input";
@@ -13,7 +15,6 @@ import img from "@/../public/images/chris-ghinda-NYQyBIUCs_A-unsplash.webp";
 
 import { SchemaKeys, SchemaType, signUpSchema } from "./validation";
 import { trpc } from "@/app/_trpc/client";
-import { useRouter } from "next/navigation";
 
 const SignUpPage = () => {
   const data = {
@@ -63,6 +64,7 @@ const SignUpPage = () => {
     register,
     handleSubmit,
     setError,
+    getValues,
     formState: { errors, isSubmitting },
   } = useForm<SchemaType>({
     mode: "onChange",
@@ -71,8 +73,15 @@ const SignUpPage = () => {
   });
 
   const { mutate: createUser } = trpc.signup.useMutation({
-    onSuccess() {
-      router.push("/");
+    async onSuccess(data) {
+      const response = await signIn("credentials", {
+        email: data.email,
+        password: getValues().password,
+        redirect: true,
+        callbackUrl: "/",
+      });
+
+      console.log(response);
     },
     onError(resp) {
       if (resp.message.toLowerCase().includes("mail")) {

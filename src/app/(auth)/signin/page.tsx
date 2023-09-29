@@ -20,7 +20,7 @@ import { useRouter } from "next/navigation";
 const SignInPage = () => {
   const data = {
     heading: "Sign in",
-    paragraph: "Don’t have an accout yet? ",
+    paragraph: "Don’t have an account yet? ",
     paragraphLinkText: "Sign up",
     paragraphLinkHref: "/signup",
     githubBtnText: "Sign in with Github",
