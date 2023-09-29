@@ -5,7 +5,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation } from "@tanstack/react-query";
 
 import Button from "@/app/components/Button";
 import Input, { Types } from "@/app/components/Input";
@@ -13,6 +12,7 @@ import Input, { Types } from "@/app/components/Input";
 import img from "@/../public/images/chris-ghinda-NYQyBIUCs_A-unsplash.webp";
 
 import { SchemaKeys, SchemaType, signUpSchema } from "./validation";
+import { trpc } from "@/app/_trpc/client";
 
 const SignUpPage = () => {
   const data = {
@@ -66,9 +66,9 @@ const SignUpPage = () => {
     resolver: zodResolver(signUpSchema),
   });
 
-  const { mutateAsync: createUser } = useMutation({
-    mutationFn: async (data: SchemaType) => {
-      const request = await fetch("api/signup", {
+  const { mutateAsync: createUser } = trpc.signup.useMutation({
+    mutationFn: async (data) => {
+      const request = await fetch("api/trpc/signUp", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
