@@ -13,6 +13,7 @@ import img from "@/../public/images/chris-ghinda-NYQyBIUCs_A-unsplash.webp";
 
 import { SchemaKeys, SchemaType, signUpSchema } from "./validation";
 import { trpc } from "@/app/_trpc/client";
+import { useRouter } from "next/navigation";
 
 const SignUpPage = () => {
   const data = {
@@ -56,9 +57,12 @@ const SignUpPage = () => {
     btnText: "Sign up",
   };
 
+  const router = useRouter();
+
   const {
     register,
     handleSubmit,
+    setError,
     formState: { errors, isSubmitting },
   } = useForm<SchemaType>({
     mode: "onChange",
@@ -66,17 +70,16 @@ const SignUpPage = () => {
     resolver: zodResolver(signUpSchema),
   });
 
-  const { mutateAsync: createUser } = trpc.signup.useMutation({
-    mutationFn: async (data) => {
-      const request = await fetch("api/trpc/signUp", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
-
-      return request.json();
+  const { mutate: createUser } = trpc.signup.useMutation({
+    onSuccess() {
+      router.push("/");
+    },
+    onError(resp) {
+      if (resp.message.toLowerCase().includes("mail")) {
+        setError("email", { type: "custom", message: resp.message });
+      } else if (resp.message.toLowerCase().includes("user")) {
+        setError("username", { type: "custom", message: resp.message });
+      }
     },
   });
 

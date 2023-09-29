@@ -1,3 +1,4 @@
+import { TRPCError } from "@trpc/server";
 import { procedure, router } from "./../trpc";
 import bcrypt from "bcrypt";
 
@@ -9,18 +10,21 @@ export const authRouter = router({
   signup: procedure.input(signUpSchema).mutation(async (opts) => {
     const { username, name, email, password, confirmPassword } = opts.input;
 
-    //server side validation TODO
-
     const emailExist = await prisma.user.findUnique({ where: { email } });
     const usernameExist = await prisma.user.findUnique({ where: { username } });
 
-    if (emailExist || usernameExist) {
-      return (
-        JSON.stringify({
-          message: "User with following email/username already exist",
-        }),
-        { status: 409 }
-      );
+    if (emailExist) {
+      throw new TRPCError({
+        code: "CONFLICT",
+        message: "User with following email already exist",
+      });
+    }
+
+    if (usernameExist) {
+      throw new TRPCError({
+        code: "CONFLICT",
+        message: "User with following username already exist",
+      });
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);

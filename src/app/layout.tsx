@@ -5,6 +5,7 @@ import { Space_Grotesk, Inter } from "next/font/google";
 
 import Header from "./components/layouts/Header";
 import Footer from "./components/layouts/Footer";
+import Toast from "./components/Toast";
 
 import { AuthProvider } from "./providers/AuthProvider";
 import { TrpcQueryProvider } from "./providers/TrpcQueryProvider";
@@ -40,6 +41,7 @@ export default function RootLayout({
             <main>{children}</main>
             <Footer />
             <div id="modals" />
+            <Toast />
           </AuthProvider>
         </TrpcQueryProvider>
       </body>

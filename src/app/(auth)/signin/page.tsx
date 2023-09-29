@@ -6,6 +6,7 @@ import Image from "next/image";
 import { signIn } from "next-auth/react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { toast } from "react-toastify";
 
 import Button from "@/app/components/Button";
 import Input, { Types } from "@/app/components/Input";
@@ -59,13 +60,17 @@ const SignInPage = () => {
 
   const router = useRouter();
 
-  const onSubmit: SubmitHandler<SchemaType> = (data) => {
-    signIn("credentials", {
+  const onSubmit: SubmitHandler<SchemaType> = async (data) => {
+    const response = await signIn("credentials", {
       ...data,
       redirect: false,
     });
 
-    router.push("/");
+    if (response?.error) {
+      toast.error(
+        "This email/password combination doesn't exist in our database."
+      );
+    } else router.push("/");
   };
 
   return (
