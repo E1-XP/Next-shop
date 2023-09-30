@@ -1,7 +1,7 @@
 import prisma from "@/../prisma/client";
 
 import HeroSection from "./Hero";
-import ProductList from "../components/ProductList";
+import ProductList from "../_components/ProductList";
 import ScrollableSlider from "./ScrollableSlider";
 import NewsletterSection from "./Newsletter";
 import InstagramSection from "./Instagram";

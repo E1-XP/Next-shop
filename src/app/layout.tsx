@@ -1,14 +1,14 @@
-import "./styles/globals.css";
+import "./_styles/globals.css";
 
 import type { Metadata } from "next";
 import { Space_Grotesk, Inter } from "next/font/google";
 
-import Header from "./components/layouts/Header";
-import Footer from "./components/layouts/Footer";
-import Toast from "./components/Toast";
+import Header from "./_components/layouts/Header";
+import Footer from "./_components/layouts/Footer";
+import Toast from "./_components/Toast";
 
-import { AuthProvider } from "./providers/AuthProvider";
-import { TrpcQueryProvider } from "./providers/TrpcQueryProvider";
+import { AuthProvider } from "./_providers/AuthProvider";
+import { TrpcQueryProvider } from "./_providers/TrpcQueryProvider";
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],

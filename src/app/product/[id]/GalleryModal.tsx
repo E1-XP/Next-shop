@@ -8,10 +8,10 @@ import { Product } from "@prisma/client";
 
 import ModalNav from "./ModalNav";
 
-import PlusIcon from "@/app/components/icons/Plus";
+import PlusIcon from "@/app/_components/icons/Plus";
 
-import { useWindowSize } from "@/app/hooks/useWindowSize";
-import { breakPoints } from "@/app/styles/constants";
+import { useWindowSize } from "@/app/_hooks/useWindowSize";
+import { breakPoints } from "@/app/_styles/constants";
 
 Modal.setAppElement("#modals");
 

@@ -1,8 +1,8 @@
 import * as React from "react";
 import { twMerge } from "tailwind-merge";
 
-import PlusIcon from "@/app/components/icons/Plus";
-import ChevronRightIcon from "@/app/components/icons/ChevronRight";
+import PlusIcon from "@/app/_components/icons/Plus";
+import ChevronRightIcon from "@/app/_components/icons/ChevronRight";
 
 import { Product } from "@prisma/client";
 

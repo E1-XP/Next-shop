@@ -10,7 +10,7 @@ import { Product } from "@prisma/client";
 import "swiper/css";
 import "swiper/css/navigation";
 import { twMerge } from "tailwind-merge";
-import ChevronRightIcon from "@/app/components/icons/ChevronRight";
+import ChevronRightIcon from "@/app/_components/icons/ChevronRight";
 
 interface Props {
   data: Product;

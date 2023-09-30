@@ -8,8 +8,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 
-import Button from "@/app/components/Button";
-import Input, { Types } from "@/app/components/Input";
+import Button from "@/app/_components/Button";
+import Input, { Types } from "@/app/_components/Input";
 
 import img from "@/../public/images/chris-ghinda-NYQyBIUCs_A-unsplash.webp";
 

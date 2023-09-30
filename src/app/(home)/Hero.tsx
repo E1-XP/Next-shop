@@ -6,11 +6,11 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
 import swiper from "swiper";
 
-import Button from "../components/Button";
-import ArrowRightIcon from "../components/icons/ArrowRight";
+import Button from "../_components/Button";
+import ArrowRightIcon from "../_components/icons/ArrowRight";
 
-import { useWindowSize } from "@/app/hooks/useWindowSize";
-import { breakPoints } from "../styles/constants";
+import { useWindowSize } from "@/app/_hooks/useWindowSize";
+import { breakPoints } from "../_styles/constants";
 
 import "swiper/css";
 import "swiper/css/pagination";

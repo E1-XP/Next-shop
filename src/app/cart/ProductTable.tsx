@@ -2,10 +2,10 @@ import * as React from "react";
 import Image from "next/image";
 
 import { Product } from "@prisma/client";
-import QuantityInput from "../components/QuantityInput";
-import { formatPrice } from "../helpers";
+import QuantityInput from "../_components/QuantityInput";
+import { formatPrice } from "../_helpers";
 import Link from "next/link";
-import TrashIcon from "../components/icons/Trash";
+import TrashIcon from "../_components/icons/Trash";
 import { twMerge } from "tailwind-merge";
 
 interface Props {

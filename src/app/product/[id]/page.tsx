@@ -6,18 +6,18 @@ import { Product, Review } from "@prisma/client";
 
 import { Categories, GenderPlurals } from "@/app/constants";
 
-import Rating from "@/app/components/Rating";
-import Button from "@/app/components/Button";
-import QuantityInput from "@/app/components/QuantityInput";
-import Breadcrumbs from "@/app/components/Breadcrumbs";
-import ColorSelector from "@/app/components/ColorSelector";
-import SizeSelector from "@/app/components/SizeSelector";
+import Rating from "@/app/_components/Rating";
+import Button from "@/app/_components/Button";
+import QuantityInput from "@/app/_components/QuantityInput";
+import Breadcrumbs from "@/app/_components/Breadcrumbs";
+import ColorSelector from "@/app/_components/ColorSelector";
+import SizeSelector from "@/app/_components/SizeSelector";
 import ProductTabs from "@/app//product/[id]/ProductTabs";
 import ProductGallery from "./ProductGallery";
 
-import HeartIcon from "@/app/components/icons/Heart";
-import QuestionCircleIcon from "@/app/components/icons/QuestionCircle";
-import ShareIcon from "@/app/components/icons/Share";
+import HeartIcon from "@/app/_components/icons/Heart";
+import QuestionCircleIcon from "@/app/_components/icons/QuestionCircle";
+import ShareIcon from "@/app/_components/icons/Share";
 
 import { formatPrice } from "@/app/helpers";
 

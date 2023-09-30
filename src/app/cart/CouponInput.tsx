@@ -1,5 +1,5 @@
 import * as React from "react";
-import Input from "../components/Input";
+import Input from "../_components/Input";
 
 interface Props {
   className?: string;

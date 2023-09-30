@@ -3,10 +3,10 @@
 import * as React from "react";
 import { twMerge } from "tailwind-merge";
 
-import Button from "../components/Button";
-import Input from "../components/Input";
+import Button from "../_components/Button";
+import Input from "../_components/Input";
 
-import { formatPrice } from "../helpers";
+import { formatPrice } from "../_helpers";
 
 interface Props {
   className?: string;
