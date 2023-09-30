@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import prisma from "@/../prisma/client";
 import { Product, Review } from "@prisma/client";
 
-import { Categories, GenderPlurals } from "@/app/constants";
+import { Categories, GenderPlurals } from "@/app/_helpers/constants";
 
 import Rating from "@/app/_components/Rating";
 import Button from "@/app/_components/Button";
@@ -19,7 +19,7 @@ import HeartIcon from "@/app/_components/icons/Heart";
 import QuestionCircleIcon from "@/app/_components/icons/QuestionCircle";
 import ShareIcon from "@/app/_components/icons/Share";
 
-import { formatPrice } from "@/app/helpers";
+import { formatPrice } from "@/app/_helpers";
 
 interface Props {
   params: { id: string };
