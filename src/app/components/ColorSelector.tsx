@@ -14,7 +14,7 @@ interface Props {
 
 const ColorSelector = ({ className, data }: Props) => {
   const params = useParams();
-  const productId = Number(params.id);
+  const productId = params.id;
 
   return (
     <div className={twMerge("flex gap-3", className)}>

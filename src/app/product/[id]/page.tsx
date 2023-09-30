@@ -26,7 +26,7 @@ interface Props {
 }
 
 const ProductPage = async ({ params }: Props) => {
-  const id = Number(params.id);
+  const id = params.id;
 
   const product = await prisma.product.findUnique({
     where: { id },
