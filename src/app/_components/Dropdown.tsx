@@ -1,6 +1,14 @@
 "use client";
 
 import * as React from "react";
+import {
+  autoUpdate,
+  useFloating,
+  shift,
+  useClick,
+  useDismiss,
+  useInteractions,
+} from "@floating-ui/react";
 
 import CaretUpIcon from "./icons/CaretUp";
 
@@ -10,49 +18,54 @@ interface Props {
 }
 
 const Dropdown = ({ options, showIndicator = true }: Props) => {
-  const [referenceElement, setReferenceElement] = React.useState<any>(null);
-  const [popperElement, setPopperElement] = React.useState<any>(null);
-
-  // const { styles, attributes, update } = usePopper(
-  //   referenceElement,
-  //   popperElement,
-  //   { placement: "top" }
-  // );
-
   const [isOpen, setIsOpen] = React.useState(false);
+
+  const { refs, floatingStyles, context } = useFloating({
+    whileElementsMounted: autoUpdate,
+    middleware: [shift()],
+    open: isOpen,
+    onOpenChange: setIsOpen,
+    placement: "top",
+  });
+
+  const click = useClick(context);
+  const dismiss = useDismiss(context);
+
+  const { getReferenceProps, getFloatingProps } = useInteractions([
+    click,
+    dismiss,
+  ]);
+
   const [activeIdx, setActiveIdx] = React.useState(0);
 
-  const toggleIsOpen = () => {
-    setIsOpen(!isOpen);
-    // update && update();
-  };
+  const toggleIsOpen = () => setIsOpen(!isOpen);
 
   const onItemClick = (i: number) => {
     setActiveIdx(i);
-    setIsOpen(false);
+    toggleIsOpen();
   };
 
   return (
-    <>
-      <div className="relative">
-        <button
-          className={`paragraph font-semibold font-display flex items-center gap-1 hover:opacity-70 ${
-            isOpen ? "opacity-70" : ""
-          }`}
-          onClick={toggleIsOpen}
-          ref={setReferenceElement}
-        >
-          {options[activeIdx]}
-          {showIndicator && (
-            <CaretUpIcon className="rotate-180 w-3 text-darkGray h-min" />
-          )}
-        </button>
+    <div className="relative">
+      <button
+        className={`paragraph font-semibold font-display flex items-center gap-1 hover:opacity-70 ${
+          isOpen ? "opacity-70" : ""
+        }`}
+        onClick={toggleIsOpen}
+        ref={refs.setReference}
+        {...getReferenceProps()}
+      >
+        {options[activeIdx]}
+        {showIndicator && (
+          <CaretUpIcon className="rotate-180 w-3 text-darkGray h-min" />
+        )}
+      </button>
+      {isOpen && (
         <ul
-          className={`bg-white border border-grayWhite w-max min-w-full rounded-md absolute z-50 py-2 ${
-            isOpen ? "" : "hidden"
-          }`}
-          ref={setPopperElement}
-          // style={ }
+          className="bg-white border border-grayWhite w-max min-w-full rounded-md absolute z-50 py-2 $"
+          ref={refs.setFloating}
+          style={floatingStyles}
+          {...getFloatingProps()}
         >
           {options.map((option, i) => (
             <li
@@ -64,14 +77,8 @@ const Dropdown = ({ options, showIndicator = true }: Props) => {
             </li>
           ))}
         </ul>
-      </div>
-      <div
-        className={`opacity-0 pointer-events-none absolute top-0 left-0 w-full h-full z-40 ${
-          isOpen ? "pointer-events-auto" : ""
-        }`}
-        onClick={toggleIsOpen}
-      ></div>
-    </>
+      )}
+    </div>
   );
 };
 
