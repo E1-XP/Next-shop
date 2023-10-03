@@ -1,7 +1,6 @@
 "use client";
 
 import * as React from "react";
-import { usePopper } from "react-popper";
 
 import CaretUpIcon from "./icons/CaretUp";
 
@@ -14,18 +13,18 @@ const Dropdown = ({ options, showIndicator = true }: Props) => {
   const [referenceElement, setReferenceElement] = React.useState<any>(null);
   const [popperElement, setPopperElement] = React.useState<any>(null);
 
-  const { styles, attributes, update } = usePopper(
-    referenceElement,
-    popperElement,
-    { placement: "top" }
-  );
+  // const { styles, attributes, update } = usePopper(
+  //   referenceElement,
+  //   popperElement,
+  //   { placement: "top" }
+  // );
 
   const [isOpen, setIsOpen] = React.useState(false);
   const [activeIdx, setActiveIdx] = React.useState(0);
 
   const toggleIsOpen = () => {
     setIsOpen(!isOpen);
-    update && update();
+    // update && update();
   };
 
   const onItemClick = (i: number) => {
@@ -53,8 +52,7 @@ const Dropdown = ({ options, showIndicator = true }: Props) => {
             isOpen ? "" : "hidden"
           }`}
           ref={setPopperElement}
-          style={styles.popper}
-          {...attributes.popper}
+          // style={ }
         >
           {options.map((option, i) => (
             <li

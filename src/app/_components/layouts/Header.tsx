@@ -5,19 +5,17 @@ import * as React from "react";
 import debounce from "lodash.debounce";
 
 import Hamburger from "../Hamburger";
+import UserWidget from "../widgets/UserWidget";
+import CartWidget from "../widgets/CartWidget";
 
 import SearchIcon from "../icons/Search";
 import ShoppingBagIcon from "../icons/ShoppingBag";
-
 import FacebookIcon from "../icons/Facebook";
 import InstagramIcon from "../icons/Instagram";
 import TwitterIcon from "../icons/Twitter";
 import EmailIcon from "../icons/Email";
-import UserWidget from "../widgets/UserWidget";
 
 const Header = () => {
-  const cartItemsCount = 2;
-
   const data = {
     logoText: "Next-Shop",
     mainMenuItems: [
@@ -38,7 +36,7 @@ const Header = () => {
     actionsMenuItems: [
       { name: "Search", component: SearchIcon },
       { name: "Profile", component: UserWidget },
-      { name: "Cart", component: ShoppingBagIcon },
+      { name: "Cart", component: CartWidget },
     ],
     socials: [
       { name: "Facebook", icon: FacebookIcon, url: "#" },
@@ -124,11 +122,6 @@ const Header = () => {
                   {item.name}
                 </span>
                 <item.component className="stroke-darkGray group-hover:opacity-60 transition" />
-                {i === arr.length - 1 && cartItemsCount && (
-                  <span className="bg-darkGray text-white text-xs font-body font-medium px-[9px] py-0.5 rounded-full ml-2 group-hover:opacity-70 transition">
-                    {cartItemsCount}
-                  </span>
-                )}
               </li>
             ))}
           </ul>
