@@ -8,9 +8,11 @@ import Button from "../Button";
 import ShoppingBagIcon from "../icons/ShoppingBag";
 
 import { formatPrice } from "@/app/_helpers";
+import { useCartStore } from "@/app/_store/cart";
 
 const CartWidget = () => {
   const router = useRouter();
+  const { products } = useCartStore();
   const [isOpen, setIsOpen] = React.useState(false);
 
   const cartItemsCount = 2;
@@ -50,7 +52,9 @@ const CartWidget = () => {
           {formatPrice(totalCost)}
         </span>
       </div>
-      <p className="text whitespace-nowrap truncate">test</p>
+      <p className="text whitespace-nowrap truncate mt-auto mb-auto">
+        Cart is empty. {products.length}
+      </p>
       <Button
         className="whitespace-nowrap rounded-md w-full mt-auto"
         onClick={onButtonClick}

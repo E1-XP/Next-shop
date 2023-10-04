@@ -8,6 +8,7 @@ const Toast = () => {
     <ToastContainer
       position={toast.POSITION.BOTTOM_RIGHT}
       toastClassName="text leading-6 text-white bg-darkGray rounded-md"
+      autoClose={2000}
     />
   );
 };

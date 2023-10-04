@@ -20,6 +20,7 @@ import QuestionCircleIcon from "@/app/_components/icons/QuestionCircle";
 import ShareIcon from "@/app/_components/icons/Share";
 
 import { formatPrice } from "@/app/_helpers";
+import AddToCartButton from "../AddToCartButton";
 
 interface Props {
   params: { id: string };
@@ -111,7 +112,7 @@ const ProductPage = async ({ params }: Props) => {
           <ColorSelector data={colorData} className="mt-4" />
           <SizeSelector data={product} className="mt-4" />
           <QuantityInput className="w-full mt-4" />
-          <Button className="w-full">Add to Cart</Button>
+          <AddToCartButton product={product} />
           <div className="flex gap-4 md:gap-8">
             {data.iconsBar.map((item) => (
               <button

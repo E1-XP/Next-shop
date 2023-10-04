@@ -7,12 +7,15 @@ import Button from "../_components/Button";
 import Input from "../_components/Input";
 
 import { formatPrice } from "../_helpers";
+import { useCartStore } from "../_store/cart";
 
 interface Props {
   className?: string;
 }
 
 const CartSummary = ({ className }: Props) => {
+  const { products } = useCartStore();
+
   const data = {
     heading: "Cart summary",
     shippingOptions: [
@@ -27,6 +30,11 @@ const CartSummary = ({ className }: Props) => {
   const [activeOption, setActiveOption] = React.useState(
     data.shippingOptions[0].price
   );
+
+  const getProductsPrice = () =>
+    products.reduce((acc, item) => acc + item.product.price * item.quantity, 0);
+
+  const getTotalPrice = () => getProductsPrice() + activeOption;
 
   const onOptionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setActiveOption(Number(e.target.value));
@@ -71,14 +79,16 @@ const CartSummary = ({ className }: Props) => {
       </fieldset>
       <p className="flex items-center justify-between mt-[29px] py-[13px]">
         <span className="text">{data.subtotalText}</span>
-        <span className="text font-semibold">{formatPrice(0)}</span>
+        <span className="text font-semibold">
+          {formatPrice(getProductsPrice())}
+        </span>
       </p>
       <p className="flex items-center justify-between py-[13px] border-t border-whiteGray3 border-opacity-60">
         <span className="text text-lg font-semibold leading-[30px]">
           {data.totalText}
         </span>
         <span className="text text-lg font-semibold leading-[30px]">
-          {formatPrice(0)}
+          {formatPrice(getTotalPrice())}
         </span>
       </p>
       <Button className="mt-6 md:mt-8 rounded-md">{data.btnText}</Button>
