@@ -60,7 +60,7 @@ const ProductPage = async ({ params }: Props) => {
     },
   ];
 
-  const colorData = [product].concat(
+  const productVariants = [product].concat(
     // current product variant is always first
     modelProducts.filter((item) => item.id !== product.id)
   );
@@ -110,7 +110,7 @@ const ProductPage = async ({ params }: Props) => {
               {formatPrice(product.oldPrice)}
             </span>
           </p>
-          <SelectAndBuy product={product} colorData={colorData} />
+          <SelectAndBuy product={product} productVariants={productVariants} />
           <div className="flex gap-4 md:gap-8">
             {data.iconsBar.map((item) => (
               <button

@@ -4,16 +4,17 @@ import { Product } from "@prisma/client";
 import * as React from "react";
 import { twMerge } from "tailwind-merge";
 
-type sizeKeys = "xs" | "s" | "m" | "l" | "xl" | "xxl";
+export type sizeKeys = "xs" | "s" | "m" | "l" | "xl" | "xxl";
 interface Props {
   className?: string;
   data: Product;
+  outsideControl: [sizeKeys | undefined, (s: sizeKeys) => void];
 }
 
-const SizeSelector = ({ className, data }: Props) => {
+const SizeSelector = ({ className, data, outsideControl }: Props) => {
   const sizes = ["xs", "s", "m", "l", "xl", "xxl"] as sizeKeys[];
 
-  const [selectedSize, setSelectedSize] = React.useState<string | null>(null);
+  const [selectedSize, setSelectedSize] = outsideControl;
 
   return (
     <div className={twMerge("flex gap-2", className)}>

@@ -6,6 +6,7 @@ import PlusIcon from "./icons/Plus";
 import MinusIcon from "./icons/Minus";
 
 import { useCartStore } from "../_store/cart";
+import { toast } from "react-toastify";
 
 type Variants = "sm" | "lg";
 interface Props {
@@ -13,6 +14,7 @@ interface Props {
   productId: string;
   outsideControl?: [number, (n: number) => void];
   className?: string;
+  isSizeSelected?: boolean;
 }
 
 const QuantityInput = ({
@@ -20,7 +22,13 @@ const QuantityInput = ({
   variant = "lg",
   productId,
   outsideControl,
+  isSizeSelected,
 }: Props) => {
+  const data = {
+    selectsizeText:
+      "Please select size first, so we can check product availability.",
+  };
+
   const { products, addProduct, removeProduct } = useCartStore();
 
   const product = products.find((p) => p.product.id === productId);
@@ -30,6 +38,12 @@ const QuantityInput = ({
   const isControlledFromOutside = !!outsideControl;
 
   const onIncrement = () => {
+    if (isSizeSelected === false) {
+      toast.info(data.selectsizeText);
+
+      return;
+    }
+
     isControlledFromOutside
       ? outsideControl[1](outsideControl[0] + 1)
       : setCount(count + 1);

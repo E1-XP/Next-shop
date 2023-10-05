@@ -55,7 +55,7 @@ const CartWidget = () => {
       </div>
       {products.length ? (
         <div className="w-full">
-          <ul className="flex flex-col max-h-[372.5px] overflow-y-scroll">
+          <ul className="flex flex-col max-h-[372.5px] overflow-y-scroll mini-scrollbar">
             {products.map(({ product, quantity }) => (
               <li
                 key={product.id}

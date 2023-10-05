@@ -11,15 +11,26 @@ import { Product } from "@prisma/client";
 interface Props {
   product: Product;
   quantity: number;
+  isSizeSelected: boolean;
 }
 
-const AddToCartButton = ({ product, quantity }: Props) => {
+const AddToCartButton = ({ product, quantity, isSizeSelected }: Props) => {
   const { addProduct } = useCartStore();
 
-  const data = { btnText: " Add to Cart", toastText: "Product added to cart." };
+  const data = {
+    btnText: " Add to Cart",
+    sizeNotSelectedText:
+      "Please select size first, so we can check product availability.",
+    toastText: "Product added to cart.",
+  };
 
   const addProductToCart = () => {
     if (typeof product.id !== "string") return;
+
+    if (!isSizeSelected) {
+      toast.info(data.sizeNotSelectedText);
+      return;
+    }
 
     addProduct({ product, quantity });
 
