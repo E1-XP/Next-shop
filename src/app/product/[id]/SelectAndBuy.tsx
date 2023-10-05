@@ -7,7 +7,7 @@ import { Product } from "@prisma/client";
 import ColorSelector from "@/app/_components/ColorSelector";
 import QuantityInput from "@/app/_components/QuantityInput";
 import SizeSelector from "@/app/_components/SizeSelector";
-import AddToCartButton from "../AddToCartButton";
+import AddToCartButton from "./AddToCartButton";
 
 interface Props {
   product: Product;

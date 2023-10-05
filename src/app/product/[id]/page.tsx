@@ -20,7 +20,7 @@ import QuestionCircleIcon from "@/app/_components/icons/QuestionCircle";
 import ShareIcon from "@/app/_components/icons/Share";
 
 import { formatPrice } from "@/app/_helpers";
-import AddToCartButton from "../AddToCartButton";
+import AddToCartButton from "./AddToCartButton";
 import SelectAndBuy from "./SelectAndBuy";
 
 interface Props {

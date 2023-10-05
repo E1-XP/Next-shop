@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import Button from "../_components/Button";
+import Button from "../../_components/Button";
 
 import { useCartStore } from "@/app/_store/cart";
 import { toast } from "react-toastify";
