@@ -10,19 +10,21 @@ import { Product } from "@prisma/client";
 
 interface Props {
   product: Product;
+  quantity: number;
 }
 
-const AddToCartButton = ({ product }: Props) => {
+const AddToCartButton = ({ product, quantity }: Props) => {
   const { addProduct } = useCartStore();
 
-  const data = { btnText: " Add to Cart" };
+  const data = { btnText: " Add to Cart", toastText: "Product added to cart." };
 
   const addProductToCart = () => {
     if (typeof product.id !== "string") return;
+    console.log(product, quantity);
 
-    addProduct({ product, quantity: 1 });
+    addProduct({ product, quantity });
 
-    toast.success("Product added to cart.");
+    toast.success(data.toastText);
   };
 
   return (

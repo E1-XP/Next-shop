@@ -82,6 +82,7 @@ const ProductTable = ({ className }: Props) => {
                       Size M, Color: TODO
                     </p>
                     <QuantityInput
+                      productId={product.id}
                       variant="sm"
                       className="bg-white border border-whiteGray3 rounded sm:hidden"
                     />
@@ -99,6 +100,7 @@ const ProductTable = ({ className }: Props) => {
               </th>
               <td className="hidden sm:block">
                 <QuantityInput
+                  productId={product.id}
                   variant="sm"
                   className="bg-white border border-whiteGray3 rounded"
                 />
