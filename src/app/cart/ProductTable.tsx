@@ -22,6 +22,7 @@ const ProductTable = ({ className }: Props) => {
   const tableData = {
     headers: ["Product", "Quantity", "Price", "Subtotal"],
     placeholderText: "Cart is empty.",
+    removeBtnText: "Remove",
   };
 
   return (
@@ -93,7 +94,9 @@ const ProductTable = ({ className }: Props) => {
                     </span>
                     <button className="flex items-center button-xsmall hover:opacity-70 transition gap-1">
                       <TrashIcon className="stroke-grayWhite w-[18px] h-[18px] shrink-0" />
-                      <span className="hidden sm:block">Remove</span>
+                      <span className="hidden sm:block">
+                        {tableData.removeBtnText}
+                      </span>
                     </button>
                   </div>
                 </div>

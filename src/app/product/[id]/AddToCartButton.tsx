@@ -20,7 +20,6 @@ const AddToCartButton = ({ product, quantity }: Props) => {
 
   const addProductToCart = () => {
     if (typeof product.id !== "string") return;
-    console.log(product, quantity);
 
     addProduct({ product, quantity });
 

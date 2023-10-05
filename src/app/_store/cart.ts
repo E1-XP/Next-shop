@@ -1,7 +1,7 @@
 import { Product } from "@prisma/client";
 import { create } from "zustand";
 
-interface CartItem {
+export interface CartItem {
   product: Product;
   quantity: number;
 }

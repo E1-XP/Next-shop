@@ -6,7 +6,7 @@ import { twMerge } from "tailwind-merge";
 import Button from "../_components/Button";
 import Input from "../_components/Input";
 
-import { formatPrice } from "../_helpers";
+import { formatPrice, getProductsPrice } from "../_helpers";
 import { useCartStore } from "../_store/cart";
 
 interface Props {
@@ -31,10 +31,7 @@ const CartSummary = ({ className }: Props) => {
     data.shippingOptions[0].price
   );
 
-  const getProductsPrice = () =>
-    products.reduce((acc, item) => acc + item.product.price * item.quantity, 0);
-
-  const getTotalPrice = () => getProductsPrice() + activeOption;
+  const getTotalPrice = () => getProductsPrice(products) + activeOption;
 
   const onOptionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setActiveOption(Number(e.target.value));
@@ -80,7 +77,7 @@ const CartSummary = ({ className }: Props) => {
       <p className="flex items-center justify-between mt-[29px] py-[13px]">
         <span className="text">{data.subtotalText}</span>
         <span className="text font-semibold">
-          {formatPrice(getProductsPrice())}
+          {formatPrice(getProductsPrice(products))}
         </span>
       </p>
       <p className="flex items-center justify-between py-[13px] border-t border-whiteGray3 border-opacity-60">
