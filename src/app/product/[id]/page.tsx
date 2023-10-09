@@ -7,21 +7,16 @@ import { Product, Review } from "@prisma/client";
 import { Categories, GenderPlurals } from "@/app/_helpers/constants";
 
 import Rating from "@/app/_components/Rating";
-import Button from "@/app/_components/Button";
-import QuantityInput from "@/app/_components/QuantityInput";
 import Breadcrumbs from "@/app/_components/Breadcrumbs";
-import ColorSelector from "@/app/_components/ColorSelector";
-import SizeSelector from "@/app/_components/SizeSelector";
 import ProductTabs from "@/app//product/[id]/ProductTabs";
 import ProductGallery from "./ProductGallery";
+import SelectAndBuy from "./SelectAndBuy";
 
 import HeartIcon from "@/app/_components/icons/Heart";
 import QuestionCircleIcon from "@/app/_components/icons/QuestionCircle";
 import ShareIcon from "@/app/_components/icons/Share";
 
 import { formatPrice } from "@/app/_helpers";
-import AddToCartButton from "./AddToCartButton";
-import SelectAndBuy from "./SelectAndBuy";
 
 interface Props {
   params: { id: string };

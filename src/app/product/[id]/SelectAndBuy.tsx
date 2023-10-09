@@ -18,24 +18,31 @@ const SelectAndBuy = ({ product, productVariants }: Props) => {
   const [quantity, setQuantity] = React.useState(1);
   const [size, selectSize] = React.useState<sizeKeys | undefined>(undefined);
 
+  const resetSize = () => selectSize(undefined);
+  const resetQuantity = () => setQuantity(1);
+
   return (
     <>
       <ColorSelector data={productVariants} className="mt-4" />
       <SizeSelector
-        data={product}
+        product={product}
         className="mt-4"
         outsideControl={[size, selectSize]}
       />
       <QuantityInput
         className="w-full mt-4"
-        productId={product.id}
+        product={product}
         outsideControl={[quantity, setQuantity]}
         isSizeSelected={size !== undefined}
+        size={size}
       />
       <AddToCartButton
         product={product}
         quantity={quantity}
         isSizeSelected={size !== undefined}
+        size={size}
+        resetSize={resetSize}
+        resetQuantity={resetQuantity}
       />
     </>
   );

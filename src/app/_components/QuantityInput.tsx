@@ -2,37 +2,48 @@
 
 import * as React from "react";
 import { twMerge } from "tailwind-merge";
+import { toast } from "react-toastify";
+
 import PlusIcon from "./icons/Plus";
 import MinusIcon from "./icons/Minus";
 
 import { useCartStore } from "../_store/cart";
-import { toast } from "react-toastify";
+import { Product } from "@prisma/client";
+import { sizeKeys } from "./SizeSelector";
 
 type Variants = "sm" | "lg";
 interface Props {
   variant?: Variants;
-  productId: string;
+  product: Product;
   outsideControl?: [number, (n: number) => void];
   className?: string;
   isSizeSelected?: boolean;
+  size?: sizeKeys;
 }
 
 const QuantityInput = ({
   className,
   variant = "lg",
-  productId,
+  product,
   outsideControl,
   isSizeSelected,
+  size,
 }: Props) => {
   const data = {
     selectsizeText:
       "Please select size first, so we can check product availability.",
+    outOfStockText:
+      "Sorry, we don't have more copies of this product in stock at this moment.",
   };
 
   const { products, addProduct, removeProduct } = useCartStore();
+  const productId = product.id;
 
-  const product = products.find((p) => p.product.id === productId);
-  const initialValue = product?.quantity || 1;
+  const productInCart = products.find(
+    (p) => p.product.id === productId && p.size === size
+  );
+
+  const initialValue = productInCart?.quantity || 1;
 
   const [count, setCount] = React.useState(initialValue);
   const isControlledFromOutside = !!outsideControl;
@@ -44,13 +55,28 @@ const QuantityInput = ({
       return;
     }
 
+    if (
+      // check size availability
+      (productInCart && // product in cart already
+        productInCart.product[productInCart.size] <=
+          (isControlledFromOutside ? outsideControl[0] : count)) ||
+      (size && // product not yet in cart
+        product[size] <= (isControlledFromOutside ? outsideControl[0] : count))
+    ) {
+      toast.info(data.outOfStockText);
+
+      return;
+    }
+
     isControlledFromOutside
       ? outsideControl[1](outsideControl[0] + 1)
       : setCount(count + 1);
 
     const quantity = isControlledFromOutside ? outsideControl[0] : 1;
 
-    !isControlledFromOutside && product && addProduct({ ...product, quantity });
+    !isControlledFromOutside &&
+      productInCart &&
+      addProduct({ ...productInCart, quantity });
   };
 
   const onDecrement = () => {
@@ -58,7 +84,10 @@ const QuantityInput = ({
       ? outsideControl[1](Math.max(1, outsideControl[0] - 1))
       : setCount(count - 1);
 
-    !isControlledFromOutside && product && removeProduct(product.product.id);
+    !isControlledFromOutside &&
+      productInCart &&
+      size &&
+      removeProduct({ id: productInCart.product.id, size });
   };
 
   return (

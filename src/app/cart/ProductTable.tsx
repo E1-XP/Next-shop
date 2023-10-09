@@ -17,7 +17,7 @@ interface Props {
 }
 
 const ProductTable = ({ className }: Props) => {
-  const { products } = useCartStore();
+  const { products, removeProduct } = useCartStore();
 
   const tableData = {
     headers: ["Product", "Quantity", "Price", "Subtotal"],
@@ -48,9 +48,9 @@ const ProductTable = ({ className }: Props) => {
       </thead>
       <tbody className={!products.length ? "h-[136px]" : ""}>
         {products.length ? (
-          products.map(({ product, quantity }) => (
+          products.map(({ product, quantity, size }) => (
             <tr
-              key={product.id}
+              key={`${product.id} ${size}`}
               className="border-b first:border-t border-whiteGray3 py-4 flex justify-between items-center gap-2"
             >
               <th
@@ -80,10 +80,11 @@ const ProductTable = ({ className }: Props) => {
                       </p>
                     </Link>
                     <p className="text font-normal text-sm leading-[20px] truncate">
-                      Size M, Color: TODO
+                      Size {size.toUpperCase()}, Color: TODO
                     </p>
                     <QuantityInput
-                      productId={product.id}
+                      product={product}
+                      size={size}
                       variant="sm"
                       className="bg-white border border-whiteGray3 rounded sm:hidden"
                     />
@@ -92,7 +93,12 @@ const ProductTable = ({ className }: Props) => {
                     <span className="sm:hidden">
                       {formatPrice(product.price)}
                     </span>
-                    <button className="flex items-center button-xsmall hover:opacity-70 transition gap-1">
+                    <button
+                      className="flex items-center button-xsmall hover:opacity-70 transition gap-1"
+                      onClick={() =>
+                        removeProduct({ id: product.id, size }, true)
+                      }
+                    >
                       <TrashIcon className="stroke-grayWhite w-[18px] h-[18px] shrink-0" />
                       <span className="hidden sm:block">
                         {tableData.removeBtnText}
@@ -103,7 +109,8 @@ const ProductTable = ({ className }: Props) => {
               </th>
               <td className="hidden sm:block">
                 <QuantityInput
-                  productId={product.id}
+                  product={product}
+                  size={size}
                   variant="sm"
                   className="bg-white border border-whiteGray3 rounded"
                 />

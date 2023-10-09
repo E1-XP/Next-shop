@@ -80,8 +80,6 @@ const SignUpPage = () => {
         redirect: true,
         callbackUrl: "/",
       });
-
-      console.log(response);
     },
     onError(resp) {
       if (resp.message.toLowerCase().includes("mail")) {

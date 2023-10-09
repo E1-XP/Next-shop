@@ -1,20 +1,31 @@
 "use client";
 
 import * as React from "react";
+import { toast } from "react-toastify";
+
 import Button from "../../_components/Button";
 
 import { useCartStore } from "@/app/_store/cart";
-import { toast } from "react-toastify";
-
 import { Product } from "@prisma/client";
+import { sizeKeys } from "@/app/_components/SizeSelector";
 
 interface Props {
   product: Product;
   quantity: number;
   isSizeSelected: boolean;
+  size: sizeKeys | undefined;
+  resetSize: () => void;
+  resetQuantity: () => void;
 }
 
-const AddToCartButton = ({ product, quantity, isSizeSelected }: Props) => {
+const AddToCartButton = ({
+  product,
+  quantity,
+  isSizeSelected,
+  size,
+  resetQuantity,
+  resetSize,
+}: Props) => {
   const { addProduct } = useCartStore();
 
   const data = {
@@ -32,9 +43,12 @@ const AddToCartButton = ({ product, quantity, isSizeSelected }: Props) => {
       return;
     }
 
-    addProduct({ product, quantity });
+    size && addProduct({ product, quantity, size });
 
     toast.success(data.toastText);
+
+    resetQuantity();
+    resetSize();
   };
 
   return (

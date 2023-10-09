@@ -22,6 +22,7 @@ const CartWidget = () => {
   const data = {
     loadingText: "Loading...",
     header: "Cart summary",
+    emptyCartText: "Cart is empty.",
     btnText: "Go to cart page",
     btnUrl: "/cart",
   };
@@ -56,9 +57,9 @@ const CartWidget = () => {
       {products.length ? (
         <div className="w-full">
           <ul className="flex flex-col max-h-[372.5px] overflow-y-scroll mini-scrollbar">
-            {products.map(({ product, quantity }) => (
+            {products.map(({ product, quantity, size }) => (
               <li
-                key={product.id}
+                key={`${product.id} ${size}`}
                 className="flex justify-between gap-4 items-center border-b first:border-t border-whiteGray3 py-2.5 px-1"
               >
                 <Image
@@ -82,7 +83,7 @@ const CartWidget = () => {
         </div>
       ) : (
         <p className="text whitespace-nowrap truncate mt-auto mb-auto">
-          Cart is empty.
+          {data.emptyCartText}
         </p>
       )}
       <Button
