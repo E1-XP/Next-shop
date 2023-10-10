@@ -3,13 +3,13 @@
 import * as React from "react";
 import { twMerge } from "tailwind-merge";
 
-import Button from "../_components/Button";
-import Input from "../_components/Input";
+import Button from "@/app/_components/Button";
+import Input from "@/app/_components/Input";
 
-import { formatPrice, getProductsPrice } from "../_helpers";
+import { formatPrice, getProductsPrice } from "@/app/_helpers";
 
-import { useCartStore } from "../_store/cart";
-import { useHydrate } from "../_hooks/useHydrate";
+import { useCartStore } from "@/app/_store/cart";
+import { useHydrate } from "@/app/_hooks/useHydrate";
 
 interface Props {
   className?: string;

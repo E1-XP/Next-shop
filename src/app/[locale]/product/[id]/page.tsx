@@ -8,7 +8,7 @@ import { Categories, GenderPlurals } from "@/app/_helpers/constants";
 
 import Rating from "@/app/_components/Rating";
 import Breadcrumbs from "@/app/_components/Breadcrumbs";
-import ProductTabs from "@/app//product/[id]/ProductTabs";
+import ProductTabs from "@/app/[locale]/product/[id]/ProductTabs";
 import ProductGallery from "./ProductGallery";
 import SelectAndBuy from "./SelectAndBuy";
 

@@ -3,7 +3,7 @@
 import * as React from "react";
 import { toast } from "react-toastify";
 
-import Button from "../../_components/Button";
+import Button from "../../../_components/Button";
 
 import { useCartStore } from "@/app/_store/cart";
 import { useHydrate } from "@/app/_hooks/useHydrate";

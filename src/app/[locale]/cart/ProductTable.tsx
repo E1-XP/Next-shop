@@ -5,13 +5,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { twMerge } from "tailwind-merge";
 
-import QuantityInput from "../_components/QuantityInput";
-import TrashIcon from "../_components/icons/Trash";
+import QuantityInput from "@/app/_components/QuantityInput";
+import TrashIcon from "@/app/_components/icons/Trash";
 
-import { formatPrice } from "../_helpers";
+import { formatPrice } from "@/app/_helpers";
 
-import { useCartStore } from "../_store/cart";
-import { useHydrate } from "../_hooks/useHydrate";
+import { useCartStore } from "@/app/_store/cart";
+import { useHydrate } from "@/app/_hooks/useHydrate";
 
 interface Props {
   className?: string;

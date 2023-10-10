@@ -4,7 +4,7 @@ import bcrypt from "bcrypt";
 
 import prisma from "@/../prisma/client";
 
-import { signUpSchema } from "@/app/(auth)/signup/validation";
+import { signUpSchema } from "@/app/[locale]/(auth)/signup/validation";
 
 export const authRouter = router({
   signup: procedure.input(signUpSchema).mutation(async (opts) => {

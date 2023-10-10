@@ -5,12 +5,13 @@ import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
 import swiper from "swiper";
+import { useTranslations } from "next-intl";
 
-import Button from "../_components/Button";
-import ArrowRightIcon from "../_components/icons/ArrowRight";
+import Button from "@/app/_components/Button";
+import ArrowRightIcon from "@/app/_components/icons/ArrowRight";
 
 import { useWindowSize } from "@/app/_hooks/useWindowSize";
-import { breakPoints } from "../_styles/constants";
+import { breakPoints } from "@/app/_styles/constants";
 
 import "swiper/css";
 import "swiper/css/pagination";
@@ -20,9 +21,11 @@ import slide2 from "@/../public/images/pexels-david-fagundes-1894263.webp";
 import slide3 from "@/../public/images/wesley-tingey-3mgnyrunick-unsplash-64fc37ee1c3bb.webp";
 
 const HeroSection = () => {
+  const t = useTranslations("Home");
+
   const data = {
     heading: "Featured",
-    buttonText: "See collection",
+    buttonText: t("Hero.buttonText"),
     slides: [
       {
         img: slide1,
