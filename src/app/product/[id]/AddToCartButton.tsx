@@ -6,6 +6,8 @@ import { toast } from "react-toastify";
 import Button from "../../_components/Button";
 
 import { useCartStore } from "@/app/_store/cart";
+import { useHydrate } from "@/app/_hooks/useHydrate";
+
 import { Product } from "@prisma/client";
 import { sizeKeys } from "@/app/_components/SizeSelector";
 
@@ -27,6 +29,7 @@ const AddToCartButton = ({
   resetSize,
 }: Props) => {
   const { addProduct } = useCartStore();
+  useHydrate();
 
   const data = {
     btnText: " Add to Cart",

@@ -8,6 +8,8 @@ import PlusIcon from "./icons/Plus";
 import MinusIcon from "./icons/Minus";
 
 import { useCartStore } from "../_store/cart";
+import { useHydrate } from "../_hooks/useHydrate";
+
 import { Product } from "@prisma/client";
 import { sizeKeys } from "./SizeSelector";
 
@@ -37,6 +39,8 @@ const QuantityInput = ({
   };
 
   const { products, addProduct, removeProduct } = useCartStore();
+  useHydrate();
+
   const productId = product.id;
 
   const productInCart = products.find(

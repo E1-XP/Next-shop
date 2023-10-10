@@ -2,18 +2,23 @@
 
 import * as React from "react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 import Widget from "./Base";
 import Button from "../Button";
 import ShoppingBagIcon from "../icons/ShoppingBag";
 
 import { formatPrice, getProductsPrice } from "@/app/_helpers";
+
 import { useCartStore } from "@/app/_store/cart";
-import Image from "next/image";
+import { useHydrate } from "@/app/_hooks/useHydrate";
 
 const CartWidget = () => {
   const router = useRouter();
+
   const { products } = useCartStore();
+  useHydrate();
+
   const [isOpen, setIsOpen] = React.useState(false);
 
   const cartItemsCount = products.length;

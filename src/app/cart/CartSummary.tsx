@@ -7,7 +7,9 @@ import Button from "../_components/Button";
 import Input from "../_components/Input";
 
 import { formatPrice, getProductsPrice } from "../_helpers";
+
 import { useCartStore } from "../_store/cart";
+import { useHydrate } from "../_hooks/useHydrate";
 
 interface Props {
   className?: string;
@@ -15,6 +17,7 @@ interface Props {
 
 const CartSummary = ({ className }: Props) => {
   const { products } = useCartStore();
+  useHydrate();
 
   const data = {
     heading: "Cart summary",

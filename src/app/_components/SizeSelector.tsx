@@ -5,6 +5,7 @@ import { twMerge } from "tailwind-merge";
 
 import { Product } from "@prisma/client";
 import { useCartStore } from "../_store/cart";
+import { useHydrate } from "../_hooks/useHydrate";
 
 export type sizeKeys = "xs" | "s" | "m" | "l" | "xl" | "xxl";
 interface Props {
@@ -15,6 +16,8 @@ interface Props {
 
 const SizeSelector = ({ className, product, outsideControl }: Props) => {
   const { products } = useCartStore();
+  useHydrate();
+
   const productId = product.id;
 
   const [selectedSize, setSelectedSize] = outsideControl;
@@ -38,7 +41,7 @@ const SizeSelector = ({ className, product, outsideControl }: Props) => {
               product[size] <= 0 ||
               (productInCart && product[size] - productInCart.quantity <= 0)
             }
-            className={`font-body text-sm font-normal leading-[22px] w-12 py-1 border  rounded-[4px] hover:opacity-70 disabled:cursor-not-allowed disabled:opacity-40 flex flex-col gap-1 ${
+            className={`font-body text-sm font-normal leading-[22px] w-12 py-1 border rounded-[4px] hover:opacity-70 disabled:cursor-not-allowed disabled:opacity-40 flex items-center justify-center ${
               selectedSize === size
                 ? "border-darkGray2 ring-darkGray2 ring-1"
                 : "border-grayWhite opacity-90"

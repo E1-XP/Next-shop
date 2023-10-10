@@ -5,12 +5,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { twMerge } from "tailwind-merge";
 
-import { Product } from "@prisma/client";
 import QuantityInput from "../_components/QuantityInput";
 import TrashIcon from "../_components/icons/Trash";
 
 import { formatPrice } from "../_helpers";
+
 import { useCartStore } from "../_store/cart";
+import { useHydrate } from "../_hooks/useHydrate";
 
 interface Props {
   className?: string;
@@ -18,6 +19,7 @@ interface Props {
 
 const ProductTable = ({ className }: Props) => {
   const { products, removeProduct } = useCartStore();
+  useHydrate();
 
   const tableData = {
     headers: ["Product", "Quantity", "Price", "Subtotal"],
