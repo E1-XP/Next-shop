@@ -1,8 +1,7 @@
 import * as React from "react";
 import Link from "next/link";
-import Image from "next/image";
 
-import Dropdown from "../Dropdown";
+import LanguageDropdown from "../dropdowns/LanguageDropdown";
 
 import FacebookIcon from "../icons/Facebook";
 import InstagramIcon from "../icons/Instagram";
@@ -11,6 +10,7 @@ import EmailIcon from "../icons/Email";
 
 import USAFlag from "@/../public/images/USAFlag.svg";
 import PolishFlag from "@/../public/images/PolishFlag.svg";
+import CurrencyDropdown from "../dropdowns/CurrencyDropdown";
 
 const Footer = () => {
   const data = {
@@ -23,19 +23,22 @@ const Footer = () => {
     copyrightText: "© 2023 Next-shop",
     dropdowns: {
       language: [
-        { text: "English", flagImg: USAFlag, flagAltText: "English flag" },
-        { text: "Polski", flagImg: PolishFlag, flagAltText: "Polish flag" },
+        {
+          text: "English",
+          flagImg: USAFlag,
+          flagAltText: "English flag",
+          locale: "en",
+        },
+        {
+          text: "Polski",
+          flagImg: PolishFlag,
+          flagAltText: "Polish flag",
+          locale: "pl",
+        },
       ],
       currency: [{ text: "USD" }, { text: "PLN" }],
     },
   };
-
-  type LanguageDropdown = typeof data.dropdowns.language;
-  type Dropdowns = LanguageDropdown | typeof data.dropdowns.currency;
-
-  const isLanguageDropdown = (
-    dropdown: Dropdowns
-  ): dropdown is LanguageDropdown => dropdown === data.dropdowns.language;
 
   return (
     <footer className="bg-whiteGray w-full">
@@ -55,27 +58,8 @@ const Footer = () => {
           {data.copyrightText}
         </p>
         <div className="flex gap-4 max-sm:-order-1">
-          {Object.values(data.dropdowns).map((options, i) => (
-            <Dropdown
-              key={i}
-              options={
-                isLanguageDropdown(options)
-                  ? options.map((option) => (
-                      <>
-                        {
-                          <Image
-                            src={option.flagImg}
-                            alt={option.flagAltText}
-                            className="w-3.5 mr-2"
-                          />
-                        }
-                        {option.text}
-                      </>
-                    ))
-                  : options.map((item) => item.text)
-              }
-            />
-          ))}
+          <LanguageDropdown options={data.dropdowns.language} />
+          <CurrencyDropdown options={data.dropdowns.currency} />
         </div>
       </div>
     </footer>

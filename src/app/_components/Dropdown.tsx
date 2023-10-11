@@ -15,9 +15,16 @@ import CaretUpIcon from "./icons/CaretUp";
 interface Props {
   showIndicator?: boolean;
   options: string[] | React.ReactElement[];
+  onOptionSelect?: (idx: number) => void;
+  defaultIdx?: number;
 }
 
-const Dropdown = ({ options, showIndicator = true }: Props) => {
+const Dropdown = ({
+  options,
+  onOptionSelect,
+  showIndicator = true,
+  defaultIdx,
+}: Props) => {
   const [isOpen, setIsOpen] = React.useState(false);
 
   const { refs, floatingStyles, context } = useFloating({
@@ -36,12 +43,13 @@ const Dropdown = ({ options, showIndicator = true }: Props) => {
     dismiss,
   ]);
 
-  const [activeIdx, setActiveIdx] = React.useState(0);
+  const [activeIdx, setActiveIdx] = React.useState(defaultIdx ?? 0);
 
   const toggleIsOpen = () => setIsOpen(!isOpen);
 
   const onItemClick = (i: number) => {
     setActiveIdx(i);
+    onOptionSelect && onOptionSelect(i);
     toggleIsOpen();
   };
 

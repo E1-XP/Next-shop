@@ -21,32 +21,29 @@ import slide2 from "@/../public/images/pexels-david-fagundes-1894263.webp";
 import slide3 from "@/../public/images/wesley-tingey-3mgnyrunick-unsplash-64fc37ee1c3bb.webp";
 
 const HeroSection = () => {
-  const t = useTranslations("Home");
+  const t = useTranslations("Home.Hero");
 
   const data = {
-    heading: "Featured",
-    buttonText: t("Hero.buttonText"),
+    heading: t("heading"),
+    buttonText: t("buttonText"),
     slides: [
       {
         img: slide1,
         imgColor: "#9ba398",
-        heading: "It's time for a bold statement!",
-        paragraph:
-          "Make a statement this summer with our bold and vibrant new collection for women - perfect for turning heads and standing out in style.",
+        heading: t("slides.0.heading"),
+        paragraph: t("slides.0.paragraph"),
       },
       {
         img: slide2,
         imgColor: "#6b8d95",
-        heading: "Stay Cool, Look Hot: Summer Styles on Sale!",
-        paragraph:
-          "Make a statement this summer with our bold and vibrant new collection for women - perfect for turning heads and standing out in style.",
+        heading: t("slides.1.heading"),
+        paragraph: t("slides.1.paragraph"),
       },
       {
         img: slide3,
         imgColor: "#d02e6e",
-        heading: "Season Sale! Up to 70% down!",
-        paragraph:
-          "Make a statement this summer with our bold and vibrant new collection for women - perfect for turning heads and standing out in style.",
+        heading: t("slides.2.heading"),
+        paragraph: t("slides.2.paragraph"),
       },
     ],
   };

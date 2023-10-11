@@ -3,20 +3,24 @@
     "Hero": {
       "heading": "Wyróżnione",
       "buttonText": "Zobacz kolekcję",
-      "slides": [
-        {
-          "heading": "It's time for a bold statement!",
-          "paragraph": "Make a statement this summer with our bold and vibrant new collection for women - perfect for turning heads and standing out in style."
+      "slides": {
+        "0": {
+          "heading": "Czas na odważną deklarację!",
+          "paragraph": "Wyróżnij się tego lata dzięki naszej odważnej i wyrazistej nowej kolekcji dla kobiet - idealnej, by zwrócić na siebie uwagę i wyróżnić się stylem."
         },
-        {
-          "heading": "Stay Cool, Look Hot: Summer Styles on Sale!",
-          "paragraph": "Make a statement this summer with our bold and vibrant new collection for women - perfect for turning heads and standing out in style."
+        "1": {
+          "heading": "Zachowaj chłód i wyglądaj seksownie: letnie stylizacje na wyprzedaży!",
+          "paragraph": "Wyróżnij się tego lata dzięki naszej odważnej i wyrazistej nowej kolekcji dla kobiet - idealnej, by zwrócić na siebie uwagę i wyróżnić się stylem."
         },
-        {
-          "heading": "Season Sale! Up to 70% down!",
-          "paragraph": "Make a statement this summer with our bold and vibrant new collection for women - perfect for turning heads and standing out in style."
+        "2": {
+          "heading": "Sezonowa wyprzedaż! Do 70% taniej!",
+          "paragraph": "Wyróżnij się tego lata dzięki naszej odważnej i wyrazistej nowej kolekcji dla kobiet - idealnej, by zwrócić na siebie uwagę i wyróżnić się stylem."
         }
-      ]
+      }
+    },
+    "Instagram": {
+      "preHeading": "#nextshop",
+      "heading": "Na Instagramie"
     }
   }
 }

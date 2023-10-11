@@ -3,20 +3,24 @@
     "Hero": {
       "heading": "Featured",
       "buttonText": "See collection",
-      "slides": [
-        {
+      "slides": {
+        "0": {
           "heading": "It's time for a bold statement!",
           "paragraph": "Make a statement this summer with our bold and vibrant new collection for women - perfect for turning heads and standing out in style."
         },
-        {
+        "1": {
           "heading": "Stay Cool, Look Hot: Summer Styles on Sale!",
           "paragraph": "Make a statement this summer with our bold and vibrant new collection for women - perfect for turning heads and standing out in style."
         },
-        {
+        "2": {
           "heading": "Season Sale! Up to 70% down!",
           "paragraph": "Make a statement this summer with our bold and vibrant new collection for women - perfect for turning heads and standing out in style."
         }
-      ]
+      }
+    },
+    "Instagram": {
+      "preHeading": "#nextshop",
+      "heading": "On Instagram"
     }
   }
 }

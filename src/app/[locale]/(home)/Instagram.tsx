@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import * as React from "react";
+import { useTranslations } from "next-intl";
 
 import img from "@/../public/images/instagram/david-lezcano-NfZiOJzZgcg-unsplash.webp";
 import img2 from "@/../public/images/instagram/evangeline-sarney-NnsqpLjiA94-unsplash.webp";
@@ -10,9 +11,11 @@ import img5 from "@/../public/images/instagram/kristina-petrick-liJ5irOt8BM-unsp
 import img6 from "@/../public/images/instagram/marco-xu-x2tnHqvWYB0-unsplash.webp";
 
 const InstagramSection = () => {
+  const t = useTranslations("Home.Instagram");
+
   const data = {
-    preHeading: "#nextshop",
-    heading: "On Instagram",
+    preHeading: t("preHeading"),
+    heading: t("heading"),
     images: [img, img2, img3, img4, img5, img6],
   };
 

@@ -1,6 +1,4 @@
-"use client";
-
-import { NextIntlClientProvider } from "next-intl";
+import { NextIntlClientProvider, useMessages } from "next-intl";
 import { notFound } from "next/navigation";
 
 interface Props {
@@ -12,13 +10,10 @@ export function generateStaticParams() {
   return [{ locale: "en" }, { locale: "pl" }];
 }
 
-export const IntlProvider = async ({ children, locale }: Props) => {
-  let messages;
-  try {
-    messages = (await import(`./../_i18n/${locale}.json`)).default;
-  } catch (error) {
-    notFound();
-  }
+export const IntlProvider = ({ children, locale }: Props) => {
+  const messages = useMessages();
+
+  if (!messages) notFound();
 
   return (
     <NextIntlClientProvider locale={locale} messages={messages}>
