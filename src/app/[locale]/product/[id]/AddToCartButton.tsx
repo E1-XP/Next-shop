@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { toast } from "react-toastify";
+import { useTranslations } from "next-intl";
 
 import Button from "../../../_components/Button";
 
@@ -28,14 +29,15 @@ const AddToCartButton = ({
   resetQuantity,
   resetSize,
 }: Props) => {
+  const t = useTranslations("Product.AddToCartButton");
+
   const { addProduct } = useCartStore();
   useHydrate();
 
   const data = {
-    btnText: " Add to Cart",
-    sizeNotSelectedText:
-      "Please select size first, so we can check product availability.",
-    toastText: "Product added to cart.",
+    btnText: t("btnText"),
+    sizeNotSelectedText: t("sizeNotSelectedText"),
+    toastText: t("toastText"),
   };
 
   const addProductToCart = () => {

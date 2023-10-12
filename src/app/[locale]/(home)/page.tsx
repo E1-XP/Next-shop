@@ -2,9 +2,9 @@ import prisma from "@/../prisma/client";
 
 import HeroSection from "./Hero";
 import ProductList from "@/app/_components/ProductList";
-import ScrollableSlider from "./ScrollableSlider";
 import NewsletterSection from "./Newsletter";
 import InstagramSection from "./Instagram";
+import { NewArrivalsSlider, SummerCollectionSlider } from "./Sliders";
 
 export default async function Home() {
   const products =
@@ -13,16 +13,9 @@ export default async function Home() {
   return (
     <main className="">
       <HeroSection />
-      <ScrollableSlider
-        data={products.concat(products)}
-        heading="New arrivals"
-      />
-      <ScrollableSlider
-        data={products.concat(products)}
-        heading="New summer collection"
-        bgColor="#FFC107"
-        paragraph="
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis unde eaque perspiciatis nemo ipsum ut, velit optio placeat. Natus maiores nostrum quae dolorem eius voluptate perferendis quod totam veniam voluptatum?"
+      <NewArrivalsSlider products={products.concat(products)} />
+      <SummerCollectionSlider
+        products={products.concat([...products, ...products])}
       />
       <ProductList
         products={products

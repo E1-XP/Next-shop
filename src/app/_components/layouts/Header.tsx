@@ -3,40 +3,42 @@
 import Link from "next/link";
 import * as React from "react";
 import debounce from "lodash.debounce";
+import { useTranslations } from "next-intl";
 
 import Hamburger from "../Hamburger";
 import UserWidget from "../widgets/UserWidget";
 import CartWidget from "../widgets/CartWidget";
 
 import SearchIcon from "../icons/Search";
-import ShoppingBagIcon from "../icons/ShoppingBag";
 import FacebookIcon from "../icons/Facebook";
 import InstagramIcon from "../icons/Instagram";
 import TwitterIcon from "../icons/Twitter";
 import EmailIcon from "../icons/Email";
 
 const Header = () => {
+  const t = useTranslations("Header");
+
   const data = {
     logoText: "Next-Shop",
     mainMenuItems: [
-      { text: "New Arrivals", url: "#" },
+      { text: t("mainMenuItems.0.text"), url: "#" },
       {
-        text: "Men",
+        text: t("mainMenuItems.1.text"),
         url: "#",
       },
       {
-        text: "Women",
+        text: t("mainMenuItems.2.text"),
         url: "#",
       },
       {
-        text: "Kids",
+        text: t("mainMenuItems.3.text"),
         url: "#",
       },
     ],
     actionsMenuItems: [
-      { name: "Search", component: SearchIcon },
-      { name: "Profile", component: UserWidget },
-      { name: "Cart", component: CartWidget },
+      { name: t("actionsMenuItems.0.name"), component: SearchIcon },
+      { name: t("actionsMenuItems.1.name"), component: UserWidget },
+      { name: t("actionsMenuItems.2.name"), component: CartWidget },
     ],
     socials: [
       { name: "Facebook", icon: FacebookIcon, url: "#" },

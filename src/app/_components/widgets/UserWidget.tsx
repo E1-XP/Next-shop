@@ -3,6 +3,7 @@
 import * as React from "react";
 import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 import Widget from "./Base";
 import Button from "../Button";
@@ -11,16 +12,17 @@ import ProfileIcon from "../icons/Profile";
 const UserWidget = () => {
   const session = useSession();
   const router = useRouter();
+  const t = useTranslations("widgets.UserWidget");
 
   const data = {
-    loadingText: "Loading...",
-    isAuthHeader: "Welcome back.",
-    isUnAuthHeader: "Welcome to Next-shop.",
-    isAuthParagraph: `Good to see you again, ${session.data?.user?.name}`,
-    isUnAuthParagraph: "Please log in to get full access.",
-    profileBtnText: "View Profile",
-    isAuthActionBtnText: "Log out",
-    isUnAuthActionBtnText: "Sign in",
+    loadingText: t("loadingText"),
+    isAuthHeader: t("isAuthHeader"),
+    isUnAuthHeader: t("isUnAuthHeader"),
+    isAuthParagraph: `${t("isAuthParagraph")}, ${session.data?.user?.name}`,
+    isUnAuthParagraph: t("isUnAuthParagraph"),
+    profileBtnText: t("profileBtnText"),
+    isAuthActionBtnText: t("isAuthActionBtnText"),
+    isUnAuthActionBtnText: t("isUnAuthActionBtnText"),
   };
 
   const [isOpen, setIsOpen] = React.useState(false);

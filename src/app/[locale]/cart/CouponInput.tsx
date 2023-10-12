@@ -1,16 +1,20 @@
 import * as React from "react";
+import { useTranslations } from "next-intl";
+
 import Input from "@/app/_components/Input";
 
 interface Props {
   className?: string;
 }
 const CouponInput = ({ className }: Props) => {
+  const t = useTranslations("Cart.CouponInput");
+
   const data = {
-    heading: "Have a coupon?",
-    paragraph: "Add your code for an instant cart discount",
-    inputPlaceholder: "Enter code",
-    inputLabel: "Coupons",
-    inputBtnText: "Apply",
+    heading: t("heading"),
+    paragraph: t("paragraph"),
+    inputPlaceholder: t("inputPlaceholder"),
+    inputLabel: t("inputLabel"),
+    inputBtnText: t("inputBtnText"),
   };
 
   return (

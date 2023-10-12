@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { useTranslations } from "next-intl";
 
 import { Product } from "@prisma/client";
 import ProductItem from "./ProductItem";
@@ -10,8 +11,11 @@ interface Props {
 }
 
 const ProductList = ({ products }: Props) => {
+  const t = useTranslations("components.ProductList");
+
   const data = {
-    heading: "Trending products",
+    heading: t("heading"),
+    noProductsText: t("noProductsText"),
   };
 
   return (
@@ -22,7 +26,7 @@ const ProductList = ({ products }: Props) => {
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 justify-center">
         {products.length
           ? products.map((product, i) => <ProductItem key={i} data={product} />)
-          : "Nothing found."}
+          : data.noProductsText}
       </div>
     </section>
   );

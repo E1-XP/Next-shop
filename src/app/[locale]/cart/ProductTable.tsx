@@ -4,6 +4,7 @@ import * as React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { twMerge } from "tailwind-merge";
+import { useTranslations } from "next-intl";
 
 import QuantityInput from "@/app/_components/QuantityInput";
 import TrashIcon from "@/app/_components/icons/Trash";
@@ -18,13 +19,17 @@ interface Props {
 }
 
 const ProductTable = ({ className }: Props) => {
+  const t = useTranslations("Cart.ProductTable");
+
   const { products, removeProduct } = useCartStore();
   useHydrate();
 
   const tableData = {
-    headers: ["Product", "Quantity", "Price", "Subtotal"],
-    placeholderText: "Cart is empty.",
-    removeBtnText: "Remove",
+    headers: [t("headers.0"), t("headers.1"), t("headers.2"), t("headers.3")],
+    placeholderText: t("placeholderText"),
+    removeBtnText: t("removeBtnText"),
+    sizeText: t("sizeText"),
+    colorText: t("colorText"),
   };
 
   return (
@@ -82,7 +87,9 @@ const ProductTable = ({ className }: Props) => {
                       </p>
                     </Link>
                     <p className="text font-normal text-sm leading-[20px] truncate">
-                      Size {size.toUpperCase()}, Color: TODO
+                      {tableData.sizeText} {size.toUpperCase()}
+                      {", "}
+                      {tableData.colorText}: TODO
                     </p>
                     <QuantityInput
                       product={product}

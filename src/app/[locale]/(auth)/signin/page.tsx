@@ -10,6 +10,7 @@ import { toast } from "react-toastify";
 
 import Button from "@/app/_components/Button";
 import Input, { Types } from "@/app/_components/Input";
+import { useTranslations } from "next-intl";
 
 import img from "@/../public/images/chris-ghinda-n4L__DFy43s-unsplash.webp";
 import GithubIcon from "@/app/_components/icons/Github";
@@ -18,34 +19,41 @@ import { SchemaKeys, SchemaType, signInSchema } from "./validation";
 import { useRouter } from "next/navigation";
 
 const SignInPage = () => {
+  const t = useTranslations("SignIn");
+
   const data = {
-    heading: "Sign in",
-    paragraph: "Don’t have an account yet? ",
-    paragraphLinkText: "Sign up",
+    heading: t("heading"),
+    paragraph: t("paragraph"),
+    paragraphLinkText: t("paragraphLinkText"),
     paragraphLinkHref: "/signup",
-    githubBtnText: "Sign in with Github",
+    orText: t("orText"),
+    githubBtnText: t("githubBtnText"),
     inputs: [
       {
         type: "email",
-        placeholder: "Email address",
-        label: "Email",
+        placeholder: t("inputs.0.placeholder"),
+        label: t("inputs.0.label"),
         id: "email",
       },
       {
         type: "password",
-        placeholder: "Password",
-        label: "Password",
+        placeholder: t("inputs.1.placeholder"),
+        label: t("inputs.1.label"),
         id: "password",
       },
     ] as { type: Types; placeholder: string; label: string; id: SchemaKeys }[],
     rememberMeInput: {
       type: "checkbox" as Types,
-      label: "Remember me",
+      label: t("rememberMeInput.label"),
       id: "rememberMe",
     },
-    rememberMeText: "Remember me",
-    resetPasswordText: "Forgot password?",
-    btnText: "Sign in",
+    rememberMeText: t("rememberMeText"),
+    resetPasswordText: t("resetPasswordText"),
+    btnText: t("btnText"),
+    toast: {
+      unknownCredentials: t("toast.unknownCredentials"),
+    },
+    imgAltText: t("imgAltText"),
   };
 
   const {
@@ -60,16 +68,14 @@ const SignInPage = () => {
 
   const router = useRouter();
 
-  const onSubmit: SubmitHandler<SchemaType> = async (data) => {
+  const onSubmit: SubmitHandler<SchemaType> = async (formData) => {
     const response = await signIn("credentials", {
-      ...data,
+      ...formData,
       redirect: false,
     });
 
     if (response?.error) {
-      toast.error(
-        "This email/password combination doesn't exist in our database."
-      );
+      toast.error(data.toast.unknownCredentials);
     } else router.push("/");
   };
 
@@ -78,7 +84,7 @@ const SignInPage = () => {
       <div className="hidden lg:block lg:basis-1/2 overflow-hidden">
         <Image
           src={img}
-          alt="Model presenting latest fashion"
+          alt={data.imgAltText}
           className="pointer-events-none object-cover object-[50%_75%] h-full w-full"
         />
       </div>
@@ -105,7 +111,7 @@ const SignInPage = () => {
         </Button>
         <div className="flex items-center justify-between gap-3 text">
           <span className="border-dashed border-b border-whiteGray3 block grow mt-1"></span>
-          or
+          {data.orText}
           <span className="border-dashed border-b border-whiteGray3 block grow mt-1"></span>
         </div>
         <div className="flex flex-col gap-8">

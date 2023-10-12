@@ -1,11 +1,14 @@
 import * as React from "react";
+import { useTranslations } from "next-intl";
 
 import ProductTable from "./ProductTable";
 import CartSummary from "./CartSummary";
 import CouponInput from "./CouponInput";
 
 const CartPage = () => {
-  const data = { heading: "Cart" };
+  const t = useTranslations("Cart");
+
+  const data = { heading: t("heading") };
 
   return (
     <div className="wrapper flex flex-col gap-[52px] py-[52px]">

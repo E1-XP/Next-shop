@@ -1,7 +1,9 @@
 import * as React from "react";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 import LanguageDropdown from "../dropdowns/LanguageDropdown";
+import CurrencyDropdown from "../dropdowns/CurrencyDropdown";
 
 import FacebookIcon from "../icons/Facebook";
 import InstagramIcon from "../icons/Instagram";
@@ -10,9 +12,10 @@ import EmailIcon from "../icons/Email";
 
 import USAFlag from "@/../public/images/USAFlag.svg";
 import PolishFlag from "@/../public/images/PolishFlag.svg";
-import CurrencyDropdown from "../dropdowns/CurrencyDropdown";
 
 const Footer = () => {
+  const t = useTranslations("Footer");
+
   const data = {
     socials: [
       { name: "Facebook", icon: FacebookIcon, url: "#" },
@@ -26,13 +29,13 @@ const Footer = () => {
         {
           text: "English",
           flagImg: USAFlag,
-          flagAltText: "English flag",
+          flagAltText: t("dropdowns.language.0.flagAltText"),
           locale: "en",
         },
         {
           text: "Polski",
           flagImg: PolishFlag,
-          flagAltText: "Polish flag",
+          flagAltText: t("dropdowns.language.0.flagAltText"),
           locale: "pl",
         },
       ],

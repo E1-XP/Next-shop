@@ -6,9 +6,9 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Mousewheel } from "swiper/modules";
 
 import { Product } from "@prisma/client";
+import ProductItem from "../../_components/ProductItem";
 
 import "swiper/css";
-import ProductItem from "../../_components/ProductItem";
 
 interface Props {
   data: Product[];

@@ -3,10 +3,10 @@
 import * as React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
+import { useTranslations } from "next-intl";
 
 import Button from "@/app/_components/Button";
 import Input, { Types } from "@/app/_components/Input";
@@ -17,48 +17,58 @@ import { SchemaKeys, SchemaType, signUpSchema } from "./validation";
 import { trpc } from "@/app/_trpc/client";
 
 const SignUpPage = () => {
+  const t = useTranslations("SignUp");
+
   const data = {
-    heading: "Sign up",
-    paragraph: "Already have an account?",
-    paragraphLinkText: "Sign in",
+    heading: t("heading"),
+    paragraph: t("paragraph"),
+    paragraphLinkText: t("paragraphLinkText"),
     paragraphLinkHref: "/signin",
     inputs: [
-      { type: "text", placeholder: "Your name", label: "Name", id: "name" },
       {
         type: "text",
-        placeholder: "Username",
-        label: "Username",
+        placeholder: t("inputs.0.placeholder"),
+        label: t("inputs.0.label"),
+        id: "name",
+      },
+      {
+        type: "text",
+        placeholder: t("inputs.1.placeholder"),
+        label: t("inputs.1.label"),
         id: "username",
       },
       {
         type: "email",
-        placeholder: "Email address",
-        label: "Email",
+        placeholder: t("inputs.2.placeholder"),
+        label: t("inputs.2.label"),
         id: "email",
       },
       {
         type: "password",
-        placeholder: "Password",
-        label: "Password",
+        placeholder: t("inputs.3.placeholder"),
+        label: t("inputs.3.label"),
         id: "password",
       },
       {
         type: "password",
-        placeholder: "Confirm password",
-        label: "Confirm password",
+        placeholder: t("inputs.4.placeholder"),
+        label: t("inputs.4.label"),
         id: "confirmPassword",
       },
     ] as { type: Types; placeholder: string; label: string; id: SchemaKeys }[],
     confirmationInput: {
       type: "checkbox" as Types,
-      label: "Terms of service",
+      label: t("confirmationInput.label"),
       id: "termsConfirmation",
     },
-    confirmationText: ["I agree with", "Privacy Policy", "and", "Terms of Use"],
-    btnText: "Sign up",
+    confirmationText: [
+      t("confirmationText.0"),
+      t("confirmationText.1"),
+      t("confirmationText.2"),
+      t("confirmationText.3"),
+    ],
+    btnText: t("btnText"),
   };
-
-  const router = useRouter();
 
   const {
     register,
@@ -74,7 +84,7 @@ const SignUpPage = () => {
 
   const { mutate: createUser } = trpc.signup.useMutation({
     async onSuccess(data) {
-      const response = await signIn("credentials", {
+      await signIn("credentials", {
         email: data.email,
         password: getValues().password,
         redirect: true,

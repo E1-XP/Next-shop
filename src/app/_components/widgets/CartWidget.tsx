@@ -3,6 +3,7 @@
 import * as React from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 
 import Widget from "./Base";
 import Button from "../Button";
@@ -14,6 +15,8 @@ import { useCartStore } from "@/app/_store/cart";
 import { useHydrate } from "@/app/_hooks/useHydrate";
 
 const CartWidget = () => {
+  const t = useTranslations("widgets.CartWidget");
+
   const router = useRouter();
 
   const { products } = useCartStore();
@@ -25,10 +28,10 @@ const CartWidget = () => {
   const totalCost = getProductsPrice(products);
 
   const data = {
-    loadingText: "Loading...",
-    header: "Cart summary",
-    emptyCartText: "Cart is empty.",
-    btnText: "Go to cart page",
+    loadingText: t("loadingText"),
+    header: t("header"),
+    emptyCartText: t("emptyCartText"),
+    btnText: t("btnText"),
     btnUrl: "/cart",
   };
 

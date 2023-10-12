@@ -1,5 +1,14 @@
 {
   "Home": {
+    "sliders": {
+      "0": {
+        "heading": "New arrivals"
+      },
+      "1": {
+        "heading": "New summer collection",
+        "paragraph": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis unde eaque perspiciatis nemo ipsum ut, velit optio placeat. Natus maiores nostrum quae dolorem eius voluptate perferendis quod totam veniam voluptatum?"
+      }
+    },
     "Hero": {
       "heading": "Featured",
       "buttonText": "See collection",
@@ -21,6 +30,188 @@
     "Instagram": {
       "preHeading": "#nextshop",
       "heading": "On Instagram"
+    },
+    "Newsletter": {
+      "heading": "Join Our Newsletter",
+      "paragraph": "Big discounts and right to your inbox.",
+      "inputPlaceholder": "Email address",
+      "inputLabel": "Newsletter",
+      "inputBtnText": "Signup"
+    }
+  },
+  "Product": {
+    "IconsBar": {
+      "0": { "text": "Wishlist" },
+      "1": {
+        "text": "Ask question"
+      },
+      "2": {
+        "text": "Share"
+      }
+    },
+    "Tabs": {
+      "0": { "tabName": "Description" },
+      "1": { "tabName": "Reviews" }
+    },
+    "AddToCartButton": {
+      "btnText": " Add to Cart",
+      "sizeNotSelectedText": "Please select size first, so we can check product availability.",
+      "toastText": "Product added to cart."
+    }
+  },
+  "Cart": {
+    "heading": "Cart",
+    "CartSummary": {
+      "heading": "Cart summary",
+      "shippingOptions": {
+        "0": { "name": "Standard shipping" },
+        "1": { "name": "Express shipping" }
+      },
+      "subtotalText": "Subtotal",
+      "totalText": "Total",
+      "btnText": "Checkout"
+    },
+    "CouponInput": {
+      "heading": "Have a coupon?",
+      "paragraph": "Add your code for an instant cart discount",
+      "inputPlaceholder": "Enter code",
+      "inputLabel": "Coupons",
+      "inputBtnText": "Apply"
+    },
+    "ProductTable": {
+      "headers": {
+        "0": "Product",
+        "1": "Quantity",
+        "2": "Price",
+        "3": "Subtotal"
+      },
+      "placeholderText": "Cart is empty.",
+      "removeBtnText": "Remove",
+      "sizeText": "Size",
+      "colorText": "Color"
+    }
+  },
+  "SignIn": {
+    "heading": "Sign in",
+    "paragraph": "Don’t have an account yet? ",
+    "paragraphLinkText": "Sign up",
+    "orText": "or",
+    "githubBtnText": "Sign in with Github",
+    "inputs": {
+      "0": {
+        "placeholder": "Email address",
+        "label": "Email"
+      },
+      "1": {
+        "placeholder": "Password",
+        "label": "Password"
+      }
+    },
+    "rememberMeInput": {
+      "label": "Remember me"
+    },
+    "rememberMeText": "Remember me",
+    "resetPasswordText": "Forgot password?",
+    "btnText": "Sign in",
+    "toast": {
+      "unknownCredentials": "This email/password combination doesn't exist in our database."
+    },
+    "imgAltText": "Model presenting latest fashion"
+  },
+  "SignUp": {
+    "heading": "Sign up",
+    "paragraph": "Already have an account?",
+    "paragraphLinkText": "Sign in",
+    "inputs": {
+      "0": {
+        "placeholder": "Your name",
+        "label": "Name"
+      },
+      "1": {
+        "placeholder": "Username",
+        "label": "Username"
+      },
+      "2": {
+        "placeholder": "Email address",
+        "label": "Email"
+      },
+      "3": {
+        "placeholder": "Password",
+        "label": "Password"
+      },
+      "4": {
+        "placeholder": "Confirm password",
+        "label": "Confirm password"
+      }
+    },
+    "confirmationInput": {
+      "label": "Terms of service"
+    },
+    "confirmationText": {
+      "0": "I agree with",
+      "1": "Privacy Policy",
+      "2": "and",
+      "3": "Terms of Use"
+    },
+    "btnText": "Sign up"
+  },
+  "Header": {
+    "mainMenuItems": {
+      "0": { "text": "New Arrivals" },
+      "1": {
+        "text": "Men"
+      },
+      "2": {
+        "text": "Women"
+      },
+      "3": {
+        "text": "Kids"
+      }
+    },
+    "actionsMenuItems": {
+      "0": { "name": "Search" },
+      "1": { "name": "Profile" },
+      "2": { "name": "Cart" }
+    }
+  },
+  "Footer": {
+    "dropdowns": {
+      "language": {
+        "0": {
+          "flagAltText": "USA flag"
+        },
+        "1": {
+          "flagAltText": "Polish flag"
+        }
+      }
+    }
+  },
+  "widgets": {
+    "CartWidget": {
+      "loadingText": "Loading...",
+      "header": "Cart summary",
+      "emptyCartText": "Cart is empty.",
+      "btnText": "Go to cart page"
+    },
+    "UserWidget": {
+      "loadingText": "Loading...",
+      "isAuthHeader": "Welcome back.",
+      "isUnAuthHeader": "Welcome to Next-shop.",
+      "isAuthParagraph": "Good to see you again",
+      "isUnAuthParagraph": "Please log in to get full access.",
+      "profileBtnText": "View Profile",
+      "isAuthActionBtnText": "Log out",
+      "isUnAuthActionBtnText": "Sign in"
+    }
+  },
+  "components": {
+    "ProductList": {
+      "heading": "Trending products",
+      "noProductsText": "Nothing found."
+    },
+    "QuantityInput": {
+      "selectSizeText": "Please select size first, so we can check product availability.",
+      "outOfStockText": "Sorry, we don't have more copies of this product in stock at this moment."
     }
   }
 }

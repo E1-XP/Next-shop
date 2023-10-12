@@ -8,18 +8,15 @@ import { Categories, GenderPlurals } from "@/app/_helpers/constants";
 
 import Rating from "@/app/_components/Rating";
 import Breadcrumbs from "@/app/_components/Breadcrumbs";
-import ProductTabs from "@/app/[locale]/product/[id]/ProductTabs";
+import ProductTabs from "./ProductTabs";
 import ProductGallery from "./ProductGallery";
 import SelectAndBuy from "./SelectAndBuy";
-
-import HeartIcon from "@/app/_components/icons/Heart";
-import QuestionCircleIcon from "@/app/_components/icons/QuestionCircle";
-import ShareIcon from "@/app/_components/icons/Share";
+import IconsBar from "../IconsBar";
 
 import { formatPrice } from "@/app/_helpers";
 
 interface Props {
-  params: { id: string };
+  params: { id: string; locale: string };
 }
 
 const ProductPage = async ({ params }: Props) => {
@@ -55,34 +52,15 @@ const ProductPage = async ({ params }: Props) => {
     },
   ];
 
+  const descriptionLocalized =
+    params.locale === "en" ? product.descriptionEN : product.descriptionPL;
+
+  const tabsContent = [{ content: descriptionLocalized }, { content: "TODO" }];
+
   const productVariants = [product].concat(
     // current product variant is always first
     modelProducts.filter((item) => item.id !== product.id)
   );
-
-  const data = {
-    iconsBar: [
-      {
-        text: "Wishlist",
-        icon: HeartIcon,
-      },
-      {
-        text: "Ask question",
-        icon: QuestionCircleIcon,
-      },
-      {
-        text: "Share",
-        icon: ShareIcon,
-      },
-    ],
-    tabs: [
-      { tabName: "Description", content: product.descriptionEN },
-      {
-        tabName: "Reviews",
-        content: "No reviews found. Be the first to write one!",
-      },
-    ],
-  };
 
   return (
     <div className="wrapper flex flex-col mt-8 mb-8 gap-y-[110px]">
@@ -106,21 +84,11 @@ const ProductPage = async ({ params }: Props) => {
             </span>
           </p>
           <SelectAndBuy product={product} productVariants={productVariants} />
-          <div className="flex gap-4 md:gap-8">
-            {data.iconsBar.map((item) => (
-              <button
-                key={item.text}
-                className="flex gap-1 items-center font-display font-medium text-sm md:text-base leading-7 -tracking-[0.4px] hover:opacity-70 transition"
-              >
-                <item.icon className="w-[18px] h-[18px] md:h-5 md:w-5" />
-                {item.text}
-              </button>
-            ))}
-          </div>
+          <IconsBar />
         </div>
       </div>
       <div className="w-full">
-        <ProductTabs data={data.tabs} />
+        <ProductTabs data={tabsContent} />
       </div>
     </div>
   );

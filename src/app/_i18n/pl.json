@@ -1,5 +1,12 @@
 {
   "Home": {
+    "sliders": {
+      "0": { "heading": "Nowości" },
+      "1": {
+        "heading": "Nowa kolekcja na lato",
+        "paragraph": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis unde eaque perspiciatis nemo ipsum ut, velit optio placeat. Natus maiores nostrum quae dolorem eius voluptate perferendis quod totam veniam voluptatum?"
+      }
+    },
     "Hero": {
       "heading": "Wyróżnione",
       "buttonText": "Zobacz kolekcję",
@@ -21,6 +28,188 @@
     "Instagram": {
       "preHeading": "#nextshop",
       "heading": "Na Instagramie"
+    },
+    "Newsletter": {
+      "heading": "Dołącz do Newslettera",
+      "paragraph": "Duże zniżki prosto do twojej skrzynki email.",
+      "inputPlaceholder": "adres email",
+      "inputLabel": "Newsletter",
+      "inputBtnText": "Zapisz się"
+    }
+  },
+  "Product": {
+    "IconsBar": {
+      "0": { "text": "Lista życzeń" },
+      "1": {
+        "text": "Zadaj pytanie"
+      },
+      "2": {
+        "text": "Udostępnij"
+      }
+    },
+    "Tabs": {
+      "0": { "tabName": "Szczegóły" },
+      "1": { "tabName": "Recenzje" }
+    },
+    "AddToCartButton": {
+      "btnText": "Dodaj do koszyka",
+      "sizeNotSelectedText": "Wybierz rozmiar, abyśmy mogli sprawdzić dostępność produktu.",
+      "toastText": "Dodano produkt do koszyka."
+    }
+  },
+  "Cart": {
+    "heading": "Koszyk",
+    "CartSummary": {
+      "heading": "Podsumowanie koszyka",
+      "shippingOptions": {
+        "0": { "name": "Standardowa wysyłka" },
+        "1": { "name": "Wysyłka ekspresowa" }
+      },
+      "subtotalText": "Suma",
+      "totalText": "Suma z przesyłką",
+      "btnText": "Przejdź do płatności"
+    },
+    "CouponInput": {
+      "heading": "Masz kupon?",
+      "paragraph": "Dodaj kod, aby uzyskac zniżkę",
+      "inputPlaceholder": "Wprowadź kupon",
+      "inputLabel": "Kupony",
+      "inputBtnText": "Zastosuj"
+    },
+    "ProductTable": {
+      "headers": {
+        "0": "Produkt",
+        "1": "Ilość",
+        "2": "Cena",
+        "3": "Suma"
+      },
+      "placeholderText": "Koszyk jest pusty.",
+      "removeBtnText": "Usuń",
+      "sizeText": "Rozmiar",
+      "colorText": "Kolor"
+    }
+  },
+  "SignIn": {
+    "heading": "Zaloguj się",
+    "paragraph": "Nie masz jeszcze konta? ",
+    "paragraphLinkText": "Utwórz konto",
+    "orText": "lub",
+    "githubBtnText": "Zaloguj się z Github",
+    "inputs": {
+      "0": {
+        "placeholder": "Adres email",
+        "label": "E-mail"
+      },
+      "1": {
+        "placeholder": "Hasło",
+        "label": "Hasło"
+      }
+    },
+    "rememberMeInput": {
+      "label": "Zapamiętaj mnie"
+    },
+    "rememberMeText": "Zapamiętaj mnie",
+    "resetPasswordText": "Zapomniałeś hasła?",
+    "btnText": "Zaloguj się",
+    "toast": {
+      "unknownCredentials": "This email/password combination doesn't exist in our database."
+    },
+    "imgAltText": "Model/ka prezentujący/a najnowszą modę"
+  },
+  "SignUp": {
+    "heading": "Utwórz konto",
+    "paragraph": "Masz już konto?",
+    "paragraphLinkText": "Zaloguj się",
+    "inputs": {
+      "0": {
+        "placeholder": "Twoje imię",
+        "label": "Imię"
+      },
+      "1": {
+        "placeholder": "Nazwa użytkownika",
+        "label": "Nazwa użytkownika"
+      },
+      "2": {
+        "placeholder": "Adres email",
+        "label": "Email"
+      },
+      "3": {
+        "placeholder": "Hasło",
+        "label": "Hasło"
+      },
+      "4": {
+        "placeholder": "Potwierdź hasło",
+        "label": "Potwierdź hasło"
+      }
+    },
+    "confirmationInput": {
+      "label": "Zasady i warunki"
+    },
+    "confirmationText": {
+      "0": "Zgadzam się z",
+      "1": "Polityką prywatności",
+      "2": "i",
+      "3": "Zasadami użytkowania"
+    },
+    "btnText": "Utwórz konto"
+  },
+  "Header": {
+    "mainMenuItems": {
+      "0": { "text": "Nowości" },
+      "1": {
+        "text": "Meżczyzna"
+      },
+      "2": {
+        "text": "Kobieta"
+      },
+      "3": {
+        "text": "Dzieci"
+      }
+    },
+    "actionsMenuItems": {
+      "0": { "name": "Szukaj" },
+      "1": { "name": "Profil" },
+      "2": { "name": "Koszyk" }
+    }
+  },
+  "Footer": {
+    "dropdowns": {
+      "language": {
+        "0": {
+          "flagAltText": "flaga USA"
+        },
+        "1": {
+          "flagAltText": "Flaga Polski"
+        }
+      }
+    }
+  },
+  "widgets": {
+    "CartWidget": {
+      "loadingText": "Ładowanie...",
+      "header": "Podsumowanie koszyka",
+      "emptyCartText": "Koszyk jest pusty.",
+      "btnText": "Idź do koszyka"
+    },
+    "UserWidget": {
+      "loadingText": "Ładowanie...",
+      "isAuthHeader": "Witaj ponownie.",
+      "isUnAuthHeader": "Witamy w Next-shop.",
+      "isAuthParagraph": "Dobrze Cię znowu widzieć",
+      "isUnAuthParagraph": "Zaloguj się aby uzyskać pełny dostęp.",
+      "profileBtnText": "Zobacz profil",
+      "isAuthActionBtnText": "wyloguj się",
+      "isUnAuthActionBtnText": "Zaloguj się"
+    }
+  },
+  "components": {
+    "ProductList": {
+      "heading": "Popularne produkty",
+      "noProductsText": "Nic nie znaleziono."
+    },
+    "QuantityInput": {
+      "selectSizeText": "Wybierz rozmiar, abyśmy mogli sprawdzić dostępność produktu.",
+      "outOfStockText": "Przepraszamy, nie mamy takiej ilości tego rozmiaru/produktu na stanie."
     }
   }
 }

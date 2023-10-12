@@ -1,13 +1,17 @@
 import * as React from "react";
+import { useTranslations } from "next-intl";
+
 import Input from "@/app/_components/Input";
 
 const NewsletterSection = () => {
+  const t = useTranslations("Home.Newsletter");
+
   const data = {
-    heading: "Join Our Newsletter",
-    paragraph: "Big discounts and right to your inbox.",
-    inputPlaceholder: "Email address",
-    inputLabel: "Newsletter",
-    inputBtnText: "Signup",
+    heading: t("heading"),
+    paragraph: t("paragraph"),
+    inputPlaceholder: t("inputPlaceholder"),
+    inputLabel: t("inputLabel"),
+    inputBtnText: t("inputBtnText"),
   };
 
   return (

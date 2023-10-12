@@ -2,9 +2,9 @@
 
 import * as React from "react";
 import { twMerge } from "tailwind-merge";
+import { useTranslations } from "next-intl";
 
 interface Data {
-  tabName: string;
   content: string;
 }
 
@@ -13,7 +13,16 @@ interface Props {
   data: Data[];
 }
 
-const Tabs = ({ className, data }: Props) => {
+const ProductTabs = ({ className, data }: Props) => {
+  const t = useTranslations("Product.Tabs");
+
+  const tabs = [
+    { tabName: t("0.tabName") },
+    {
+      tabName: t("1.tabName"),
+    },
+  ];
+
   const [activeTabIdx, setActiveTabIdx] = React.useState(0);
 
   return (
@@ -21,7 +30,7 @@ const Tabs = ({ className, data }: Props) => {
       className={twMerge("flex max-md:gap-4 flex-col md:flex-row", className)}
     >
       <div className="basis-1/5 flex flex-row md:flex-col gap-6">
-        {data.map((tab, i) => (
+        {tabs.map((tab, i) => (
           <button
             key={tab.tabName}
             className={`w-min font-display text-xl font-medium leading-7  pb-1 hover:text-darkGray2 ${
@@ -44,7 +53,7 @@ const Tabs = ({ className, data }: Props) => {
         </div>
         {data.map((tab, i) => (
           <div
-            key={tab.tabName}
+            key={i}
             className={`bg-white whitespace-pre-wrap absolute top-0 left-0 w-full transition text-lg font-normal font-body leading-[30px] ${
               i === activeTabIdx ? "opacity-100" : "opacity-0"
             }`}
@@ -57,4 +66,4 @@ const Tabs = ({ className, data }: Props) => {
   );
 };
 
-export default Tabs;
+export default ProductTabs;

@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { twMerge } from "tailwind-merge";
+import { useTranslations } from "next-intl";
 
 import Button from "@/app/_components/Button";
 import Input from "@/app/_components/Input";
@@ -16,18 +17,20 @@ interface Props {
 }
 
 const CartSummary = ({ className }: Props) => {
+  const t = useTranslations("Cart.CartSummary");
+
   const { products } = useCartStore();
   useHydrate();
 
   const data = {
-    heading: "Cart summary",
+    heading: t("heading"),
     shippingOptions: [
-      { name: "Standard shipping", price: 0 },
-      { name: "Express shipping", price: 15 },
+      { name: t("shippingOptions.0.name"), price: 0 },
+      { name: t("shippingOptions.1.name"), price: 15 },
     ],
-    subtotalText: "Subtotal",
-    totalText: "Total",
-    btnText: "Checkout",
+    subtotalText: t("subtotalText"),
+    totalText: t("totalText"),
+    btnText: t("btnText"),
   };
 
   const [activeOption, setActiveOption] = React.useState(

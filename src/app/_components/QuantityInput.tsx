@@ -3,6 +3,7 @@
 import * as React from "react";
 import { twMerge } from "tailwind-merge";
 import { toast } from "react-toastify";
+import { useTranslations } from "next-intl";
 
 import PlusIcon from "./icons/Plus";
 import MinusIcon from "./icons/Minus";
@@ -31,11 +32,11 @@ const QuantityInput = ({
   isSizeSelected,
   size,
 }: Props) => {
+  const t = useTranslations("components.QuantityInput");
+
   const data = {
-    selectsizeText:
-      "Please select size first, so we can check product availability.",
-    outOfStockText:
-      "Sorry, we don't have more copies of this product in stock at this moment.",
+    selectSizeText: t("selectSizeText"),
+    outOfStockText: t("outOfStockText"),
   };
 
   const { products, addProduct, removeProduct } = useCartStore();
@@ -54,7 +55,7 @@ const QuantityInput = ({
 
   const onIncrement = () => {
     if (isSizeSelected === false) {
-      toast.info(data.selectsizeText);
+      toast.info(data.selectSizeText);
 
       return;
     }
