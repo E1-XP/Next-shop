@@ -32,7 +32,7 @@
     "Newsletter": {
       "heading": "Dołącz do Newslettera",
       "paragraph": "Duże zniżki prosto do twojej skrzynki email.",
-      "inputPlaceholder": "adres email",
+      "inputPlaceholder": "Adres email",
       "inputLabel": "Newsletter",
       "inputBtnText": "Zapisz się"
     }
@@ -151,7 +151,16 @@
       "2": "i",
       "3": "Zasadami użytkowania"
     },
-    "btnText": "Utwórz konto"
+    "btnText": "Utwórz konto",
+    "validation": {
+      "signUpForm": {
+        "name": "Wpisz imię i nazwisko rozdzielone spacją",
+        "username": "Dozwolone znaki alfanumeryczne, '_' lub '-'",
+        "password": "Wykorzystaj znaki alfanumeryczne i obowiązkowo specjalne",
+        "confirmPassword": "Musisz potwierdzić hasło",
+        "afterPasswordConfirmation": "Hasła różnią się"
+      }
+    }
   },
   "Header": {
     "mainMenuItems": {

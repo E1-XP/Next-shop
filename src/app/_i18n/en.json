@@ -153,7 +153,16 @@
       "2": "and",
       "3": "Terms of Use"
     },
-    "btnText": "Sign up"
+    "btnText": "Sign up",
+    "validation": {
+      "signUpForm": {
+        "name": "Write your name and surname divided by space",
+        "username": "Alphanumeric, underscores or dash characters only",
+        "password": "Please combine numbers, letters and special characters",
+        "confirmPassword": "Password confirmation is required",
+        "afterPasswordConfirmation": "Passwords do not match"
+      }
+    }
   },
   "Header": {
     "mainMenuItems": {

@@ -6,7 +6,7 @@ import Image from "next/image";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signIn } from "next-auth/react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 import Button from "@/app/_components/Button";
 import Input, { Types } from "@/app/_components/Input";
@@ -15,9 +15,13 @@ import img from "@/../public/images/chris-ghinda-NYQyBIUCs_A-unsplash.webp";
 
 import { SchemaKeys, SchemaType, signUpSchema } from "./validation";
 import { trpc } from "@/app/_trpc/client";
+import { setZodErrorMap } from "@/app/_lib/zod";
 
 const SignUpPage = () => {
   const t = useTranslations("SignUp");
+  const locale = useLocale();
+
+  setZodErrorMap(locale);
 
   const data = {
     heading: t("heading"),
@@ -124,23 +128,28 @@ const SignUpPage = () => {
           </Link>
         </p>
         <div className="flex flex-col gap-8">
-          {data.inputs.map((data, i) => (
-            <div key={data.placeholder} className="relative">
-              <Input
-                type={data.type}
-                placeholder={data.placeholder}
-                id={data.id}
-                label={data.label}
-                register={register}
-                className={`w-full ${
-                  errors[data.id]?.message && "border-red-500 outline-red-500"
-                }`}
-              />
-              <p className="text-red-500 font-body text-sm absolute -bottom-[26px] left-0">
-                {errors[data.id]?.message}
-              </p>
-            </div>
-          ))}
+          {data.inputs.map((data, i) => {
+            const message = errors[data.id]?.message;
+            const isLocalePath = message?.startsWith("i18n:");
+
+            return (
+              <div key={data.placeholder} className="relative">
+                <Input
+                  type={data.type}
+                  placeholder={data.placeholder}
+                  id={data.id}
+                  label={data.label}
+                  register={register}
+                  className={`w-full ${
+                    message && "border-red-500 outline-red-500"
+                  }`}
+                />
+                <p className="text-red-500 font-body text-sm absolute -bottom-[26px] left-0">
+                  {isLocalePath ? t(message?.split("i18n:")[1]) : message}
+                </p>
+              </div>
+            );
+          })}
         </div>
         <div className="flex items-center">
           <Input

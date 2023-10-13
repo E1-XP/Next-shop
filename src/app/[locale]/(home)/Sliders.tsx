@@ -8,7 +8,7 @@ import { Product } from "@prisma/client";
 export const NewArrivalsSlider = ({ products }: { products: Product[] }) => {
   const t = useTranslations("Home.sliders");
 
-  const data = { heading: t("0.heading"), paragraph: t("0.paragraph") };
+  const data = { heading: t("0.heading") };
 
   return <ScrollableSlider data={products} heading={data.heading} />;
 };
