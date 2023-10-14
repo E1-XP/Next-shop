@@ -4,16 +4,24 @@ import * as React from "react";
 import { twMerge } from "tailwind-merge";
 import { useTranslations } from "next-intl";
 
-interface Data {
-  content: string;
-}
+import { Product, Review } from "@prisma/client";
+
+import ReviewCard from "./ReviewCard";
+import ReviewsList from "./ReviewsList";
 
 interface Props {
   className?: string;
-  data: Data[];
+  productData: Product;
+  aboutData: string;
+  reviewData: Review[];
 }
 
-const ProductTabs = ({ className, data }: Props) => {
+const ProductTabs = ({
+  className,
+  aboutData,
+  reviewData,
+  productData,
+}: Props) => {
   const t = useTranslations("Product.Tabs");
 
   const tabs = [
@@ -23,11 +31,15 @@ const ProductTabs = ({ className, data }: Props) => {
     },
   ];
 
+  const data: [string, Review[]] = [aboutData, reviewData];
+
   const [activeTabIdx, setActiveTabIdx] = React.useState(0);
+  const activeTabItem = data[activeTabIdx];
+  console.log(activeTabItem);
 
   return (
     <div
-      className={twMerge("flex max-md:gap-4 flex-col md:flex-row", className)}
+      className={twMerge("flex max-md:gap-8 flex-col md:flex-row", className)}
     >
       <div className="basis-1/5 flex flex-row md:flex-col gap-6">
         {tabs.map((tab, i) => (
@@ -44,21 +56,29 @@ const ProductTabs = ({ className, data }: Props) => {
           </button>
         ))}
       </div>
-      <div className="basis-4/5 relative min-h-[320px]">
+      <div className="basis-4/5 relative min-h-[320px] overflow-hidden">
         <div // duplicated active slide to maintain container height of absolute positioned tabs
           aria-hidden="true"
-          className="bg-white whitespace-pre-wrap top-0 left-0 w-full transition text-lg font-normal font-body leading-[30px] opacity-0"
+          className="bg-white whitespace-pre-wrap top-0 left-0 w-full transition text-lg font-normal font-body leading-[30px] flex flex-col gap-12 opacity-0"
         >
-          {data[activeTabIdx].content}
+          {Array.isArray(activeTabItem) ? (
+            <ReviewsList reviews={reviewData} product={productData} />
+          ) : (
+            activeTabItem
+          )}
         </div>
-        {data.map((tab, i) => (
+        {data.map((content, i) => (
           <div
             key={i}
-            className={`bg-white whitespace-pre-wrap absolute top-0 left-0 w-full transition text-lg font-normal font-body leading-[30px] ${
+            className={`bg-white whitespace-pre-wrap absolute top-0 left-0 w-full transition text-lg font-normal font-body leading-[30px] flex flex-col gap-12 ${
               i === activeTabIdx ? "opacity-100" : "opacity-0"
             }`}
           >
-            {tab.content}
+            {Array.isArray(content) ? (
+              <ReviewsList reviews={content} product={productData} />
+            ) : (
+              content
+            )}
           </div>
         ))}
       </div>

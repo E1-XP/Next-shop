@@ -11,7 +11,7 @@ import Breadcrumbs from "@/app/_components/Breadcrumbs";
 import ProductTabs from "./ProductTabs";
 import ProductGallery from "./ProductGallery";
 import SelectAndBuy from "./SelectAndBuy";
-import IconsBar from "../IconsBar";
+import IconsBar from "./IconsBar";
 
 import { formatPrice } from "@/app/_helpers";
 
@@ -29,9 +29,10 @@ const ProductPage = async ({ params }: Props) => {
     where: { modelId: product?.modelId },
   });
 
-  const productReviews: Review[] = await prisma.review.findMany({
-    where: { productId: product?.id },
-  });
+  const productReviews: Review[] =
+    (await prisma.review.findMany({
+      where: { productId: product?.id },
+    })) ?? [];
 
   if (!product) {
     return notFound();
@@ -54,8 +55,6 @@ const ProductPage = async ({ params }: Props) => {
 
   const descriptionLocalized =
     params.locale === "en" ? product.descriptionEN : product.descriptionPL;
-
-  const tabsContent = [{ content: descriptionLocalized }, { content: "TODO" }];
 
   const productVariants = [product].concat(
     // current product variant is always first
@@ -88,7 +87,11 @@ const ProductPage = async ({ params }: Props) => {
         </div>
       </div>
       <div className="w-full">
-        <ProductTabs data={tabsContent} />
+        <ProductTabs
+          productData={product}
+          aboutData={descriptionLocalized}
+          reviewData={productReviews}
+        />
       </div>
     </div>
   );

@@ -90,5 +90,6 @@ model Review {
   productId  String
   authorName String
   text       String
+  rating     Int
   createdAt  DateTime @default(now())
 }
