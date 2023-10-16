@@ -3,6 +3,7 @@ import { twMerge } from "tailwind-merge";
 
 interface Props {
   alt?: boolean;
+  rounded?: boolean;
   disabled?: boolean;
   className?: string;
   type?: "button" | "submit";
@@ -13,6 +14,7 @@ const Button = ({
   children,
   className,
   alt = false,
+  rounded = false,
   disabled = false,
   type = "button",
   onClick,
@@ -26,6 +28,7 @@ const Button = ({
       className={twMerge(
         "py-2.5 px-[26px] hover:opacity-90 transition font-display text-lg font-medium leading-8 -tracking-[0.4px] disabled:cursor-not-allowed",
         alt ? altClassName : standardClassName,
+        rounded ? "rounded-md" : "",
         className
       )}
       disabled={disabled}

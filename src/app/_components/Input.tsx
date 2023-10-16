@@ -2,14 +2,20 @@
 
 import * as React from "react";
 import { twMerge } from "tailwind-merge";
+import { UseFormRegister } from "react-hook-form";
 
 import EyeClosedIcon from "./icons/EyeClosed";
 import EyeIcon from "./icons/Eye";
-import { UseFormRegister } from "react-hook-form";
 
-export type Types = "text" | "email" | "password" | "radio" | "checkbox";
+export type Types =
+  | "text"
+  | "email"
+  | "password"
+  | "radio"
+  | "checkbox"
+  | "textarea";
 
-interface Props {
+interface Props<T = HTMLInputElement> {
   type?: Types;
   name?: string;
   value?: string | number;
@@ -20,10 +26,10 @@ interface Props {
   id: string;
   className?: string;
   withSubmitButton?: string;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (e: React.ChangeEvent<T>) => void;
   onBlur?: () => void;
-  onClick?: (e: React.MouseEvent<HTMLInputElement>) => void;
-  onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;
+  onClick?: (e: React.MouseEvent<T>) => void;
+  onFocus?: (e: React.FocusEvent<T>) => void;
   register?: UseFormRegister<any>;
 }
 
@@ -48,7 +54,8 @@ const Input = React.forwardRef<HTMLInputElement, Props>(
     },
     ref
   ) => {
-    const textClassname = "h-[52px] rounded-md border border-whiteGray3 p-4";
+    const baseClassName =
+      "h-[52px] rounded-md border border-whiteGray3 p-4 text text-grayWhite";
 
     const Text = () => (
       <>
@@ -60,7 +67,7 @@ const Input = React.forwardRef<HTMLInputElement, Props>(
           value={value}
           placeholder={placeholder}
           id={id}
-          className={twMerge(textClassname, "text text-grayWhite", className)}
+          className={twMerge(baseClassName, className)}
           onChange={onChange}
           onBlur={onBlur}
           onClick={onClick}
@@ -82,7 +89,7 @@ const Input = React.forwardRef<HTMLInputElement, Props>(
             value={value}
             placeholder={placeholder}
             id={id}
-            className={`${textClassname} text text-grayWhite w-full`}
+            className={`${baseClassName} w-full`}
             onChange={onChange}
             onClick={onClick}
             onFocus={onFocus}
@@ -106,7 +113,7 @@ const Input = React.forwardRef<HTMLInputElement, Props>(
           value={value}
           placeholder={placeholder}
           id={id}
-          className={twMerge(textClassname, "text text-grayWhite", className)}
+          className={twMerge(baseClassName, className)}
           onChange={onChange}
           onClick={onClick}
           onFocus={onFocus}
@@ -130,11 +137,7 @@ const Input = React.forwardRef<HTMLInputElement, Props>(
               value={value}
               placeholder={placeholder}
               id={id}
-              className={twMerge(
-                textClassname,
-                "text text-grayWhite w-full",
-                className
-              )}
+              className={twMerge(baseClassName, "w-full", className)}
               onChange={onChange}
               onClick={onClick}
               onFocus={onFocus}
@@ -199,6 +202,25 @@ const Input = React.forwardRef<HTMLInputElement, Props>(
       </>
     );
 
+    const Textarea = () => (
+      <>
+        <label className="sr-only" htmlFor={id}>
+          {label}
+        </label>
+        <textarea
+          value={value}
+          placeholder={placeholder}
+          id={id}
+          className={twMerge(baseClassName, "resize-none", className)}
+          onChange={onChange}
+          onClick={onClick}
+          onFocus={onFocus}
+          ref={ref}
+          {...(register && register(id))}
+        />
+      </>
+    );
+
     switch (type) {
       case "text":
         return withSubmitButton ? TextWithSubmitButton() : Text();
@@ -214,6 +236,9 @@ const Input = React.forwardRef<HTMLInputElement, Props>(
 
       case "checkbox":
         return Checkbox();
+
+      case "textarea":
+        return Textarea();
 
       default:
         return Text();

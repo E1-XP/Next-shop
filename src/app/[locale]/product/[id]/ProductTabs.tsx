@@ -35,7 +35,6 @@ const ProductTabs = ({
 
   const [activeTabIdx, setActiveTabIdx] = React.useState(0);
   const activeTabItem = data[activeTabIdx];
-  console.log(activeTabItem);
 
   return (
     <div

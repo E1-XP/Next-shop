@@ -94,7 +94,9 @@ const CartSummary = ({ className }: Props) => {
           {formatPrice(getTotalPrice())}
         </span>
       </p>
-      <Button className="mt-6 md:mt-8 rounded-md">{data.btnText}</Button>
+      <Button className="mt-6 md:mt-8" rounded>
+        {data.btnText}
+      </Button>
     </div>
   );
 };

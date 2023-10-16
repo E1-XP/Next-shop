@@ -85,6 +85,7 @@ const GalleryModal = ({
         },
         overlay: { zIndex: "999" },
       }}
+      closeTimeoutMS={200}
     >
       <button
         onClick={closeModal}
