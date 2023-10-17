@@ -84,8 +84,8 @@ model Product {
 
 model Review {
   id         String   @id @default(cuid())
-  author     User     @relation(fields: [authorId], references: [id])
-  authorId   String
+  user       User     @relation(fields: [userId], references: [id])
+  userId     String
   product    Product  @relation(fields: [productId], references: [id])
   productId  String
   authorName String

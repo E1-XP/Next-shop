@@ -86,7 +86,7 @@ const SignUpPage = () => {
     resolver: zodResolver(signUpSchema),
   });
 
-  const { mutate: createUser } = trpc.signup.useMutation({
+  const { mutate: createUser } = trpc.auth.signup.useMutation({
     async onSuccess(data) {
       await signIn("credentials", {
         email: data.email,
