@@ -29,11 +29,6 @@ const ProductPage = async ({ params }: Props) => {
     where: { modelId: product?.modelId },
   });
 
-  const productReviews: Review[] =
-    (await prisma.review.findMany({
-      where: { productId: product?.id },
-    })) ?? [];
-
   if (!product) {
     return notFound();
   }
@@ -87,11 +82,7 @@ const ProductPage = async ({ params }: Props) => {
         </div>
       </div>
       <div className="w-full">
-        <ProductTabs
-          productData={product}
-          aboutData={descriptionLocalized}
-          reviewData={productReviews}
-        />
+        <ProductTabs productData={product} aboutData={descriptionLocalized} />
       </div>
     </div>
   );

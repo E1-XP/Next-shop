@@ -57,6 +57,34 @@
       "btnText": " Add to Cart",
       "sizeNotSelectedText": "Please select size first, so we can check product availability.",
       "toastText": "Product added to cart."
+    },
+    "ReviewCard": {
+      "rating": "Rating:",
+      "by": "by"
+    },
+    "ReviewsList": {
+      "loadingText": "Loading...",
+      "listHeaderText": "Only logged in users can write reviews.",
+      "createButtonText": "Create review",
+      "noReviewsText": " No reviews found. Maybe it's time to write the first one?",
+      "toastNotAuthenticated": "Please log in first."
+    },
+    "ReviewModal": {
+      "buttonText": "Send",
+      "heading": "Compose your review",
+      "ratingText": "Your rating:",
+      "noRatingError": "Please select how many stars would you give this product",
+      "inputs": {
+        "0": {
+          "label": "review",
+          "placeholder": "Your review"
+        },
+        "1": {
+          "label": "username",
+          "placeholder": "Username"
+        }
+      },
+      "creationError": "Something went wrong. Please try again later."
     }
   },
   "Cart": {

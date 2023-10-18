@@ -6,6 +6,17 @@ import prisma from "@/../prisma/client";
 import { reviewSchema } from "@/app/[locale]/product/[id]/validation";
 
 export const reviewRouter = router({
+  get: procedure
+    .input(z.object({ productId: z.string().nonempty() }))
+    .query(async (opts) => {
+      const { productId } = opts.input;
+
+      const products = await prisma.review.findMany({
+        where: { productId },
+      });
+
+      return products;
+    }),
   create: procedure
     .input(
       reviewSchema.extend({

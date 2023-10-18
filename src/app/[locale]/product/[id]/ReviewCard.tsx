@@ -1,4 +1,6 @@
 import * as React from "react";
+import { useTranslations } from "next-intl";
+
 import { Product, Review } from "@prisma/client";
 import Rating from "@/app/_components/Rating";
 
@@ -8,9 +10,11 @@ interface Props {
 }
 
 const ReviewCard = ({ review, product }: Props) => {
+  const t = useTranslations("Product.ReviewCard");
+
   const data = {
-    rating: "Rating:",
-    by: "by",
+    rating: t("rating"),
+    by: t("by"),
   };
 
   return (

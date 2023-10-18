@@ -6,22 +6,16 @@ import { useTranslations } from "next-intl";
 
 import { Product, Review } from "@prisma/client";
 
-import ReviewCard from "./ReviewCard";
 import ReviewsList from "./ReviewsList";
+import { trpc } from "@/app/_trpc/client";
 
 interface Props {
   className?: string;
   productData: Product;
   aboutData: string;
-  reviewData: Review[];
 }
 
-const ProductTabs = ({
-  className,
-  aboutData,
-  reviewData,
-  productData,
-}: Props) => {
+const ProductTabs = ({ className, aboutData, productData }: Props) => {
   const t = useTranslations("Product.Tabs");
 
   const tabs = [
@@ -31,7 +25,15 @@ const ProductTabs = ({
     },
   ];
 
-  const data: [string, Review[]] = [aboutData, reviewData];
+  const getReviews = trpc.review.get.useQuery({ productId: productData?.id });
+  const productReviews =
+    getReviews.data?.map((r) => ({
+      ...r,
+      createdAt: new Date(r.createdAt),
+      updatedAt: new Date(r.updatedAt),
+    })) || [];
+
+  const data: [string, Review[]] = [aboutData, productReviews];
 
   const [activeTabIdx, setActiveTabIdx] = React.useState(0);
   const activeTabItem = data[activeTabIdx];
@@ -61,7 +63,7 @@ const ProductTabs = ({
           className="bg-white whitespace-pre-wrap top-0 left-0 w-full transition text-lg font-normal font-body leading-[30px] flex flex-col gap-12 opacity-0"
         >
           {Array.isArray(activeTabItem) ? (
-            <ReviewsList reviews={reviewData} product={productData} />
+            <ReviewsList reviews={productReviews} product={productData} />
           ) : (
             activeTabItem
           )}

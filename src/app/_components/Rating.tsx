@@ -18,12 +18,17 @@ const Rating = ({
   className,
   itemClassName,
 }: Props) => {
+  const StarWrapperTag: keyof JSX.IntrinsicElements = onClickSelect
+    ? "button"
+    : "span";
+
   return (
     <div className={twMerge("flex", className)}>
       {Array(5)
         .fill(null)
         .map((_, i) => (
-          <span
+          <StarWrapperTag
+            type={StarWrapperTag === "button" ? "button" : undefined}
             key={i}
             onClick={onClickSelect ? () => onClickSelect(i + 1) : undefined}
           >
@@ -35,7 +40,7 @@ const Rating = ({
                 itemClassName
               )}
             />
-          </span>
+          </StarWrapperTag>
         ))}
     </div>
   );

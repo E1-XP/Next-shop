@@ -17,6 +17,7 @@ import Input, { Types } from "@/app/_components/Input";
 import { SchemaType, reviewSchema } from "./validation";
 
 import { trpc } from "@/app/_trpc/client";
+import { toast } from "react-toastify";
 
 interface Props {
   isOpen: boolean;
@@ -24,29 +25,30 @@ interface Props {
 }
 
 const ReviewModal = ({ isOpen, closeModal }: Props) => {
-  const t = useTranslations("");
+  const t = useTranslations("Product.ReviewModal");
   const session = useSession();
   const params = useParams();
 
   const data = {
-    buttonText: "Send",
-    heading: "Compose your review",
-    ratingText: "Your rating:",
-    noRatingError: "Please select how many stars would you give this product",
+    buttonText: t("buttonText"),
+    heading: t("heading"),
+    ratingText: t("ratingText"),
+    noRatingError: t("noRatingError"),
     inputs: [
       {
         type: "textarea",
-        label: "review",
-        placeholder: "Your review",
+        label: t("inputs.0.label"),
+        placeholder: t("inputs.0.placeholder"),
         id: "review",
       },
       {
         type: "text",
-        label: "username",
-        placeholder: "Username",
+        label: t("inputs.1.label"),
+        placeholder: t("inputs.1.placeholder"),
         id: "username",
       },
     ] as ({ type: Types } & { [key: string]: string })[],
+    creationError: t("creationError"),
   };
 
   const [rating, setRating] = React.useState(0);
@@ -71,14 +73,20 @@ const ReviewModal = ({ isOpen, closeModal }: Props) => {
   const validateRating = () => {
     if (rating === 0) setNoRatingError(true);
   };
-  console.log(session);
+
+  const utils = trpc.useContext();
 
   const { mutate: createReview } = trpc.review.create.useMutation({
-    onSuccess() {
+    onSuccess(data) {
       closeModal();
+
+      utils.review.get.setData({ productId: data.productId }, (reviews) => [
+        ...(reviews || []),
+        data,
+      ]);
     },
-    onError(resp) {
-      console.log(resp);
+    onError() {
+      toast.error(data.creationError);
     },
   });
 

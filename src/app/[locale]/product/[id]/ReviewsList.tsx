@@ -17,14 +17,14 @@ interface Props {
 
 const ReviewsList = ({ reviews, product }: Props) => {
   const session = useSession();
-  const t = useTranslations("Product.Reviews");
+  const t = useTranslations("Product.ReviewsList");
 
   const data = {
-    loadingText: "Loading...",
-    listHeaderText: "Only logged in users can write reviews.",
-    createButtonText: "Create review",
-    noReviewsText: " No reviews found. Maybe it's time to write the first one?",
-    toastNotAuthenticated: "Please log in first.",
+    loadingText: t("loadingText"),
+    listHeaderText: t("listHeaderText"),
+    createButtonText: t("createButtonText"),
+    noReviewsText: t("noReviewsText"),
+    toastNotAuthenticated: t("toastNotAuthenticated"),
   };
 
   const [isModalOpen, setIsModalOpen] = React.useState(false);

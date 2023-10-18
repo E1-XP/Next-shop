@@ -55,6 +55,34 @@
       "btnText": "Dodaj do koszyka",
       "sizeNotSelectedText": "Wybierz rozmiar, abyśmy mogli sprawdzić dostępność produktu.",
       "toastText": "Dodano produkt do koszyka."
+    },
+    "ReviewCard": {
+      "rating": "Ocena",
+      "by": "od"
+    },
+    "ReviewsList": {
+      "loadingText": "Ładowanie...",
+      "listHeaderText": "Tylko zalogowani użytkownicy mogą pisać opinie.",
+      "createButtonText": "Stwórz opinię",
+      "noReviewsText": "Nie znaleziono opinii. Może to czas aby napisać własną?",
+      "toastNotAuthenticated": "Najpierw się zaloguj."
+    },
+    "ReviewModal": {
+      "buttonText": "Wyślij",
+      "heading": "Skomponuj swoją recenzję",
+      "ratingText": "Twoja ocena:",
+      "noRatingError": "Wybierz ile gwiazdek dałbyś temu produktowi",
+      "inputs": {
+        "0": {
+          "label": "recenzja",
+          "placeholder": "Twoja recenzja"
+        },
+        "1": {
+          "label": "twój nick",
+          "placeholder": "Twój nick"
+        }
+      },
+      "creationError": "Coś poszło nie tak, spróbuj ponownie później."
     }
   },
   "Cart": {
