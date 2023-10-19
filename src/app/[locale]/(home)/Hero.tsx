@@ -83,6 +83,7 @@ const HeroSection = () => {
             <div className="relative flex flex-col h-full">
               <div className="h-full overflow-hidden">
                 <Image
+                  priority
                   src={item.img}
                   alt="Product campaign photo"
                   className={`pointer-events-none w-full h-full object-cover object-center md:object-[10%_48%] mask-image max-sm:!basis-1/2 max-sm:scale-110 max-sm:translate-x-[-5%] max-sm:translate-y-[-1%] ${

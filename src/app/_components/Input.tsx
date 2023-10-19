@@ -15,7 +15,7 @@ export type Types =
   | "checkbox"
   | "textarea";
 
-interface Props<T = HTMLInputElement> {
+interface Props<T = HTMLInputElement | HTMLTextAreaElement> {
   type?: Types;
   name?: string;
   value?: string | number;
@@ -33,7 +33,7 @@ interface Props<T = HTMLInputElement> {
   register?: UseFormRegister<any>;
 }
 
-const Input = React.forwardRef<HTMLInputElement, Props>(
+const Input = React.forwardRef<HTMLInputElement | HTMLTextAreaElement, Props>(
   (
     {
       className,
@@ -72,7 +72,7 @@ const Input = React.forwardRef<HTMLInputElement, Props>(
           onBlur={onBlur}
           onClick={onClick}
           onFocus={onFocus}
-          ref={ref}
+          ref={ref as React.LegacyRef<HTMLInputElement>}
           {...(register && register(id))}
         />
       </>
@@ -93,7 +93,7 @@ const Input = React.forwardRef<HTMLInputElement, Props>(
             onChange={onChange}
             onClick={onClick}
             onFocus={onFocus}
-            ref={ref}
+            ref={ref as React.LegacyRef<HTMLInputElement>}
             {...(register && register(id))}
           />
           <button className="button-small absolute right-4 top-1/2 -translate-y-1/2 hover:opacity-70 transition">
@@ -117,7 +117,7 @@ const Input = React.forwardRef<HTMLInputElement, Props>(
           onChange={onChange}
           onClick={onClick}
           onFocus={onFocus}
-          ref={ref}
+          ref={ref as React.LegacyRef<HTMLInputElement>}
           {...(register && register(id))}
         />
       </>
@@ -141,7 +141,7 @@ const Input = React.forwardRef<HTMLInputElement, Props>(
               onChange={onChange}
               onClick={onClick}
               onFocus={onFocus}
-              ref={ref}
+              ref={ref as React.LegacyRef<HTMLInputElement>}
               {...(register && register(id))}
             />
             <button
@@ -171,7 +171,7 @@ const Input = React.forwardRef<HTMLInputElement, Props>(
           onChange={onChange}
           onClick={onClick}
           onFocus={onFocus}
-          ref={ref}
+          ref={ref as React.LegacyRef<HTMLInputElement>}
           {...(register && register(id))}
         />
       </>
@@ -196,7 +196,7 @@ const Input = React.forwardRef<HTMLInputElement, Props>(
           onChange={onChange}
           onClick={onClick}
           onFocus={onFocus}
-          ref={ref}
+          ref={ref as React.LegacyRef<HTMLInputElement>}
           {...(register && register(id))}
         />
       </>
@@ -215,7 +215,7 @@ const Input = React.forwardRef<HTMLInputElement, Props>(
           onChange={onChange}
           onClick={onClick}
           onFocus={onFocus}
-          ref={ref}
+          ref={ref as React.LegacyRef<HTMLTextAreaElement>}
           {...(register && register(id))}
         />
       </>
