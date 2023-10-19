@@ -1,8 +1,7 @@
 import * as React from "react";
 import { notFound } from "next/navigation";
 
-import prisma from "@/../prisma/client";
-import { Product, Review } from "@prisma/client";
+import { Product } from "@prisma/client";
 
 import { Categories, GenderPlurals } from "@/app/_helpers/constants";
 
@@ -14,6 +13,7 @@ import SelectAndBuy from "./SelectAndBuy";
 import IconsBar from "./IconsBar";
 
 import { formatPrice } from "@/app/_helpers";
+import { serverClient } from "@/app/_trpc/serverClient";
 
 interface Props {
   params: { id: string; locale: string };
@@ -22,16 +22,15 @@ interface Props {
 const ProductPage = async ({ params }: Props) => {
   const id = params.id;
 
-  const product = await prisma.product.findUnique({
-    where: { id },
-  });
-  const modelProducts: Product[] = await prisma.product.findMany({
-    where: { modelId: product?.modelId },
-  });
+  const product = await serverClient.product.getOne({ productId: id });
 
   if (!product) {
     return notFound();
   }
+
+  const modelProducts: Product[] = await serverClient.product.getModelVariants({
+    modelId: product?.modelId,
+  });
 
   const genderPlural = GenderPlurals[product.gender];
   const category = Categories[product.category];

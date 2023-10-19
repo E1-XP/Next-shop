@@ -1,14 +1,12 @@
-import prisma from "@/../prisma/client";
-
 import HeroSection from "./Hero";
 import ProductList from "@/app/_components/ProductList";
 import NewsletterSection from "./Newsletter";
 import InstagramSection from "./Instagram";
 import { NewArrivalsSlider, SummerCollectionSlider } from "./Sliders";
+import { serverClient } from "@/app/_trpc/serverClient";
 
 export default async function Home() {
-  const products =
-    (await prisma.product.findMany({ orderBy: { id: "asc" } })) || [];
+  const products = await serverClient.product.getAll({ order: "asc" });
 
   return (
     <main className="">

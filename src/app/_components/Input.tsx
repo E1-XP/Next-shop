@@ -15,7 +15,9 @@ export type Types =
   | "checkbox"
   | "textarea";
 
-interface Props<T = HTMLInputElement | HTMLTextAreaElement> {
+type ComponentTypes = HTMLInputElement | HTMLTextAreaElement;
+
+interface Props<T extends ComponentTypes> {
   type?: Types;
   name?: string;
   value?: string | number;
@@ -33,7 +35,7 @@ interface Props<T = HTMLInputElement | HTMLTextAreaElement> {
   register?: UseFormRegister<any>;
 }
 
-const Input = React.forwardRef<HTMLInputElement | HTMLTextAreaElement, Props>(
+const Input = React.forwardRef<ComponentTypes, Props<any>>(
   (
     {
       className,
