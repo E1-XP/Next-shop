@@ -66,6 +66,7 @@ model Product {
   name          String
   brand         String
   price         Int
+  priceId       String
   oldPrice      Int
   rating        Int
   color         String // hex code

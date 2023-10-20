@@ -11,6 +11,8 @@ import { formatPrice, getProductsPrice } from "@/app/_helpers";
 
 import { useCartStore } from "@/app/_store/cart";
 import { useHydrate } from "@/app/_hooks/useHydrate";
+import { trpc } from "@/app/_trpc/client";
+import { useRouter } from "next/navigation";
 
 interface Props {
   className?: string;
@@ -18,6 +20,7 @@ interface Props {
 
 const CartSummary = ({ className }: Props) => {
   const t = useTranslations("Cart.CartSummary");
+  const router = useRouter();
 
   const { products } = useCartStore();
   useHydrate();
@@ -43,6 +46,23 @@ const CartSummary = ({ className }: Props) => {
     setActiveOption(Number(e.target.value));
   };
 
+  const { mutate: checkout } = trpc.payment.checkout.useMutation({
+    onSuccess(data) {
+      if (data.url) router.push(data.url);
+    },
+    onError(err) {
+      console.error(err);
+    },
+  });
+
+  const onCheckout = () => {
+    const lineProducts = products.map((p) => ({
+      price: p.product.priceId,
+      quantity: p.quantity,
+    }));
+
+    checkout({ items: lineProducts });
+  };
   return (
     <div
       className={twMerge(
@@ -94,7 +114,7 @@ const CartSummary = ({ className }: Props) => {
           {formatPrice(getTotalPrice())}
         </span>
       </p>
-      <Button className="mt-6 md:mt-8" rounded>
+      <Button className="mt-6 md:mt-8" rounded onClick={onCheckout}>
         {data.btnText}
       </Button>
     </div>
