@@ -12,6 +12,7 @@ import EmailIcon from "../icons/Email";
 
 import USAFlag from "@/../public/images/USAFlag.svg";
 import PolishFlag from "@/../public/images/PolishFlag.svg";
+import { currencies } from "@/app/_helpers/constants";
 
 const Footer = () => {
   const t = useTranslations("Footer");
@@ -39,7 +40,9 @@ const Footer = () => {
           locale: "pl",
         },
       ],
-      currency: [{ text: "USD" }, { text: "PLN" }],
+      currency: [{ text: "usd" }, { text: "pln" }] as {
+        text: (typeof currencies)[number];
+      }[],
     },
   };
 

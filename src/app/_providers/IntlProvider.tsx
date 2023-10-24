@@ -1,13 +1,15 @@
 import { NextIntlClientProvider, useMessages } from "next-intl";
 import { notFound } from "next/navigation";
 
+import { locales } from "../_helpers/constants";
+
 interface Props {
   children?: React.ReactNode;
-  locale: string;
+  locale: (typeof locales)[number];
 }
 
 export function generateStaticParams() {
-  return [{ locale: "en" }, { locale: "pl" }];
+  return locales.map((locale) => ({ locale }));
 }
 
 export const IntlProvider = ({ children, locale }: Props) => {

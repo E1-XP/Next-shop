@@ -13,6 +13,7 @@ import { useCartStore } from "@/app/_store/cart";
 import { useHydrate } from "@/app/_hooks/useHydrate";
 import { trpc } from "@/app/_trpc/client";
 import { useRouter } from "next/navigation";
+import { useGlobalStore } from "@/app/_store/global";
 
 interface Props {
   className?: string;
@@ -23,13 +24,22 @@ const CartSummary = ({ className }: Props) => {
   const router = useRouter();
 
   const { products } = useCartStore();
+  const { currency } = useGlobalStore();
   useHydrate();
 
   const data = {
     heading: t("heading"),
     shippingOptions: [
-      { name: t("shippingOptions.0.name"), price: 0 },
-      { name: t("shippingOptions.1.name"), price: 15 },
+      {
+        name: t("shippingOptions.0.name"),
+        price: 0,
+        stripeId: "shr_1O3i5KEl9PJWMc3qDttbJZuh",
+      },
+      {
+        name: t("shippingOptions.1.name"),
+        price: 15,
+        stripeId: "shr_1O3i5tEl9PJWMc3qmeUdOZpN",
+      },
     ],
     subtotalText: t("subtotalText"),
     totalText: t("totalText"),
@@ -37,13 +47,13 @@ const CartSummary = ({ className }: Props) => {
   };
 
   const [activeOption, setActiveOption] = React.useState(
-    data.shippingOptions[0].price
+    data.shippingOptions[0]
   );
 
-  const getTotalPrice = () => getProductsPrice(products) + activeOption;
+  const getTotalPrice = () => getProductsPrice(products) + activeOption.price;
 
-  const onOptionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setActiveOption(Number(e.target.value));
+  const onOptionChange = (idx: number) => {
+    setActiveOption(data.shippingOptions[idx]);
   };
 
   const { mutate: checkout } = trpc.payment.checkout.useMutation({
@@ -61,7 +71,11 @@ const CartSummary = ({ className }: Props) => {
       quantity: p.quantity,
     }));
 
-    checkout({ items: lineProducts });
+    checkout({
+      items: lineProducts,
+      currency,
+      stripeShippingOptionId: activeOption.stripeId,
+    });
   };
   return (
     <div
@@ -72,11 +86,11 @@ const CartSummary = ({ className }: Props) => {
     >
       <p className="button-large">{data.heading}</p>
       <fieldset className="gap-3 flex flex-col mt-4">
-        {data.shippingOptions.map((option) => (
+        {data.shippingOptions.map((option, idx) => (
           <div
             key={option.name}
             className={`flex px-4 py-[13px] border ${
-              activeOption === option.price
+              activeOption.price === option.price
                 ? "border-darkGray"
                 : "border-whiteGray3"
             } rounded gap-3 items-center`}
@@ -87,8 +101,8 @@ const CartSummary = ({ className }: Props) => {
               label={option.name}
               value={option.price}
               className="accent-darkGray cursor-pointer"
-              onChange={onOptionChange}
-              checked={activeOption === option.price}
+              onChange={() => onOptionChange(idx)}
+              checked={activeOption.price === option.price}
             />
             <label
               htmlFor={option.name}

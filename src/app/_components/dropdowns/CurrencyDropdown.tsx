@@ -1,11 +1,16 @@
 "use client";
 
 import * as React from "react";
+import { useLocale } from "next-intl";
 
 import Dropdown from "../Dropdown";
 
+import { useGlobalStore } from "@/app/_store/global";
+import { useHydrate } from "@/app/_hooks/useHydrate";
+import { currencies } from "@/app/_helpers/constants";
+
 interface Option {
-  text: string;
+  text: (typeof currencies)[number];
 }
 
 interface Props {
@@ -13,7 +18,35 @@ interface Props {
 }
 
 const CurrencyDropdown = ({ options }: Props) => {
-  return <Dropdown options={options.map((option) => option.text)} />;
+  const { setCurrency, currency } = useGlobalStore();
+  const isHydrating = useHydrate();
+
+  const locale = useLocale();
+
+  React.useEffect(() => {
+    const actualCurrency = locale === "en" ? "usd" : "pln";
+    setCurrency(actualCurrency);
+  }, []);
+
+  const onSelect = (idx: number) => {
+    const currency = options[idx].text;
+    setCurrency(currency);
+  };
+
+  const getDefaultIdx = () => {
+    const idx = options.findIndex((opt) => opt.text === currency);
+    return idx !== -1 ? idx : undefined;
+  };
+
+  if (isHydrating) return "...";
+
+  return (
+    <Dropdown
+      options={options.map((option) => option.text.toUpperCase())}
+      onOptionSelect={onSelect}
+      defaultIdx={getDefaultIdx()}
+    />
+  );
 };
 
 export default CurrencyDropdown;

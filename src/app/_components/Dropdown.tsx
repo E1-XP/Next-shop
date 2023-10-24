@@ -43,7 +43,7 @@ const Dropdown = ({
     dismiss,
   ]);
 
-  const [activeIdx, setActiveIdx] = React.useState(defaultIdx ?? 0);
+  const [activeIdx, setActiveIdx] = React.useState(() => defaultIdx ?? 0);
 
   const toggleIsOpen = () => setIsOpen(!isOpen);
 

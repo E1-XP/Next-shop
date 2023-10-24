@@ -10,8 +10,9 @@ import Toast from "../_components/Toast";
 
 import { AuthProvider } from "../_providers/AuthProvider";
 import { TrpcQueryProvider } from "../_providers/TrpcQueryProvider";
-import { locales } from "../_i18n";
 import { IntlProvider } from "../_providers/IntlProvider";
+
+import { locales } from "@/app/_helpers/constants";
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -30,7 +31,7 @@ export const metadata: Metadata = {
 
 interface Props {
   children: React.ReactNode;
-  params: { locale: string };
+  params: { locale: (typeof locales)[number] };
 }
 
 export default function RootLayout({ children, params: { locale } }: Props) {

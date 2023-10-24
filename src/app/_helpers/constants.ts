@@ -1,5 +1,9 @@
-export const Genders = ["Man", "Woman", "Unisex"];
+export const currencies = <const>["usd", "pln"];
 
-export const GenderPlurals = ["Men", "Women", "Unisex"];
+export const locales = <const>["en", "pl"];
 
-export const Categories = ["T-Shirts"];
+export const Genders = <const>["Man", "Woman", "Unisex"];
+
+export const GenderPlurals = <const>["Men", "Women", "Unisex"];
+
+export const Categories = <const>["T-Shirts"];
