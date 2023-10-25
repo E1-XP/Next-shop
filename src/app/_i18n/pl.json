@@ -95,7 +95,8 @@
       },
       "subtotalText": "Suma",
       "totalText": "Suma z przesyłką",
-      "btnText": "Przejdź do płatności"
+      "btnText": "Przejdź do płatności",
+      "toastNotAuthenticated": "Najpierw się zaloguj."
     },
     "CouponInput": {
       "heading": "Masz kupon?",

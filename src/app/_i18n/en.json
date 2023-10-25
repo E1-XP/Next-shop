@@ -97,7 +97,8 @@
       },
       "subtotalText": "Subtotal",
       "totalText": "Total",
-      "btnText": "Checkout"
+      "btnText": "Checkout",
+      "toastNotAuthenticated": "Please log in first."
     },
     "CouponInput": {
       "heading": "Have a coupon?",

@@ -48,6 +48,7 @@ export const paymentRouter = router({
           })
         ),
         currency: z.string().nonempty(),
+        locale: z.string().nonempty(),
         stripeShippingOptionId: z.string().nonempty(),
       })
     )
@@ -61,6 +62,7 @@ export const paymentRouter = router({
         line_items: opts.input.items,
         mode: "payment",
         currency: opts.input.currency,
+        locale: opts.input.locale as Stripe.Checkout.Session.Locale,
         payment_method_types: isUSD ? ["card"] : ["blik", "card"],
         customer_email: authSession?.user?.email,
         submit_type: "pay",

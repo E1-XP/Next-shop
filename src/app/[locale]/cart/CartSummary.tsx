@@ -4,6 +4,8 @@ import * as React from "react";
 import { twMerge } from "tailwind-merge";
 import { useLocale, useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
+import { toast } from "react-toastify";
 
 import Button from "@/app/_components/Button";
 import Input from "@/app/_components/Input";
@@ -24,10 +26,14 @@ const CartSummary = ({ className }: Props) => {
   const t = useTranslations("Cart.CartSummary");
   const router = useRouter();
   const locale = useLocale();
+  const session = useSession();
 
   const { products } = useCartStore();
   const { currency } = useGlobalStore();
   useHydrate();
+
+  const isAuthenticated = session.status === "authenticated";
+  const isUSD = currency === "usd";
 
   const data = {
     heading: t("heading"),
@@ -39,20 +45,19 @@ const CartSummary = ({ className }: Props) => {
       },
       {
         name: t("shippingOptions.1.name"),
-        price: 1500,
+        price: isUSD ? 500 : 1500,
         stripeId: "shr_1O3i5tEl9PJWMc3qmeUdOZpN",
       },
     ],
     subtotalText: t("subtotalText"),
     totalText: t("totalText"),
     btnText: t("btnText"),
+    toastNotAuthenticated: t("toastNotAuthenticated"),
   };
 
   const [activeOption, setActiveOption] = React.useState(
     data.shippingOptions[0]
   );
-
-  const isUSD = currency === "usd";
 
   const prices =
     trpc.payment.getPrices.useQuery({
@@ -88,7 +93,9 @@ const CartSummary = ({ className }: Props) => {
   });
 
   const onCheckout = () => {
-    const isUSD = currency === "usd";
+    if (!isAuthenticated) {
+      return toast.info(data.toastNotAuthenticated);
+    }
 
     const lineProducts = products.map((p) => ({
       price: isUSD ? p.product.priceUSDId : p.product.pricePLNId,
@@ -99,6 +106,7 @@ const CartSummary = ({ className }: Props) => {
       items: lineProducts,
       currency,
       stripeShippingOptionId: activeOption.stripeId,
+      locale,
     });
   };
 
