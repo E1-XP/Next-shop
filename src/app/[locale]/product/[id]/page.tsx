@@ -5,14 +5,12 @@ import { Product } from "@prisma/client";
 
 import { Categories, GenderPlurals } from "@/app/_helpers/constants";
 
-import Rating from "@/app/_components/Rating";
 import Breadcrumbs from "@/app/_components/Breadcrumbs";
 import ProductTabs from "./ProductTabs";
 import ProductGallery from "./ProductGallery";
-import SelectAndBuy from "./SelectAndBuy";
+import ProductDetails from "./ProductDetails";
 import IconsBar from "./IconsBar";
 
-import { formatPrice } from "@/app/_helpers";
 import { serverClient } from "@/app/_trpc/serverClient";
 
 interface Props {
@@ -20,17 +18,25 @@ interface Props {
 }
 
 const ProductPage = async ({ params }: Props) => {
-  const id = params.id;
+  const { id } = params;
 
-  const product = await serverClient.product.getOne({ productId: id });
+  const product = await serverClient.product.getOne({ id });
 
   if (!product) {
     return notFound();
   }
 
+  const prices = await serverClient.payment.getPrices({
+    stripeId: product?.stripeId,
+  });
+
   const modelProducts: Product[] = await serverClient.product.getModelVariants({
     modelId: product?.modelId,
   });
+
+  if (!prices) {
+    return notFound();
+  }
 
   const genderPlural = GenderPlurals[product.gender];
   const category = Categories[product.category];
@@ -67,16 +73,11 @@ const ProductPage = async ({ params }: Props) => {
           <p className="font-display text-[34px] leading-[38px] font-medium -tracking-[0.6px]">
             {product.name}
           </p>
-          <Rating rate={product.rating} className="mt-4" />
-          <p className="flex gap-3 text-lg items-center mt-4">
-            <span className="block font-bold font-display text-[26px]">
-              {formatPrice(product.price)}
-            </span>
-            <span className="block line-through opacity-70 font-display text-base">
-              {formatPrice(product.oldPrice)}
-            </span>
-          </p>
-          <SelectAndBuy product={product} productVariants={productVariants} />
+          <ProductDetails
+            product={product}
+            productPrices={prices}
+            productVariants={productVariants}
+          />
           <IconsBar />
         </div>
       </div>

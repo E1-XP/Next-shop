@@ -2,18 +2,19 @@
 
 import * as React from "react";
 import { twMerge } from "tailwind-merge";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
+import { useRouter } from "next/navigation";
 
 import Button from "@/app/_components/Button";
 import Input from "@/app/_components/Input";
 
 import { formatPrice, getProductsPrice } from "@/app/_helpers";
+import { locales } from "@/app/_helpers/constants";
 
 import { useCartStore } from "@/app/_store/cart";
+import { useGlobalStore } from "@/app/_store/global";
 import { useHydrate } from "@/app/_hooks/useHydrate";
 import { trpc } from "@/app/_trpc/client";
-import { useRouter } from "next/navigation";
-import { useGlobalStore } from "@/app/_store/global";
 
 interface Props {
   className?: string;
@@ -22,6 +23,7 @@ interface Props {
 const CartSummary = ({ className }: Props) => {
   const t = useTranslations("Cart.CartSummary");
   const router = useRouter();
+  const locale = useLocale();
 
   const { products } = useCartStore();
   const { currency } = useGlobalStore();
@@ -37,7 +39,7 @@ const CartSummary = ({ className }: Props) => {
       },
       {
         name: t("shippingOptions.1.name"),
-        price: 15,
+        price: 1500,
         stripeId: "shr_1O3i5tEl9PJWMc3qmeUdOZpN",
       },
     ],
@@ -50,7 +52,27 @@ const CartSummary = ({ className }: Props) => {
     data.shippingOptions[0]
   );
 
-  const getTotalPrice = () => getProductsPrice(products) + activeOption.price;
+  const isUSD = currency === "usd";
+
+  const prices =
+    trpc.payment.getPrices.useQuery({
+      stripeId: products.map((p) => p.product.stripeId),
+    }).data ?? [];
+
+  const productsWithPrices = products.map(({ quantity, product }) => {
+    const price = prices.find(
+      (price) =>
+        price.id === (isUSD ? product?.priceUSDId : product?.pricePLNId)
+    );
+
+    return {
+      price: price?.unit_amount!,
+      quantity,
+    };
+  });
+
+  const getTotalPrice = () =>
+    getProductsPrice(productsWithPrices) + activeOption.price;
 
   const onOptionChange = (idx: number) => {
     setActiveOption(data.shippingOptions[idx]);
@@ -66,8 +88,10 @@ const CartSummary = ({ className }: Props) => {
   });
 
   const onCheckout = () => {
+    const isUSD = currency === "usd";
+
     const lineProducts = products.map((p) => ({
-      price: p.product.priceId,
+      price: isUSD ? p.product.priceUSDId : p.product.pricePLNId,
       quantity: p.quantity,
     }));
 
@@ -77,6 +101,7 @@ const CartSummary = ({ className }: Props) => {
       stripeShippingOptionId: activeOption.stripeId,
     });
   };
+
   return (
     <div
       className={twMerge(
@@ -109,7 +134,13 @@ const CartSummary = ({ className }: Props) => {
               className="flex gap-2 justify-between items-center w-full text"
             >
               {option.name}
-              <span className="ml-auto">{formatPrice(option.price)}</span>
+              <span className="ml-auto">
+                {formatPrice(
+                  option.price,
+                  currency,
+                  locale as (typeof locales)[number]
+                )}
+              </span>
             </label>
           </div>
         ))}
@@ -117,7 +148,11 @@ const CartSummary = ({ className }: Props) => {
       <p className="flex items-center justify-between mt-[29px] py-[13px]">
         <span className="text">{data.subtotalText}</span>
         <span className="text font-semibold">
-          {formatPrice(getProductsPrice(products))}
+          {formatPrice(
+            getProductsPrice(productsWithPrices),
+            currency,
+            locale as (typeof locales)[number]
+          )}
         </span>
       </p>
       <p className="flex items-center justify-between py-[13px] border-t border-whiteGray3 border-opacity-60">
@@ -125,7 +160,11 @@ const CartSummary = ({ className }: Props) => {
           {data.totalText}
         </span>
         <span className="text text-lg font-semibold leading-[30px]">
-          {formatPrice(getTotalPrice())}
+          {formatPrice(
+            getTotalPrice(),
+            currency,
+            locale as (typeof locales)[number]
+          )}
         </span>
       </p>
       <Button className="mt-6 md:mt-8" rounded onClick={onCheckout}>

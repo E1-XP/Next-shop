@@ -60,14 +60,15 @@ model VerificationToken {
 model Product {
   id            String   @id @default(cuid())
   modelId       String
-  productId     String
   gender        Int // 0 => "man", 1 => "woman", 2 => "unisex"
   category      Int // like 0 => "T-Shirts"
   name          String
   brand         String
-  price         Int
-  priceId       String
-  oldPrice      Int
+  priceUSDId    String
+  pricePLNId    String
+  oldPriceUSDId String
+  oldPricePLNId String
+  stripeId      String
   rating        Int
   color         String // hex code
   xs            Int // number of products in storage

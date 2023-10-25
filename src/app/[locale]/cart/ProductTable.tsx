@@ -4,15 +4,19 @@ import * as React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { twMerge } from "tailwind-merge";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 import QuantityInput from "@/app/_components/QuantityInput";
 import TrashIcon from "@/app/_components/icons/Trash";
 
+import { locales } from "@/app/_helpers/constants";
 import { formatPrice } from "@/app/_helpers";
 
 import { useCartStore } from "@/app/_store/cart";
 import { useHydrate } from "@/app/_hooks/useHydrate";
+import { useGlobalStore } from "@/app/_store/global";
+
+import { trpc } from "@/app/_trpc/client";
 
 interface Props {
   className?: string;
@@ -20,8 +24,10 @@ interface Props {
 
 const ProductTable = ({ className }: Props) => {
   const t = useTranslations("Cart.ProductTable");
+  const locale = useLocale();
 
   const { products, removeProduct } = useCartStore();
+  const { currency } = useGlobalStore();
   useHydrate();
 
   const tableData = {
@@ -31,6 +37,24 @@ const ProductTable = ({ className }: Props) => {
     sizeText: t("sizeText"),
     colorText: t("colorText"),
   };
+
+  const isUSD = currency === "usd";
+
+  const prices =
+    trpc.payment.getPrices.useQuery({
+      stripeId: products.map((p) => p.product.stripeId),
+    }).data ?? [];
+
+  const productsWithPrices = products.map(({ product }) => {
+    const price = prices.find(
+      (price) =>
+        price.id === (isUSD ? product?.priceUSDId : product?.pricePLNId)
+    );
+
+    return {
+      price: price?.unit_amount!,
+    };
+  });
 
   return (
     <table
@@ -55,7 +79,7 @@ const ProductTable = ({ className }: Props) => {
       </thead>
       <tbody className={!products.length ? "h-[136px]" : ""}>
         {products.length ? (
-          products.map(({ product, quantity, size }) => (
+          products.map(({ product, quantity, size }, i) => (
             <tr
               key={`${product.id} ${size}`}
               className="border-b first:border-t border-whiteGray3 py-4 flex justify-between items-center gap-2"
@@ -100,7 +124,11 @@ const ProductTable = ({ className }: Props) => {
                   </div>
                   <div className="gap-2 flex flex-col items-end sm:items-start">
                     <span className="sm:hidden">
-                      {formatPrice(product.price)}
+                      {formatPrice(
+                        productsWithPrices[i].price ?? 0,
+                        currency,
+                        locale as (typeof locales)[number]
+                      )}
                     </span>
                     <button
                       className="flex items-center button-xsmall hover:opacity-70 transition gap-1"
@@ -125,10 +153,18 @@ const ProductTable = ({ className }: Props) => {
                 />
               </td>
               <td className="text text-lg leading-[30px] w-[68px] hidden sm:block">
-                {formatPrice(product.price)}
+                {formatPrice(
+                  productsWithPrices[i].price ?? 0,
+                  currency,
+                  locale as (typeof locales)[number]
+                )}
               </td>
               <td className="pr-0 text text-lg leading-[30px] font-semibold max-md:hidden">
-                {formatPrice(product.price)}
+                {formatPrice(
+                  productsWithPrices[i].price ?? 0,
+                  currency,
+                  locale as (typeof locales)[number]
+                )}
               </td>
             </tr>
           ))

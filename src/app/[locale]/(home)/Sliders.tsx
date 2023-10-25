@@ -10,7 +10,7 @@ export const NewArrivalsSlider = ({ products }: { products: Product[] }) => {
 
   const data = { heading: t("0.heading") };
 
-  return <ScrollableSlider data={products} heading={data.heading} />;
+  return <ScrollableSlider products={products} heading={data.heading} />;
 };
 
 export const SummerCollectionSlider = ({
@@ -24,7 +24,7 @@ export const SummerCollectionSlider = ({
 
   return (
     <ScrollableSlider
-      data={products}
+      products={products}
       heading={data.heading}
       paragraph={data.paragraph}
       bgColor="#FFC107"

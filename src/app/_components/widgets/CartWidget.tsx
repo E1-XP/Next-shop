@@ -4,28 +4,54 @@ import * as React from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
+import { useLocale } from "next-intl";
 
 import Widget from "./Base";
 import Button from "../Button";
 import ShoppingBagIcon from "../icons/ShoppingBag";
 
 import { formatPrice, getProductsPrice } from "@/app/_helpers";
+import { locales } from "@/app/_helpers/constants";
 
 import { useCartStore } from "@/app/_store/cart";
 import { useHydrate } from "@/app/_hooks/useHydrate";
+import { useGlobalStore } from "@/app/_store/global";
+import { trpc } from "@/app/_trpc/client";
 
 const CartWidget = () => {
   const t = useTranslations("widgets.CartWidget");
 
   const router = useRouter();
+  const locale = useLocale();
 
   const { products } = useCartStore();
+  const { currency } = useGlobalStore();
   useHydrate();
 
   const [isOpen, setIsOpen] = React.useState(false);
 
   const cartItemsCount = products.length;
-  const totalCost = getProductsPrice(products);
+
+  const isUSD = currency === "usd";
+
+  const prices =
+    trpc.payment.getPrices.useQuery({
+      stripeId: products.map((p) => p.product.stripeId),
+    }).data ?? [];
+
+  const productsWithPrices = products.map(({ quantity, product }) => {
+    const price = prices.find(
+      (price) =>
+        price.id === (isUSD ? product?.priceUSDId : product?.pricePLNId)
+    );
+
+    return {
+      price: price?.unit_amount!,
+      quantity,
+    };
+  });
+
+  const totalCost = getProductsPrice(productsWithPrices);
 
   const data = {
     loadingText: t("loadingText"),
@@ -59,7 +85,7 @@ const CartWidget = () => {
       <div className="flex justify-between items-center w-full">
         <p className="heading-5">{data.header}</p>
         <span className="heading-6 font-semibold">
-          {formatPrice(totalCost)}
+          {formatPrice(totalCost, currency, locale as (typeof locales)[number])}
         </span>
       </div>
       {products.length ? (

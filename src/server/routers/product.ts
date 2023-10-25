@@ -5,12 +5,12 @@ import prisma from "@/../prisma/client";
 
 export const productRouter = router({
   getOne: procedure
-    .input(z.object({ productId: z.string().nonempty() }))
+    .input(z.object({ id: z.string().nonempty() }))
     .query(async (opts) => {
-      const { productId } = opts.input;
+      const { id } = opts.input;
 
       const product = await prisma.product.findUnique({
-        where: { id: productId },
+        where: { id },
       });
 
       return product;

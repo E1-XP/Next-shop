@@ -7,11 +7,14 @@ import { Mousewheel } from "swiper/modules";
 
 import { Product } from "@prisma/client";
 import ProductItem from "../../_components/ProductItem";
+import { useGlobalStore } from "@/app/_store/global";
+import { trpc } from "@/app/_trpc/client";
+import { useHydrate } from "@/app/_hooks/useHydrate";
 
 import "swiper/css";
 
 interface Props {
-  data: Product[];
+  products: Product[];
   heading: string;
   paragraph?: string;
   bgColor?: string;
@@ -22,17 +25,44 @@ interface Props {
 const ScrollableSlider = ({
   className,
   itemClassName,
-  data,
+  products,
   heading,
   paragraph,
   bgColor,
 }: Props) => {
+  const { currency } = useGlobalStore();
+  useHydrate();
+
   React.useEffect(() => {
     document.documentElement.style.setProperty(
       "--scrollbar-width",
       `${window.innerWidth - document.documentElement.offsetWidth}px`
     );
   }, []);
+
+  const isUSD = currency === "usd";
+
+  const prices =
+    trpc.payment.getPrices.useQuery({
+      stripeId: products.map((p) => p.stripeId),
+    }).data ?? [];
+
+  const productsWithPrices = products.map((product) => {
+    const price = prices.find(
+      (price) =>
+        price.id === (isUSD ? product?.priceUSDId : product?.pricePLNId)
+    );
+
+    const oldPrice = prices.find(
+      (price) =>
+        price.id === (isUSD ? product?.oldPriceUSDId : product?.oldPricePLNId)
+    );
+
+    return {
+      price: price?.unit_amount!,
+      oldPrice: oldPrice?.unit_amount!,
+    };
+  });
 
   return (
     <section
@@ -59,9 +89,13 @@ const ScrollableSlider = ({
         modules={[Mousewheel]}
         className="w-full !px-[max(16px,(100vw_-_(1432px_+_var(--scrollbar-width)))_/_2)]"
       >
-        {data.map((item, i) => (
+        {products.map((item, i) => (
           <SwiperSlide key={i}>
-            <ProductItem data={item} className={itemClassName} />
+            <ProductItem
+              product={item}
+              productPrices={productsWithPrices[i]}
+              className={itemClassName}
+            />
           </SwiperSlide>
         ))}
       </Swiper>

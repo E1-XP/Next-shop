@@ -1,12 +1,20 @@
-import { CartItem } from "../_store/cart";
+import { currencies, locales } from "./constants";
 
-export const formatPrice = (num: number) =>
-  num.toLocaleString("en-US", {
+export const formatPrice = (
+  num: number,
+  currency: (typeof currencies)[number],
+  locale: (typeof locales)[number]
+) => {
+  const currLocale = locale === "en" ? "en-US" : "pl";
+
+  return (num / 100).toLocaleString(currLocale, {
     maximumFractionDigits: 2,
     minimumFractionDigits: 2,
     style: "currency",
-    currency: "USD",
+    currency: currency.toUpperCase(),
   });
+};
 
-export const getProductsPrice = (products: CartItem[]) =>
-  products.reduce((acc, item) => acc + item.product.price * item.quantity, 0);
+export const getProductsPrice = (
+  products: { price: number; quantity: number }[]
+) => products.reduce((acc, item) => acc + item.price * item.quantity, 0);
