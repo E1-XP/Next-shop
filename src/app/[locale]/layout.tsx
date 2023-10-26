@@ -47,7 +47,7 @@ export default function RootLayout({ children, params: { locale } }: Props) {
           <AuthProvider>
             <IntlProvider locale={locale}>
               <Header />
-              <main>{children}</main>
+              <main className="flex flex-col grow">{children}</main>
               <Footer />
               <div id="modals" />
               <Toast />

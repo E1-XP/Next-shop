@@ -9,7 +9,7 @@
 @layer components {
   @layer base {
     .wrapper {
-      @apply max-w-[1432px] mx-auto px-4;
+      @apply max-w-[1432px] mx-auto px-4 w-full;
     }
 
     .content {
