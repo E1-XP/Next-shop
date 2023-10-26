@@ -12,6 +12,7 @@ import { formatPrice } from "../_helpers";
 import { useGlobalStore } from "../_store/global";
 import { useHydrate } from "../_hooks/useHydrate";
 import { locales } from "../_helpers/constants";
+import Skeleton from "react-loading-skeleton";
 
 interface Prices {
   price: number;
@@ -42,20 +43,28 @@ const ProductItem = ({ product, productPrices, className }: Props) => {
         <p>{product.brand}</p>
         <p className="truncate">{product.name}</p>
         <p className="flex gap-3 text-lg">
-          <span className="font-bold font-display">
-            {formatPrice(
-              productPrices.price ?? 0,
-              currency,
-              locale as (typeof locales)[number]
-            )}
-          </span>
-          <span className="line-through opacity-70 font-display">
-            {formatPrice(
-              productPrices.oldPrice ?? 0,
-              currency,
-              locale as (typeof locales)[number]
-            )}
-          </span>
+          {productPrices.price ? (
+            <span className="font-bold font-display">
+              {formatPrice(
+                productPrices.price,
+                currency,
+                locale as (typeof locales)[number]
+              )}
+            </span>
+          ) : (
+            <Skeleton containerClassName="w-[70px]" />
+          )}
+          {productPrices.oldPrice ? (
+            <span className="line-through opacity-70 font-display">
+              {formatPrice(
+                productPrices.oldPrice ?? 0,
+                currency,
+                locale as (typeof locales)[number]
+              )}
+            </span>
+          ) : (
+            <Skeleton containerClassName="w-[70px]" />
+          )}
         </p>
       </div>
       <Link

@@ -1,3 +1,4 @@
+import "react-loading-skeleton/dist/skeleton.css";
 import "./../_styles/globals.css";
 
 import type { Metadata } from "next";

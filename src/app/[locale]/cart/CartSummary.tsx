@@ -6,6 +6,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { toast } from "react-toastify";
+import Skeleton from "react-loading-skeleton";
 
 import Button from "@/app/_components/Button";
 import Input from "@/app/_components/Input";
@@ -30,7 +31,7 @@ const CartSummary = ({ className }: Props) => {
 
   const { products } = useCartStore();
   const { currency } = useGlobalStore();
-  useHydrate();
+  const isHydrating = useHydrate();
 
   const isAuthenticated = session.status === "authenticated";
   const isUSD = currency === "usd";
@@ -110,6 +111,8 @@ const CartSummary = ({ className }: Props) => {
     });
   };
 
+  const isLoadingPrices = isHydrating || (products.length && !prices.length);
+
   return (
     <div
       className={twMerge(
@@ -143,10 +146,14 @@ const CartSummary = ({ className }: Props) => {
             >
               {option.name}
               <span className="ml-auto">
-                {formatPrice(
-                  option.price,
-                  currency,
-                  locale as (typeof locales)[number]
+                {!isHydrating ? (
+                  formatPrice(
+                    option.price,
+                    currency,
+                    locale as (typeof locales)[number]
+                  )
+                ) : (
+                  <Skeleton className="w-[70px]" />
                 )}
               </span>
             </label>
@@ -156,10 +163,14 @@ const CartSummary = ({ className }: Props) => {
       <p className="flex items-center justify-between mt-[29px] py-[13px]">
         <span className="text">{data.subtotalText}</span>
         <span className="text font-semibold">
-          {formatPrice(
-            getProductsPrice(productsWithPrices),
-            currency,
-            locale as (typeof locales)[number]
+          {!isLoadingPrices ? (
+            formatPrice(
+              getProductsPrice(productsWithPrices),
+              currency,
+              locale as (typeof locales)[number]
+            )
+          ) : (
+            <Skeleton className="w-[70px]" />
           )}
         </span>
       </p>
@@ -168,10 +179,14 @@ const CartSummary = ({ className }: Props) => {
           {data.totalText}
         </span>
         <span className="text text-lg font-semibold leading-[30px]">
-          {formatPrice(
-            getTotalPrice(),
-            currency,
-            locale as (typeof locales)[number]
+          {!isLoadingPrices ? (
+            formatPrice(
+              getTotalPrice(),
+              currency,
+              locale as (typeof locales)[number]
+            )
+          ) : (
+            <Skeleton className="w-[70px]" />
           )}
         </span>
       </p>

@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { useLocale } from "next-intl";
+import Skeleton from "react-loading-skeleton";
 
 import Widget from "./Base";
 import Button from "../Button";
@@ -26,7 +27,7 @@ const CartWidget = () => {
 
   const { products } = useCartStore();
   const { currency } = useGlobalStore();
-  useHydrate();
+  const isHydrating = useHydrate();
 
   const [isOpen, setIsOpen] = React.useState(false);
 
@@ -71,16 +72,20 @@ const CartWidget = () => {
 
   return (
     <Widget
-      referenceContent={() => (
-        <>
-          <ShoppingBagIcon className="stroke-darkGray group-hover:opacity-60 transition h-[24px] w-[24px]" />
-          {!!cartItemsCount && (
-            <span className="bg-darkGray text-white text-xs font-body font-medium px-[9px] py-0.5 rounded-full ml-2 h-5 group-hover:opacity-70">
-              {cartItemsCount}
-            </span>
-          )}
-        </>
-      )}
+      referenceContent={() =>
+        isHydrating ? (
+          <Skeleton className="w-[56px] h-[26px]" borderRadius={999} />
+        ) : (
+          <>
+            <ShoppingBagIcon className="stroke-darkGray group-hover:opacity-60 transition h-[24px] w-[24px]" />
+            {!!cartItemsCount && (
+              <span className="bg-darkGray text-white text-xs font-body font-medium px-[9px] py-0.5 rounded-full ml-2 h-5 group-hover:opacity-70">
+                {cartItemsCount}
+              </span>
+            )}
+          </>
+        )
+      }
     >
       <div className="flex justify-between items-center w-full">
         <p className="heading-5">{data.header}</p>

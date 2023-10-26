@@ -63,7 +63,7 @@
     "ReviewsList": {
       "loadingText": "Ładowanie...",
       "listHeaderText": "Tylko zalogowani użytkownicy mogą pisać opinie.",
-      "createButtonText": "Stwórz opinię",
+      "createButtonText": "Dodaj opinię",
       "noReviewsText": "Nie znaleziono opinii. Może to czas aby napisać własną?",
       "toastNotAuthenticated": "Najpierw się zaloguj."
     },

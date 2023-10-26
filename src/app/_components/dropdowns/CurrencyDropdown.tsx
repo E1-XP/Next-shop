@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { useLocale } from "next-intl";
+import Skeleton from "react-loading-skeleton";
 
 import Dropdown from "../Dropdown";
 
@@ -38,7 +39,7 @@ const CurrencyDropdown = ({ options }: Props) => {
     return idx !== -1 ? idx : undefined;
   };
 
-  if (isHydrating) return "...";
+  if (isHydrating) return <Skeleton containerClassName="w-[45px]" />;
 
   return (
     <Dropdown

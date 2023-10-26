@@ -4,6 +4,7 @@ import * as React from "react";
 import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
+import Skeleton from "react-loading-skeleton";
 
 import Widget from "./Base";
 import Button from "../Button";
@@ -43,13 +44,17 @@ const UserWidget = () => {
 
   return (
     <Widget
-      referenceContent={() => (
-        <ProfileIcon
-          className={`stroke-darkGray group-hover:opacity-60 transition ${
-            isAuthenticated ? "h-[18px] w-[18px]" : ""
-          }`}
-        />
-      )}
+      referenceContent={() =>
+        isLoading ? (
+          <Skeleton className="w-[26px] h-[26px]" borderRadius={999} />
+        ) : (
+          <ProfileIcon
+            className={`stroke-darkGray group-hover:opacity-60 transition ${
+              isAuthenticated ? "h-[18px] w-[18px]" : ""
+            }`}
+          />
+        )
+      }
       referenceContentClass={
         isAuthenticated ? "bg-whiteGray3 rounded-full p-1 block" : ""
       }

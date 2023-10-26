@@ -9,6 +9,7 @@ import { useTranslations } from "next-intl";
 import ReviewCard from "./ReviewCard";
 import Button from "@/app/_components/Button";
 import ReviewModal from "./ReviewModal";
+import Skeleton from "react-loading-skeleton";
 
 interface Props {
   reviews: Review[];
@@ -40,14 +41,16 @@ const ReviewsList = ({ reviews, product }: Props) => {
     toggleModal();
   };
 
-  if (isLoading) return <p className="text">{data.loadingText}</p>;
-
   return (
     <>
-      <div className="flex items-center justify-between">
-        <p className="text">
-          {reviews.length ? data.listHeaderText : data.noReviewsText}
-        </p>
+      <div className="flex items-center justify-between gap-4">
+        {isLoading ? (
+          <Skeleton containerClassName="w-full" />
+        ) : (
+          <p className="text">
+            {reviews.length ? data.listHeaderText : data.noReviewsText}
+          </p>
+        )}
         <Button
           rounded
           className="whitespace-nowrap"
@@ -56,9 +59,13 @@ const ReviewsList = ({ reviews, product }: Props) => {
           {data.createButtonText}
         </Button>
       </div>
-      {reviews.map((review) => (
-        <ReviewCard product={product} review={review} key={review.id} />
-      ))}
+      {isLoading ? (
+        <Skeleton count={10} />
+      ) : (
+        reviews.map((review) => (
+          <ReviewCard product={product} review={review} key={review.id} />
+        ))
+      )}
       <ReviewModal
         isOpen={isModalOpen}
         closeModal={() => setIsModalOpen(false)}
