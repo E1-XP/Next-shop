@@ -6,9 +6,9 @@ const ErrorPage = () => {
   const t = useTranslations("NotFound");
 
   const data = {
-    heading: "Page not found",
-    text: "Nothing found at this address. This page may have been moved or permanently deleted. Please double-check that this link is correct, go back or click below to return to the home page.",
-    btnText: "Return to main page",
+    heading: t("heading"),
+    text: t("text"),
+    btnText: t("btnText"),
     href: "/",
   };
 

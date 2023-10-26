@@ -191,6 +191,11 @@
       }
     }
   },
+  "NotFound": {
+    "heading": "Nie znaleziono strony",
+    "text": "Nie znaleziono niczego pod tym adresem. Ta podstrona mogła zostać przeniesiona lub usunięta. upewnij się że adres jest poprawny, kliknij wstecz lub użyj przycisku poniżej aby przejść do strony głównej.",
+    "btnText": "Powróć do strony głównej"
+  },
   "Header": {
     "mainMenuItems": {
       "0": { "text": "Nowości" },
