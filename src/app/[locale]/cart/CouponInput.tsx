@@ -1,5 +1,6 @@
 import * as React from "react";
 import { useTranslations } from "next-intl";
+import { toast } from "react-toastify";
 
 import Input from "@/app/_components/Input";
 
@@ -17,6 +18,10 @@ const CouponInput = ({ className }: Props) => {
     inputBtnText: t("inputBtnText"),
   };
 
+  const onSubmit = () => {
+    toast.info("This feature is not yet implemented.");
+  };
+
   return (
     <div className={className}>
       <p className="button-large">{data.heading}</p>
@@ -27,6 +32,7 @@ const CouponInput = ({ className }: Props) => {
         withSubmitButton={data.inputBtnText}
         label={data.inputLabel}
         id={data.inputLabel}
+        onClick={onSubmit}
       />
     </div>
   );

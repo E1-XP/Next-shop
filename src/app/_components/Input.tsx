@@ -93,12 +93,14 @@ const Input = React.forwardRef<ComponentTypes, Props<any>>(
             id={id}
             className={`${baseClassName} w-full`}
             onChange={onChange}
-            onClick={onClick}
             onFocus={onFocus}
             ref={ref as React.LegacyRef<HTMLInputElement>}
             {...(register && register(id))}
           />
-          <button className="button-small absolute right-4 top-1/2 -translate-y-1/2 hover:opacity-70 transition">
+          <button
+            className="button-small absolute right-4 top-1/2 -translate-y-1/2 hover:opacity-70 transition"
+            onClick={onClick}
+          >
             {withSubmitButton}
           </button>
         </div>

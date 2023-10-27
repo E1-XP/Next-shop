@@ -138,6 +138,7 @@ const GalleryModal = ({
             className={`pointer-events-none mx-auto relative ${
               isMainImgZoomed ? "w-max h-auto" : "h-full w-auto "
             }`}
+            priority
           />
         </div>
       </div>

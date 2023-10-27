@@ -24,9 +24,18 @@ const CurrencyDropdown = ({ options }: Props) => {
 
   const locale = useLocale();
 
-  React.useEffect(() => {
+  const setDefaultCurrencyForLocale = () => {
     const actualCurrency = locale === "en" ? "usd" : "pln";
     setCurrency(actualCurrency);
+  };
+
+  React.useEffect(() => {
+    const isFirstVisit = localStorage.getItem("isCurrencySelected") === null;
+
+    if (isFirstVisit) {
+      localStorage.setItem("isCurrencySelected", "true");
+      setDefaultCurrencyForLocale();
+    }
   }, []);
 
   const onSelect = (idx: number) => {

@@ -82,6 +82,7 @@ const ProductGallery = ({ data, className }: Props) => {
                 ? `${coords.x}% ${coords.y}%`
                 : undefined,
             }}
+            priority
           />
         </div>
         <Slider data={data} className="md:!hidden" />
