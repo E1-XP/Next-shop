@@ -6,7 +6,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Mousewheel } from "swiper/modules";
 
 import { Product } from "@prisma/client";
-import ProductItem from "../../_components/ProductItem";
+import ProductItem from "./ProductItem";
 import { useGlobalStore } from "@/app/_store/global";
 import { trpc } from "@/app/_trpc/client";
 import { useHydrate } from "@/app/_hooks/useHydrate";
@@ -70,7 +70,7 @@ const ScrollableSlider = ({
       style={{ backgroundColor: bgColor }}
     >
       <div className="wrapper flex flex-col gap-4 items-center justify-between mx-auto">
-        <h2 className="heading-2">{heading}</h2>
+        <h2 className="heading-3 md:heading-2">{heading}</h2>
         {paragraph && <p className="text max-w-[1000px]">{paragraph}</p>}
       </div>
       <Swiper

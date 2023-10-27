@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useTranslations } from "next-intl";
 
-import ScrollableSlider from "./ScrollableSlider";
+import ScrollableSlider from "../../_components/ScrollableSlider";
 
 import { Product } from "@prisma/client";
 

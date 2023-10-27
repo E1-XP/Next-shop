@@ -87,6 +87,11 @@
   },
   "Cart": {
     "heading": "Koszyk",
+    "CartDetails": {
+      "paragraph": "Koszyk jest pusty. Może to czas aby wybrać się na zakupy?",
+      "btnText": "Powróć do strony głównej",
+      "sliderHeading": "Te produkty mogą Ci się spodobać:"
+    },
     "CartSummary": {
       "heading": "Podsumowanie koszyka",
       "shippingOptions": {

@@ -60,8 +60,8 @@ model VerificationToken {
 model Product {
   id            String   @id @default(cuid())
   modelId       String
-  gender        Int // 0 => "man", 1 => "woman", 2 => "unisex"
-  category      Int // like 0 => "T-Shirts"
+  gender        Int // 0 => "man", 1 => "woman", 2 => "unisex" // see constants.ts file
+  category      Int // like 0 => "T-Shirts" // see constants.ts file
   name          String
   brand         String
   priceUSDId    String

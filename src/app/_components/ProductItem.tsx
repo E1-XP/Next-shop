@@ -29,15 +29,15 @@ const ProductItem = ({ product, productPrices, className }: Props) => {
   const { currency } = useGlobalStore();
   useHydrate();
 
+  const [currImage, setcurrImage] = React.useState(product.images[0]);
+
   return (
-    <div className={twMerge("relative group", className)}>
-      <Image
-        src={product.images[0]}
-        alt={product.name}
-        width={640}
-        height={800}
-        className="transition group-hover:opacity-90"
-      />
+    <div
+      className={twMerge("relative", className)}
+      onMouseMove={() => setcurrImage(product.images[1])}
+      onMouseLeave={() => setcurrImage(product.images[0])}
+    >
+      <Image src={currImage} alt={product.name} width={640} height={800} />
       <div className="py-4 px-2 flex flex-col gap-2">
         <Rating rate={product.rating} />
         <p>{product.brand}</p>
@@ -57,7 +57,7 @@ const ProductItem = ({ product, productPrices, className }: Props) => {
           {productPrices.oldPrice ? (
             <span className="line-through opacity-70 font-display">
               {formatPrice(
-                productPrices.oldPrice ?? 0,
+                productPrices.oldPrice,
                 currency,
                 locale as (typeof locales)[number]
               )}

@@ -89,6 +89,11 @@
   },
   "Cart": {
     "heading": "Cart",
+    "CartDetails": {
+      "paragraph": "Cart is empty. Now it's time for some shopping!",
+      "btnText": "Go back to main page",
+      "sliderHeading": "You might like these products:"
+    },
     "CartSummary": {
       "heading": "Cart summary",
       "shippingOptions": {
