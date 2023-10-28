@@ -42,7 +42,7 @@ const ProductItem = ({ product, productPrices, className }: Props) => {
         <Rating rate={product.rating} />
         <p>{product.brand}</p>
         <p className="truncate">{product.name}</p>
-        <p className="flex gap-3 text-lg">
+        <p className="flex gap-2 justify-between text-lg">
           {productPrices.price ? (
             <span className="font-bold font-display">
               {formatPrice(
@@ -55,7 +55,7 @@ const ProductItem = ({ product, productPrices, className }: Props) => {
             <Skeleton containerClassName="w-[70px]" />
           )}
           {productPrices.oldPrice ? (
-            <span className="line-through opacity-70 font-display">
+            <span className="hidden md:block line-through opacity-70 font-display">
               {formatPrice(
                 productPrices.oldPrice,
                 currency,
@@ -63,7 +63,7 @@ const ProductItem = ({ product, productPrices, className }: Props) => {
               )}
             </span>
           ) : (
-            <Skeleton containerClassName="w-[70px]" />
+            <Skeleton containerClassName="hidden md:block w-[70px]" />
           )}
         </p>
       </div>
