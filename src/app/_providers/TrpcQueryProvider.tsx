@@ -17,7 +17,7 @@ export const TrpcQueryProvider = ({
     trpc.createClient({
       links: [
         httpBatchLink({
-          url: `${process.env.BASE_URL}api/trpc`,
+          url: `${process.env.BASE_URL}/api/trpc`,
         }),
       ],
     })
