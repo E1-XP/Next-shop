@@ -41,11 +41,12 @@ const SizeSelector = ({ className, product, outsideControl }: Props) => {
               product[size] <= 0 ||
               (productInCart && product[size] - productInCart.quantity <= 0)
             }
-            className={`font-body text-sm font-normal leading-[22px] w-12 py-1 border rounded-[4px] hover:opacity-70 disabled:cursor-not-allowed disabled:opacity-40 flex items-center justify-center ${
+            className={twMerge(
+              "font-body text-sm font-normal leading-[22px] w-12 py-1 border rounded-[4px] hover:opacity-70 disabled:cursor-not-allowed disabled:opacity-40 flex items-center justify-center",
               selectedSize === size
                 ? "border-darkGray2 ring-darkGray2 ring-1"
                 : "border-grayWhite opacity-90"
-            }`}
+            )}
             onClick={() => setSelectedSize(size)}
           >
             {size.toUpperCase()}

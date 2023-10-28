@@ -46,11 +46,12 @@ const ProductTabs = ({ className, aboutData, productData }: Props) => {
         {tabs.map((tab, i) => (
           <button
             key={tab.tabName}
-            className={`w-min font-display text-xl font-medium leading-7  pb-1 hover:text-darkGray2 ${
+            className={twMerge(
+              "w-min font-display text-xl font-medium leading-7 pb-1 hover:text-darkGray2",
               activeTabIdx === i
                 ? "border-b  border-darkGray2 text-darkGray2"
                 : "text-grayWhite"
-            }`}
+            )}
             onClick={() => setActiveTabIdx(i)}
           >
             {tab.tabName}
@@ -71,9 +72,10 @@ const ProductTabs = ({ className, aboutData, productData }: Props) => {
         {data.map((content, i) => (
           <div
             key={i}
-            className={`bg-white whitespace-pre-wrap absolute top-0 left-0 w-full transition text-lg font-normal font-body leading-[30px] flex flex-col gap-12 ${
+            className={twMerge(
+              "bg-white whitespace-pre-wrap absolute top-0 left-0 w-full transition text-lg font-normal font-body leading-[30px] flex flex-col gap-12",
               i === activeTabIdx ? "opacity-100" : "opacity-0"
-            }`}
+            )}
           >
             {Array.isArray(content) ? (
               <ReviewsList reviews={content} product={productData} />

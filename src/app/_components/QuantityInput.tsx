@@ -105,9 +105,10 @@ const QuantityInput = ({
     >
       <button className="w-1/3 px-3 py-1.5" onClick={onDecrement}>
         <MinusIcon
-          className={`stroke-darkGray ${
+          className={twMerge(
+            "stroke-darkGray",
             variant === "sm" ? "w-3 h-3" : "w-5 h-5"
-          }`}
+          )}
         />
       </button>
       <span className="font-semibold">
@@ -118,9 +119,10 @@ const QuantityInput = ({
         onClick={onIncrement}
       >
         <PlusIcon
-          className={`stroke-darkGray shrink-0 ${
+          className={twMerge(
+            "stroke-darkGray shrink-0",
             variant === "sm" ? "w-3 h-3" : "w-5 h-5"
-          }`}
+          )}
         />
       </button>
     </div>

@@ -9,6 +9,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "react-toastify";
 import { useLocale, useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
+import { twMerge } from "tailwind-merge";
 
 import Button from "@/app/_components/Button";
 import Input, { Types } from "@/app/_components/Input";
@@ -127,9 +128,12 @@ const SignInPage = () => {
                 id={data.id}
                 label={data.label}
                 register={register}
-                className={`w-full ${
-                  errors[data.id]?.message && "border-red-500 outline-red-500"
-                }`}
+                className={twMerge(
+                  `w-full`,
+                  errors[data.id]?.message
+                    ? "border-red-500 outline-red-500"
+                    : ""
+                )}
               />
               <p className="text-red-500 font-body text-sm absolute -bottom-[26px] left-0">
                 {errors[data.id]?.message}

@@ -22,11 +22,12 @@ const ColorSelector = ({ className, data }: Props) => {
         <Link key={item.id} href={`/product/${item.id}`} className="group">
           <div className="w-[38px] h-[38px] flex items-center justify-center rounded-full border bg-white border-darkGray">
             <span
-              className={`block rounded-full group-hover:brightness-95 transition ${
+              className={twMerge(
+                "block rounded-full group-hover:brightness-95 transition",
                 item.id === productId
                   ? "border border-darkGray h-8 w-8 "
                   : "w-[38px] h-[38px] "
-              }`}
+              )}
               style={{ backgroundColor: item.color }}
             ></span>
           </div>

@@ -12,6 +12,7 @@ import PlusIcon from "@/app/_components/icons/Plus";
 
 import { useWindowSize } from "@/app/_hooks/useWindowSize";
 import { breakPoints } from "@/app/_styles/constants";
+import { twMerge } from "tailwind-merge";
 
 Modal.setAppElement("#modals");
 
@@ -98,9 +99,10 @@ const GalleryModal = ({
           {data.images.map((img, i) => (
             <button
               key={img}
-              className={`border-2 ${
+              className={twMerge(
+                "border-2",
                 activeIdx === i ? "border-darkGray" : "border-transparent"
-              }`}
+              )}
               onClick={() => setActiveIdx(i)}
               onMouseMove={() => setActiveIdx(i)}
             >
@@ -122,11 +124,12 @@ const GalleryModal = ({
           className="lg:hidden"
         />
         <div
-          className={`max-lg:mb-[72px] ${
+          className={twMerge(
+            "max-lg:mb-[72px]",
             isMainImgZoomed
               ? "sm:cursor-zoom-out h-full overflow-hidden"
               : "sm:cursor-zoom-in h-screen"
-          }`}
+          )}
           ref={galleryWrapper}
           onClick={onMainImgClick}
         >
@@ -135,9 +138,10 @@ const GalleryModal = ({
             alt={data.name}
             width={1800}
             height={2600}
-            className={`pointer-events-none mx-auto relative ${
+            className={twMerge(
+              "pointer-events-none mx-auto relative",
               isMainImgZoomed ? "w-max h-auto" : "h-full w-auto "
-            }`}
+            )}
             priority
           />
         </div>

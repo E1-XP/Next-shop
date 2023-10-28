@@ -5,6 +5,7 @@ import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import Skeleton from "react-loading-skeleton";
+import { twMerge } from "tailwind-merge";
 
 import Widget from "./Base";
 import Button from "../Button";
@@ -49,9 +50,10 @@ const UserWidget = () => {
           <Skeleton className="w-[26px] h-[26px]" borderRadius={999} />
         ) : (
           <ProfileIcon
-            className={`stroke-darkGray group-hover:opacity-60 transition ${
+            className={twMerge(
+              "stroke-darkGray group-hover:opacity-60 transition",
               isAuthenticated ? "h-[18px] w-[18px]" : ""
-            }`}
+            )}
           />
         )
       }

@@ -143,9 +143,10 @@ const ReviewModal = ({ isOpen, closeModal }: Props) => {
               placeholder={data.inputs[0].placeholder}
               id={data.inputs[0].id}
               register={register}
-              className={`w-full h-52 mini-scrollbar ${
-                errors.review?.message && "border-red-500 outline-red-500"
-              }`}
+              className={twMerge(
+                "w-full h-52 mini-scrollbar",
+                errors.review?.message ? "border-red-500 outline-red-500" : ""
+              )}
             />
             <p className="text-red-500 font-body text-sm absolute -bottom-[24px] left-0">
               {errors.review?.message}
@@ -158,9 +159,10 @@ const ReviewModal = ({ isOpen, closeModal }: Props) => {
               placeholder={data.inputs[1].placeholder}
               id={data.inputs[1].id}
               register={register}
-              className={`w-fit ${
-                errors.username?.message && "border-red-500 outline-red-500"
-              }`}
+              className={twMerge(
+                "w-fit",
+                errors.username?.message ? "border-red-500 outline-red-500" : ""
+              )}
             />
             <p className="text-red-500 font-body text-sm absolute -bottom-[24px] left-0">
               {errors.username?.message}

@@ -4,6 +4,7 @@ import Link from "next/link";
 import * as React from "react";
 import debounce from "lodash.debounce";
 import { useTranslations } from "next-intl";
+import { twMerge } from "tailwind-merge";
 
 import Hamburger from "../Hamburger";
 import UserWidget from "../widgets/UserWidget";
@@ -81,9 +82,10 @@ const Header = () => {
           </h1>
         </Link>
         <nav
-          className={`z-40 bg-white max-sm:transition-opacity flex max-sm:gap-16 max-sm:pt-16 sm:justify-between w-full max-sm:flex-col max-sm:absolute max-sm:top-[72px] max-sm:left-0 max-sm:h-[calc(100vh_-_72px)] ${
+          className={twMerge(
+            "z-40 bg-white max-sm:transition-opacity flex max-sm:gap-16 max-sm:pt-16 sm:justify-between w-full max-sm:flex-col max-sm:absolute max-sm:top-[72px] max-sm:left-0 max-sm:h-[calc(100vh_-_72px)]",
             isMenuOpen ? "" : "max-sm:opacity-0 max-sm:pointer-events-none"
-          }`}
+          )}
         >
           <ul className="flex gap-4 mx-auto w-fit">
             {data.mainMenuItems.map((item) => (

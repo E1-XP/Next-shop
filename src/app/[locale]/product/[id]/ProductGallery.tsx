@@ -47,9 +47,10 @@ const ProductGallery = ({ data, className }: Props) => {
           {data.images.map((img, i) => (
             <button
               key={img}
-              className={`border-2 ${
+              className={twMerge(
+                "border-2",
                 activeIdx === i ? "border-darkGray" : "border-transparent"
-              }`}
+              )}
               onClick={() => onThumbClick(i)}
               onMouseMove={() => setActiveIdx(i)}
             >

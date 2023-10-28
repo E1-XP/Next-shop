@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signIn } from "next-auth/react";
 import { useLocale, useTranslations } from "next-intl";
+import { twMerge } from "tailwind-merge";
 
 import Button from "@/app/_components/Button";
 import Input, { Types } from "@/app/_components/Input";
@@ -140,9 +141,10 @@ const SignUpPage = () => {
                   id={data.id}
                   label={data.label}
                   register={register}
-                  className={`w-full ${
-                    message && "border-red-500 outline-red-500"
-                  }`}
+                  className={twMerge(
+                    "w-full",
+                    message ? "border-red-500 outline-red-500" : ""
+                  )}
                 />
                 <p className="text-red-500 font-body text-sm absolute -bottom-[26px] left-0">
                   {isLocalePath ? t(message?.split("i18n:")[1]) : message}
@@ -156,16 +158,19 @@ const SignUpPage = () => {
             type={data.confirmationInput.type}
             id={data.confirmationInput.id}
             label={data.confirmationInput.label}
-            className={`mr-3 ${
-              errors.termsConfirmation?.message &&
-              "ring-red-500 ring-1 ring-inset"
-            }`}
+            className={twMerge(
+              "mr-3",
+              errors.termsConfirmation?.message
+                ? "ring-red-500 ring-1 ring-inset"
+                : ""
+            )}
             register={register}
           />
           <p
-            className={`text ${
-              errors.termsConfirmation?.message && "text-red-500"
-            }`}
+            className={twMerge(
+              "text",
+              errors.termsConfirmation?.message ? "text-red-500" : ""
+            )}
           >
             {data.confirmationText.map((txt, i) =>
               i % 2 ? (

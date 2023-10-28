@@ -6,6 +6,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
 import swiper from "swiper";
 import { useTranslations } from "next-intl";
+import { twMerge } from "tailwind-merge";
 
 import Button from "@/app/_components/Button";
 import ArrowRightIcon from "@/app/_components/icons/ArrowRight";
@@ -86,9 +87,10 @@ const HeroSection = () => {
                   priority
                   src={item.img}
                   alt="Product campaign photo"
-                  className={`pointer-events-none w-full h-full object-cover object-center md:object-[24%_48%] mask-image max-sm:!basis-1/2 max-sm:scale-110 max-sm:translate-x-[-5%] max-sm:translate-y-[-1%] ${
+                  className={twMerge(
+                    "pointer-events-none w-full h-full object-cover object-center md:object-[24%_48%] mask-image max-sm:!basis-1/2 max-sm:scale-110 max-sm:translate-x-[-5%] max-sm:translate-y-[-1%]",
                     i === 2 ? "max-sm:object-center max-md:object-left" : ""
-                  }`}
+                  )}
                 />
               </div>
               <div className="max-sm:wrapper max-sm:h-[305px] max-[400px]:h-[330px] max-sm:mb-10 max-sm:justify-center sm:absolute top-[50%] sm:top-[10%] md:top-[12%] inset-4 sm:left-10 lg:left-14 sm:w-[400px] lg:w-[545px] flex flex-col items-start gap-4">

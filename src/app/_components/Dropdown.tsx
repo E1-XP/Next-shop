@@ -9,6 +9,7 @@ import {
   useDismiss,
   useInteractions,
 } from "@floating-ui/react";
+import { twMerge } from "tailwind-merge";
 
 import CaretUpIcon from "./icons/CaretUp";
 
@@ -56,9 +57,10 @@ const Dropdown = ({
   return (
     <div className="relative">
       <button
-        className={`paragraph font-semibold font-display flex items-center gap-1 hover:opacity-70 ${
+        className={twMerge(
+          "paragraph font-semibold font-display flex items-center gap-1 hover:opacity-70",
           isOpen ? "opacity-70" : ""
-        }`}
+        )}
         onClick={toggleIsOpen}
         ref={refs.setReference}
         {...getReferenceProps()}

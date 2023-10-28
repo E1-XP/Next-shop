@@ -20,21 +20,24 @@ const Hamburger = ({ className, isOpen, setIsOpen }: Props) => {
     >
       <span
         aria-hidden="true"
-        className={`bg-darkGray h-[2px] w-full rounded block transition ${
+        className={twMerge(
+          "bg-darkGray h-[2px] w-full rounded block transition",
           isOpen ? "rotate-45 translate-y-[6px]" : ""
-        }`}
+        )}
       ></span>
       <span
         aria-hidden="true"
-        className={`bg-darkGray h-[2px] w-full rounded block transition ${
+        className={twMerge(
+          "bg-darkGray h-[2px] w-full rounded block transition",
           isOpen ? "opacity-0" : "opacity-100"
-        }`}
+        )}
       ></span>
       <span
         aria-hidden="true"
-        className={`bg-darkGray h-[2px] w-full rounded block transition ${
+        className={twMerge(
+          "bg-darkGray h-[2px] w-full rounded block transition",
           isOpen ? "-rotate-45 -translate-y-[6px]" : ""
-        }`}
+        )}
       ></span>
     </button>
   );

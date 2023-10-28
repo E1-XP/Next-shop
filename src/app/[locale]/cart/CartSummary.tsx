@@ -125,11 +125,13 @@ const CartSummary = ({ className }: Props) => {
         {data.shippingOptions.map((option, idx) => (
           <div
             key={option.name}
-            className={`flex px-4 py-[13px] border ${
+            className={twMerge(
+              "flex px-4 py-[13px] border",
               activeOption.price === option.price
                 ? "border-darkGray"
-                : "border-whiteGray3"
-            } rounded gap-3 items-center`}
+                : "border-whiteGray3",
+              "rounded gap-3 items-center"
+            )}
           >
             <Input
               type="radio"
