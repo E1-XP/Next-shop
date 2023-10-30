@@ -31,6 +31,12 @@
       "preHeading": "#nextshop",
       "heading": "On Instagram"
     },
+    "DiscountBanner": {
+      "heading": "Summer sale coupon!",
+      "paragraph": "Apply this coupon to get massive price drop: up to 20% less if you paste this code during checkout.",
+      "couponCode": "SUMMER20",
+      "copiedToastText": "Coupon copied!"
+    },
     "Newsletter": {
       "heading": "Join Our Newsletter",
       "paragraph": "Big discounts and right to your inbox.",

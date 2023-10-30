@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import Skeleton from "react-loading-skeleton";
 import { twMerge } from "tailwind-merge";
+import { toast } from "react-toastify";
 
 import Widget from "./Base";
 import Button from "../Button";
@@ -36,11 +37,15 @@ const UserWidget = () => {
   const isAuthenticated = session.status === "authenticated";
   const isLoading = session.status === "loading";
 
-  const onButtonClick = () => {
+  const onAuthActionButtonClick = () => {
     if (isAuthenticated) signOut();
     else router.push("/signin");
 
     toggleIsOpen();
+  };
+
+  const onProfileButtonClick = () => {
+    toast.info("This feature is not yet implemented.");
   };
 
   return (
@@ -76,13 +81,16 @@ const UserWidget = () => {
           </p>
           <div className="flex flex-col gap-2 w-full">
             {isAuthenticated && (
-              <Button className="whitespace-nowrap rounded-md w-full">
+              <Button
+                className="whitespace-nowrap rounded-md w-full"
+                onClick={onProfileButtonClick}
+              >
                 {data.profileBtnText}
               </Button>
             )}
             <Button
               className="whitespace-nowrap rounded-md w-full"
-              onClick={onButtonClick}
+              onClick={onAuthActionButtonClick}
             >
               {isAuthenticated
                 ? data.isAuthActionBtnText

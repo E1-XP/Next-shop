@@ -29,6 +29,12 @@
       "preHeading": "#nextshop",
       "heading": "Na Instagramie"
     },
+    "DiscountBanner": {
+      "heading": "Kupon dla letniej wyprzedaży!",
+      "paragraph": "Masywna obniżka ceny tylko z tym kuponem: do 20% taniej jeśli użyjesz go przy realizacji koszyka.",
+      "couponCode": "SUMMER20",
+      "copiedToastText": "Kupon skopiowany!"
+    },
     "Newsletter": {
       "heading": "Dołącz do Newslettera",
       "paragraph": "Duże zniżki prosto do twojej skrzynki email.",
@@ -246,7 +252,7 @@
       "isAuthParagraph": "Dobrze Cię znowu widzieć",
       "isUnAuthParagraph": "Zaloguj się aby uzyskać pełny dostęp.",
       "profileBtnText": "Zobacz profil",
-      "isAuthActionBtnText": "wyloguj się",
+      "isAuthActionBtnText": "Wyloguj się",
       "isUnAuthActionBtnText": "Zaloguj się"
     }
   },

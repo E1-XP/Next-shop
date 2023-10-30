@@ -22,17 +22,15 @@ export const signUpSchema = z
       .max(24)
       .regex(new RegExp(userNameRegex), "i18n:validation.signUpForm.username")
       .trim(),
-    email: z.string().email().nonempty().trim(),
+    email: z.string().email().nonempty().toLowerCase().trim(),
     password: z
       .string()
       .min(8)
       .max(32)
-      .regex(new RegExp(passwordRegex), "i18n:validation.signUpForm.password")
-      .trim(),
+      .regex(new RegExp(passwordRegex), "i18n:validation.signUpForm.password"),
     confirmPassword: z
       .string()
-      .min(1, "i18n:validation.signUpForm.confirmPassword")
-      .trim(),
+      .min(1, "i18n:validation.signUpForm.confirmPassword"),
     termsConfirmation: z.literal(true),
   })
   .refine((data) => data.password === data.confirmPassword, {
