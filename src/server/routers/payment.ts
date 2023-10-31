@@ -72,8 +72,8 @@ export const paymentRouter = router({
         shipping_options: [
           { shipping_rate: opts.input.stripeShippingOptionId },
         ],
-        success_url: `${baseUrl}/cart?success=true&session_id={CHECKOUT_SESSION_ID}`,
-        cancel_url: `${baseUrl}/cart?canceled=true`,
+        success_url: `${baseUrl}/cart/success?session_id={CHECKOUT_SESSION_ID}`,
+        cancel_url: `${baseUrl}/cart/rejected`,
       });
 
       return session;

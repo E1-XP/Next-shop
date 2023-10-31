@@ -4,7 +4,7 @@ import GithubProvider from "next-auth/providers/github";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcrypt";
 
-import prisma from "../../../../../prisma/client";
+import prisma from "@/../prisma/client";
 
 const handler = NextAuth({
   // adapter: PrismaAdapter(prisma),
@@ -26,7 +26,7 @@ const handler = NextAuth({
 
         const user = await prisma.user.findUnique({
           where: {
-            email: credentials.email,
+            email: credentials.email.toLowerCase().trim(),
           },
         });
 

@@ -75,7 +75,8 @@ const SignInPage = () => {
 
   const onSubmit: SubmitHandler<SchemaType> = async (formData) => {
     const response = await signIn("credentials", {
-      ...formData,
+      email: formData.email.toLowerCase().trim(),
+      password: formData.password,
       redirect: false,
     });
 

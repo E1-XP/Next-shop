@@ -30,7 +30,7 @@
       "heading": "Na Instagramie"
     },
     "DiscountBanner": {
-      "heading": "Kupon dla letniej wyprzedaży!",
+      "heading": "Letnie kupony!",
       "paragraph": "Masywna obniżka ceny tylko z tym kuponem: do 20% taniej jeśli użyjesz go przy realizacji koszyka.",
       "couponCode": "SUMMER20",
       "copiedToastText": "Kupon skopiowany!"
@@ -128,6 +128,16 @@
       "sizeText": "Rozmiar",
       "colorText": "Kolor"
     }
+  },
+  "CartSuccess": {
+    "heading": "Potwierdzenie zamówienia",
+    "paragraph": "Gratulacje! Twoje zamówienie zostało złożone, teraz nasza kolej aby przygotować zamówienie i wysłać je do Ciebie tak szybko jak to możliwe. Sprawdź email aby dowiedzieć się wiecej o zamówieniu.",
+    "btnText": "Przejdź do strony głównej"
+  },
+  "CartRejected": {
+    "heading": "Płatność odrzucona",
+    "paragraph": "O nie! Wygląda na to, że Twoja płatność nie doszła do skutku. To albo twoja decyzja, albo problemy techniczne nasze lub naszych partnerów. Spróbuj ponownie. Jeśli ten problem się powtarza skontaktuj się z naszą linią wsparcia.",
+    "btnText": "Przejdź do strony głównej"
   },
   "SignIn": {
     "heading": "Zaloguj się",

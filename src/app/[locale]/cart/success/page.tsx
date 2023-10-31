@@ -1,13 +1,14 @@
 import * as React from "react";
 import { useTranslations } from "next-intl";
-import Button from "../_components/Button";
 
-const ErrorPage = () => {
-  const t = useTranslations("NotFound");
+import Button from "@/app/_components/Button";
+
+const CartSuccessPage = () => {
+  const t = useTranslations("CartSuccess");
 
   const data = {
     heading: t("heading"),
-    text: t("text"),
+    paragraph: t("paragraph"),
     btnText: t("btnText"),
     href: "/",
   };
@@ -19,7 +20,7 @@ const ErrorPage = () => {
       </header>
       <div className="flex flex-col gap-24 items-center">
         <p className="text-lg font-normal font-body leading-[30px] max-w-[750px]">
-          {data.text}
+          {data.paragraph}
         </p>
         <Button className="self-center" rounded asLink href={data.href}>
           {data.btnText}
@@ -29,4 +30,4 @@ const ErrorPage = () => {
   );
 };
 
-export default ErrorPage;
+export default CartSuccessPage;

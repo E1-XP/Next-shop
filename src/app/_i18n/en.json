@@ -131,6 +131,16 @@
       "colorText": "Color"
     }
   },
+  "CartSuccess": {
+    "heading": "Order confirmation",
+    "paragraph": "Congratulations! You payment was successfull, now its time for us to prepare your order and sent it to you as fast as we can. Check your email for more info abou your purchase.",
+    "btnText": "Return to main page"
+  },
+  "CartRejected": {
+    "heading": "Payment rejected",
+    "paragraph": "Oh no! Looks like your payment process didn't finish. Its either your decision or we encountered some technical issues. Please try again. If this problem repeats please contact our support team.",
+    "btnText": "Return to main page"
+  },
   "SignIn": {
     "heading": "Sign in",
     "paragraph": "Don’t have an account yet? ",
