@@ -20,7 +20,7 @@ const Header = () => {
   const t = useTranslations("Header");
 
   const data = {
-    logoText: "Next-Shop",
+    logoText: "Next-shop",
     mainMenuItems: [
       { text: t("mainMenuItems.0.text"), url: "#" },
       {

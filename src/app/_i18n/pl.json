@@ -237,6 +237,7 @@
     }
   },
   "Footer": {
+    "photoCopyright": "© Zdjęcia pochodzą od Zalando i autorów z Unsplash",
     "dropdowns": {
       "language": {
         "0": {

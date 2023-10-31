@@ -24,7 +24,9 @@ const Footer = () => {
       { name: "Twitter", icon: TwitterIcon, url: "#" },
       { name: "Email", icon: EmailIcon, url: "#" },
     ],
-    copyrightText: "© 2023 Next-shop",
+    copyrightText: "© 2023",
+    brand: "Next-shop",
+    photoCopyright: t("photoCopyright"),
     dropdowns: {
       language: [
         {
@@ -48,24 +50,32 @@ const Footer = () => {
 
   return (
     <footer className="bg-whiteGray w-full">
-      <div className="wrapper flex flex-col max-sm:gap-6 sm:flex-row justify-between items-center my-12 sm:my-8">
-        <ul className="flex gap-4">
-          {data.socials.map((item) => (
-            <li key={item.name} className="hover:opacity-70 transition">
-              <Link href={item.url}>
-                <span className="w-10 h-10 bg-white rounded-full flex items-center justify-center">
-                  <item.icon className="stroke-darkGray" />
-                </span>
-              </Link>
-            </li>
-          ))}
-        </ul>
-        <p className="paragraph-small sm:paragraph max-sm:order-1">
-          {data.copyrightText}
-        </p>
-        <div className="flex gap-4 max-sm:-order-1">
-          <LanguageDropdown options={data.dropdowns.language} />
-          <CurrencyDropdown options={data.dropdowns.currency} />
+      <div className="wrapper flex flex-col items-center justify-center my-12 sm:my-8 gap-8">
+        <div className="flex flex-col max-sm:gap-6 sm:flex-row justify-between items-center w-full">
+          <ul className="flex gap-4">
+            {data.socials.map((item) => (
+              <li key={item.name} className="hover:opacity-70 transition">
+                <Link href={item.url}>
+                  <span className="w-10 h-10 bg-white rounded-full flex items-center justify-center">
+                    <item.icon className="stroke-darkGray" />
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <p className="paragraph-small sm:paragraph max-sm:order-1 flex items-center justify-center gap-1">
+            {data.copyrightText}
+            <span className="text-base sm:text-lg font-display font-semibold -tracking-[0.7px] whitespace-nowrap text-darkGray">
+              {data.brand}
+            </span>
+          </p>
+          <div className="flex gap-4 max-sm:-order-1">
+            <LanguageDropdown options={data.dropdowns.language} />
+            <CurrencyDropdown options={data.dropdowns.currency} />
+          </div>
+        </div>
+        <div>
+          <p className="paragraph-small">{data.photoCopyright}</p>
         </div>
       </div>
     </footer>
