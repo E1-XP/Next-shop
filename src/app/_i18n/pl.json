@@ -89,6 +89,7 @@
           "placeholder": "Twój nick"
         }
       },
+      "successToast": "Dodano opinię.",
       "creationError": "Coś poszło nie tak, spróbuj ponownie później."
     }
   },
@@ -220,7 +221,7 @@
     "btnText": "Powróć do strony głównej"
   },
   "ErrorPage": {
-    "heading": "Awaria sklepu",
+    "heading": "Doszło do awarii",
     "text": "Coś się popsuło i pracujemy na tym aby to naprawić. Poczekaj kilka chwil i spróbuj ponownie. Jeśli problem nadal występuje skontaktuj się z obsługą."
   },
   "Header": {

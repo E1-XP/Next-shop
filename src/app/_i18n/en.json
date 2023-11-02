@@ -91,6 +91,7 @@
           "placeholder": "Username"
         }
       },
+      "successToast": "Review succesfully added.",
       "creationError": "Something went wrong. Please try again later."
     }
   },

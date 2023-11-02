@@ -85,7 +85,7 @@ const SignInPage = () => {
       toast.error(data.toast.unknownCredentials);
     } else {
       router.push("/");
-      requestAnimationFrame(() => toast.info(data.toast.loginSuccess));
+      requestAnimationFrame(() => toast.success(data.toast.loginSuccess));
     }
   };
 

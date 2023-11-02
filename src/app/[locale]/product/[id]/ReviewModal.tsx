@@ -48,6 +48,7 @@ const ReviewModal = ({ isOpen, closeModal }: Props) => {
         id: "username",
       },
     ] as ({ type: Types } & { [key: string]: string })[],
+    successToast: t("successToast"),
     creationError: t("creationError"),
   };
 
@@ -77,13 +78,15 @@ const ReviewModal = ({ isOpen, closeModal }: Props) => {
   const utils = trpc.useContext();
 
   const { mutate: createReview } = trpc.review.create.useMutation({
-    onSuccess(data) {
+    onSuccess(reviewData) {
       closeModal();
 
-      utils.review.get.setData({ productId: data.productId }, (reviews) => [
-        ...(reviews || []),
-        data,
-      ]);
+      utils.review.get.setData(
+        { productId: reviewData.productId },
+        (reviews) => [...(reviews || []), reviewData]
+      );
+
+      toast.success(data.successToast);
     },
     onError() {
       toast.error(data.creationError);

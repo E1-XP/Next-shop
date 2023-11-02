@@ -43,7 +43,7 @@ const UserWidget = () => {
   const onAuthActionButtonClick = () => {
     if (isAuthenticated) {
       signOut();
-      setTimeout(() => toast.info(data.toast.logOut), 200);
+      setTimeout(() => toast.success(data.toast.logOut), 200);
     } else router.push("/signin");
 
     toggleIsOpen();
