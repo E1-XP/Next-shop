@@ -62,6 +62,8 @@ const SignInPage = () => {
     imgAltText: t("imgAltText"),
   };
 
+  const [isRedirecting, setIsRedirecting] = React.useState(false);
+
   const {
     register,
     handleSubmit,
@@ -84,6 +86,8 @@ const SignInPage = () => {
     if (response?.error) {
       toast.error(data.toast.unknownCredentials);
     } else {
+      setIsRedirecting(true);
+
       router.push("/");
       requestAnimationFrame(() => toast.success(data.toast.loginSuccess));
     }
@@ -161,7 +165,12 @@ const SignInPage = () => {
             {data.resetPasswordText}
           </Link>
         </div>
-        <Button className="rounded-md" type="submit" disabled={isSubmitting}>
+        <Button
+          className="rounded-md"
+          type="submit"
+          disabled={isSubmitting}
+          isLoading={isSubmitting || isRedirecting}
+        >
           {data.btnText}
         </Button>
       </form>

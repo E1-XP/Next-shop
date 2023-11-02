@@ -5,6 +5,7 @@ interface Props {
   alt?: boolean;
   rounded?: boolean;
   disabled?: boolean;
+  isLoading?: boolean;
   className?: string;
   type?: "button" | "submit";
   asLink?: boolean;
@@ -18,6 +19,7 @@ const Button = ({
   alt = false,
   rounded = false,
   disabled = false,
+  isLoading = false,
   type = "button",
   asLink = false,
   href,
@@ -33,7 +35,7 @@ const Button = ({
       type={asLink ? undefined : type}
       href={asLink ? href : undefined}
       className={twMerge(
-        "py-2.5 px-[26px] hover:opacity-90 transition font-display text-lg font-medium leading-8 -tracking-[0.4px] disabled:cursor-not-allowed",
+        "py-2.5 px-[26px] h-[52px] flex items-center justify-center hover:opacity-90 transition font-display text-lg font-medium leading-8 -tracking-[0.4px] disabled:cursor-not-allowed",
         alt ? altClassName : standardClassName,
         rounded ? "rounded-md" : "",
         className
@@ -41,7 +43,7 @@ const Button = ({
       disabled={!asLink && disabled}
       onClick={onClick}
     >
-      {children}
+      {isLoading ? <span className="block loader" /> : children}
     </SelectedTag>
   );
 };

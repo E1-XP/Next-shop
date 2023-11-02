@@ -84,7 +84,7 @@ const CartSummary = ({ className }: Props) => {
     setActiveOption(data.shippingOptions[idx]);
   };
 
-  const { mutate: checkout } = trpc.payment.checkout.useMutation({
+  const { mutate: checkout, isLoading } = trpc.payment.checkout.useMutation({
     onSuccess(data) {
       if (data.url) router.push(data.url);
     },
@@ -192,7 +192,12 @@ const CartSummary = ({ className }: Props) => {
           )}
         </span>
       </p>
-      <Button className="mt-6 md:mt-8" rounded onClick={onCheckout}>
+      <Button
+        className="mt-6 md:mt-8"
+        rounded
+        onClick={onCheckout}
+        isLoading={isLoading}
+      >
         {data.btnText}
       </Button>
     </div>

@@ -188,7 +188,12 @@ const SignUpPage = () => {
             )}
           </p>
         </div>
-        <Button type="submit" className="rounded-md" disabled={isSubmitting}>
+        <Button
+          type="submit"
+          className="rounded-md"
+          disabled={isSubmitting}
+          isLoading={isSubmitting}
+        >
           {data.btnText}
         </Button>
       </form>
