@@ -30,10 +30,10 @@ const IconsBar = ({}: Props) => {
       {data.map((item) => (
         <button
           key={item.text}
-          className="flex gap-1 items-center font-display font-medium text-sm md:text-base leading-7 -tracking-[0.4px] hover:opacity-70 transition"
+          className="flex gap-1 items-center font-display font-medium text-sm md:text-base leading-7 -tracking-[0.4px] hover:opacity-70 transition justify-center flex-wrap"
         >
           <item.icon className="w-[18px] h-[18px] md:h-5 md:w-5" />
-          {item.text}
+          <span className="whitespace-nowrap">{item.text}</span>
         </button>
       ))}
     </div>

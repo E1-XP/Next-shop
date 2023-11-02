@@ -1,15 +1,14 @@
+"use client";
+
 import * as React from "react";
 import { useTranslations } from "next-intl";
-import Button from "../_components/Button";
 
-const NotFoundPage = () => {
-  const t = useTranslations("NotFound");
+const ErrorPage = () => {
+  const t = useTranslations("ErrorPage");
 
   const data = {
     heading: t("heading"),
     text: t("text"),
-    btnText: t("btnText"),
-    href: "/",
   };
 
   return (
@@ -21,12 +20,9 @@ const NotFoundPage = () => {
         <p className="text-lg font-normal font-body leading-[30px] max-w-[750px]">
           {data.text}
         </p>
-        <Button className="self-center" rounded asLink href={data.href}>
-          {data.btnText}
-        </Button>
       </div>
     </div>
   );
 };
 
-export default NotFoundPage;
+export default ErrorPage;

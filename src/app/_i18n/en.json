@@ -221,6 +221,10 @@
     "text": "Nothing found at this address. This page may have been moved or permanently deleted. Please double-check that this link is correct, go back or click below to return to the home page.",
     "btnText": "Return to main page"
   },
+  "ErrorPage": {
+    "heading": "Application crashed",
+    "text": "Something bad happened and we are working to fix it. Please wait for a while and try again. If problem is still persisting please contact our support."
+  },
   "Header": {
     "mainMenuItems": {
       "0": { "text": "New Arrivals" },
