@@ -165,7 +165,8 @@
     "resetPasswordText": "Forgot password?",
     "btnText": "Sign in",
     "toast": {
-      "unknownCredentials": "This email/password combination doesn't exist in our database."
+      "unknownCredentials": "This email/password combination doesn't exist in our database.",
+      "loginSuccess": "Welcome back!"
     },
     "imgAltText": "Model presenting latest fashion"
   },
@@ -267,7 +268,10 @@
       "isUnAuthParagraph": "Please log in to get full access.",
       "profileBtnText": "View Profile",
       "isAuthActionBtnText": "Log out",
-      "isUnAuthActionBtnText": "Sign in"
+      "isUnAuthActionBtnText": "Sign in",
+      "toast": {
+        "logOut": "You have been successfully logged out."
+      }
     }
   },
   "components": {

@@ -57,6 +57,7 @@ const SignInPage = () => {
     btnText: t("btnText"),
     toast: {
       unknownCredentials: t("toast.unknownCredentials"),
+      loginSuccess: t("toast.loginSuccess"),
     },
     imgAltText: t("imgAltText"),
   };
@@ -82,7 +83,10 @@ const SignInPage = () => {
 
     if (response?.error) {
       toast.error(data.toast.unknownCredentials);
-    } else router.push("/");
+    } else {
+      router.push("/");
+      requestAnimationFrame(() => toast.info(data.toast.loginSuccess));
+    }
   };
 
   return (

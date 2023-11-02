@@ -163,7 +163,8 @@
     "resetPasswordText": "Zapomniałeś hasła?",
     "btnText": "Zaloguj się",
     "toast": {
-      "unknownCredentials": "This email/password combination doesn't exist in our database."
+      "unknownCredentials": "This email/password combination doesn't exist in our database.",
+      "loginSuccess": " Witaj ponownie!"
     },
     "imgAltText": "Model/ka prezentujący/a najnowszą modę"
   },
@@ -265,7 +266,10 @@
       "isUnAuthParagraph": "Zaloguj się aby uzyskać pełny dostęp.",
       "profileBtnText": "Zobacz profil",
       "isAuthActionBtnText": "Wyloguj się",
-      "isUnAuthActionBtnText": "Zaloguj się"
+      "isUnAuthActionBtnText": "Zaloguj się",
+      "toast": {
+        "logOut": "Zostałaś/eś pomyślnie wylogowana/y."
+      }
     }
   },
   "components": {

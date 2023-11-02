@@ -26,6 +26,9 @@ const UserWidget = () => {
     profileBtnText: t("profileBtnText"),
     isAuthActionBtnText: t("isAuthActionBtnText"),
     isUnAuthActionBtnText: t("isUnAuthActionBtnText"),
+    toast: {
+      logOut: t("toast.logOut"),
+    },
   };
 
   const [isOpen, setIsOpen] = React.useState(false);
@@ -38,8 +41,10 @@ const UserWidget = () => {
   const isLoading = session.status === "loading";
 
   const onAuthActionButtonClick = () => {
-    if (isAuthenticated) signOut();
-    else router.push("/signin");
+    if (isAuthenticated) {
+      signOut();
+      setTimeout(() => toast.info(data.toast.logOut), 200);
+    } else router.push("/signin");
 
     toggleIsOpen();
   };
