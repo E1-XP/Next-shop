@@ -5,7 +5,7 @@ import { twMerge } from "tailwind-merge";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Mousewheel } from "swiper/modules";
 
-import { Product } from "@prisma/client";
+import { Product, Review } from "@prisma/client";
 import ProductItem from "./ProductItem";
 import { useGlobalStore } from "@/app/_store/global";
 import { trpc } from "@/app/_trpc/client";

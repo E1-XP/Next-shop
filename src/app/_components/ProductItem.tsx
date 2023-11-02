@@ -1,18 +1,17 @@
 "use client";
 
-import { Product } from "@prisma/client";
+import { Product, Review } from "@prisma/client";
 import Image from "next/image";
 import * as React from "react";
-import Rating from "./Rating";
 import Link from "next/link";
 import { twMerge } from "tailwind-merge";
 import { useLocale } from "next-intl";
+import Skeleton from "react-loading-skeleton";
 
 import { formatPrice } from "../_helpers";
 import { useGlobalStore } from "../_store/global";
 import { useHydrate } from "../_hooks/useHydrate";
 import { locales } from "../_helpers/constants";
-import Skeleton from "react-loading-skeleton";
 
 interface Prices {
   price: number;
@@ -39,7 +38,6 @@ const ProductItem = ({ product, productPrices, className }: Props) => {
     >
       <Image src={currImage} alt={product.name} width={640} height={800} />
       <div className="py-4 px-2 flex flex-col gap-2">
-        <Rating rate={product.rating} />
         <p>{product.brand}</p>
         <p className="truncate">{product.name}</p>
         <p className="flex gap-2 justify-between text-lg">

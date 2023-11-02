@@ -11,7 +11,7 @@ export default async function Home() {
   const products = await serverClient.product.getAll({ order: "asc" });
 
   return (
-    <main className="">
+    <>
       <HeroSection />
       <NewArrivalsSlider products={products.concat(products)} />
       <SummerCollectionSlider
@@ -25,6 +25,6 @@ export default async function Home() {
       />
       <NewsletterSection />
       <InstagramSection />
-    </main>
+    </>
   );
 }

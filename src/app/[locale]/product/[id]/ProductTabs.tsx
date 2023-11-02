@@ -18,12 +18,7 @@ interface Props {
 const ProductTabs = ({ className, aboutData, productData }: Props) => {
   const t = useTranslations("Product.Tabs");
 
-  const tabs = [
-    { tabName: t("0.tabName") },
-    {
-      tabName: t("1.tabName"),
-    },
-  ];
+  const tabs = [{ tabName: t("0.tabName") }, { tabName: t("1.tabName") }];
 
   const getReviews = trpc.review.get.useQuery({ productId: productData?.id });
   const productReviews =

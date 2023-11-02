@@ -46,6 +46,7 @@
     }
   },
   "Product": {
+    "ratingCount": "{count, plural, =0 {No reviews yet} =1 {Review} other {Reviews}}",
     "IconsBar": {
       "0": { "text": "Wishlist" },
       "1": {

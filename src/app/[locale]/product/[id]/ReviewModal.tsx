@@ -117,7 +117,7 @@ const ReviewModal = ({ isOpen, closeModal }: Props) => {
           left: "50%",
           transform: "translate(-50%, -50%)",
           minWidth: "320px",
-          width: "80%",
+          width: "90%",
           maxWidth: "900px",
         },
       }}

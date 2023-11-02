@@ -3,8 +3,9 @@
 import * as React from "react";
 import { useTranslations } from "next-intl";
 
-import { Product } from "@prisma/client";
 import ProductItem from "./ProductItem";
+
+import { Product, Review } from "@prisma/client";
 import { useGlobalStore } from "../_store/global";
 import { useHydrate } from "../_hooks/useHydrate";
 import { trpc } from "../_trpc/client";

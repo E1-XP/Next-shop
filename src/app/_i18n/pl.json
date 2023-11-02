@@ -44,6 +44,7 @@
     }
   },
   "Product": {
+    "ratingCount": "{count, plural, =0 {Brak ocen} =1 {Ocena} few {Oceny} other {Ocen}}",
     "IconsBar": {
       "0": { "text": "Lista życzeń" },
       "1": {

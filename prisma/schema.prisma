@@ -69,7 +69,6 @@ model Product {
   oldPriceUSDId String
   oldPricePLNId String
   stripeId      String
-  rating        Int
   color         String // hex code
   xs            Int // number of products in storage
   s             Int
