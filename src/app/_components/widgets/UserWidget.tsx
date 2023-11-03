@@ -11,6 +11,7 @@ import { toast } from "react-toastify";
 import Widget from "./Base";
 import Button from "../Button";
 import ProfileIcon from "../icons/Profile";
+import Image from "next/image";
 
 const UserWidget = () => {
   const session = useSession();
@@ -39,6 +40,7 @@ const UserWidget = () => {
 
   const isAuthenticated = session.status === "authenticated";
   const isLoading = session.status === "loading";
+  const hasUserAvatar = !!session.data?.user.image;
 
   const onAuthActionButtonClick = () => {
     if (isAuthenticated) {
@@ -58,6 +60,13 @@ const UserWidget = () => {
       referenceContent={() =>
         isLoading ? (
           <Skeleton className="w-[26px] h-[26px]" borderRadius={999} />
+        ) : hasUserAvatar ? (
+          <Image
+            src={session.data?.user.image}
+            alt="User avatar"
+            width={26}
+            height={26}
+          />
         ) : (
           <ProfileIcon
             className={twMerge(
@@ -67,17 +76,31 @@ const UserWidget = () => {
           />
         )
       }
-      referenceContentClass={
-        isAuthenticated ? "bg-whiteGray3 rounded-full p-1 block" : ""
-      }
+      referenceContentClass={twMerge(
+        isAuthenticated
+          ? "bg-whiteGray3 rounded-full block overflow-hidden border border-darkGray"
+          : "",
+        !hasUserAvatar ? "p-1" : ""
+      )}
     >
       {isLoading ? (
         <div className="self-center mt-auto mb-auto">{data.loadingText}</div>
       ) : (
         <>
-          <div className="bg-whiteGray3 rounded-full p-4">
-            <ProfileIcon className="h-10 w-10 stroke-darkGray" />
-          </div>
+          {hasUserAvatar ? (
+            <div className="rounded-full overflow-hidden border border-darkGray">
+              <Image
+                src={session.data?.user.image}
+                alt="User avatar"
+                width={72}
+                height={72}
+              />
+            </div>
+          ) : (
+            <div className="bg-whiteGray3 rounded-full p-4 border border-darkGray">
+              <ProfileIcon className="h-10 w-10 stroke-darkGray" />
+            </div>
+          )}
           <p className="heading-5">
             {isAuthenticated ? data.isAuthHeader : data.isUnAuthHeader}
           </p>

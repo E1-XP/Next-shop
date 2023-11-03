@@ -53,7 +53,7 @@ const Widget = ({
 
   return (
     <div
-      className="relative z-50"
+      className="relative z-50 w-max"
       ref={refs.setReference}
       {...getReferenceProps()}
     >
