@@ -4,7 +4,7 @@ import * as React from "react";
 import { useLocale } from "next-intl";
 import Skeleton from "react-loading-skeleton";
 
-import Dropdown from "../Dropdown";
+import Dropdown from "./Base";
 
 import { useGlobalStore } from "@/app/_store/global";
 import { useHydrate } from "@/app/_hooks/useHydrate";

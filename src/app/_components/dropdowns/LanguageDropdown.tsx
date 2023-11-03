@@ -5,7 +5,7 @@ import Image from "next/image";
 import { usePathname, useRouter } from "next-intl/client";
 import { useLocale } from "next-intl";
 
-import Dropdown from "../Dropdown";
+import Dropdown from "./Base";
 
 interface Option {
   text: string;

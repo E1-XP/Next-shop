@@ -5,13 +5,15 @@ import {
   autoUpdate,
   useFloating,
   shift,
+  offset,
   useClick,
   useDismiss,
   useInteractions,
+  useTransitionStyles,
 } from "@floating-ui/react";
 import { twMerge } from "tailwind-merge";
 
-import CaretUpIcon from "./icons/CaretUp";
+import CaretUpIcon from "../icons/CaretUp";
 
 interface Props {
   showIndicator?: boolean;
@@ -30,7 +32,7 @@ const Dropdown = ({
 
   const { refs, floatingStyles, context } = useFloating({
     whileElementsMounted: autoUpdate,
-    middleware: [shift()],
+    middleware: [shift(), offset({ mainAxis: -8 })],
     open: isOpen,
     onOpenChange: setIsOpen,
     placement: "top",
@@ -43,6 +45,14 @@ const Dropdown = ({
     click,
     dismiss,
   ]);
+
+  const { isMounted, styles } = useTransitionStyles(context, {
+    duration: 250,
+    initial: {
+      opacity: 0,
+      transform: "translateY(8px)",
+    },
+  });
 
   const [activeIdx, setActiveIdx] = React.useState(() => defaultIdx ?? 0);
 
@@ -70,23 +80,28 @@ const Dropdown = ({
           <CaretUpIcon className="rotate-180 w-3 text-darkGray h-min" />
         )}
       </button>
-      {isOpen && (
-        <ul
-          className="bg-white border border-grayWhite w-max min-w-full rounded-md absolute z-50 py-2 $"
+      {isMounted && (
+        <div
           ref={refs.setFloating}
+          className="absolute z-50 py-2"
           style={floatingStyles}
           {...getFloatingProps()}
         >
-          {options.map((option, i) => (
-            <li
-              key={i}
-              className="flex py-1 px-4 cursor-pointer paragraph font-display font-semibold hover:bg-whiteGray"
-              onClick={() => onItemClick(i)}
-            >
-              {option}
-            </li>
-          ))}
-        </ul>
+          <ul
+            className="bg-white border border-grayWhite w-max min-w-full rounded-md"
+            style={styles}
+          >
+            {options.map((option, i) => (
+              <li
+                key={i}
+                className="flex py-1 px-4 cursor-pointer paragraph font-display font-semibold hover:bg-whiteGray"
+                onClick={() => onItemClick(i)}
+              >
+                {option}
+              </li>
+            ))}
+          </ul>
+        </div>
       )}
     </div>
   );
