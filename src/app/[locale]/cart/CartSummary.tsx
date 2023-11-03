@@ -140,7 +140,7 @@ const CartSummary = ({ className }: Props) => {
               value={option.price}
               className="accent-darkGray cursor-pointer"
               onChange={() => onOptionChange(idx)}
-              checked={activeOption.price === option.price}
+              checked={activeOption.stripeId === option.stripeId}
             />
             <label
               htmlFor={option.name}

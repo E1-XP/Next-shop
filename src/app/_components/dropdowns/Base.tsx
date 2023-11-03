@@ -88,7 +88,7 @@ const Dropdown = ({
           {...getFloatingProps()}
         >
           <ul
-            className="bg-white border border-grayWhite w-max min-w-full rounded-md"
+            className="bg-white border border-grayWhite w-max min-w-full rounded-md overflow-hidden"
             style={styles}
           >
             {options.map((option, i) => (
