@@ -78,9 +78,9 @@ const UserWidget = () => {
       }
       referenceContentClass={twMerge(
         isAuthenticated
-          ? "bg-whiteGray3 rounded-full block overflow-hidden border border-darkGray"
+          ? "bg-whiteGray3 rounded-full block overflow-hidden"
           : "",
-        !hasUserAvatar ? "p-1" : ""
+        !hasUserAvatar ? "p-1" : " border border-darkGray"
       )}
     >
       {isLoading ? (
@@ -97,7 +97,12 @@ const UserWidget = () => {
               />
             </div>
           ) : (
-            <div className="bg-whiteGray3 rounded-full p-4 border border-darkGray">
+            <div
+              className={twMerge(
+                "bg-whiteGray3 rounded-full p-4",
+                hasUserAvatar ? "border border-darkGray" : ""
+              )}
+            >
               <ProfileIcon className="h-10 w-10 stroke-darkGray" />
             </div>
           )}

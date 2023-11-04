@@ -84,7 +84,7 @@ const HeroSection = () => {
             <div className="relative flex flex-col h-full">
               <div className="h-full overflow-hidden">
                 <Image
-                  priority
+                  priority={i === 0}
                   src={item.img}
                   alt="Product campaign photo"
                   className={twMerge(
