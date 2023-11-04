@@ -47,7 +47,7 @@ const ReviewsList = ({ reviews, product }: Props) => {
         {isLoading ? (
           <Skeleton containerClassName="w-full" />
         ) : (
-          <p className="text">
+          <p className="paragraph">
             {reviews.length ? data.listHeaderText : data.noReviewsText}
           </p>
         )}

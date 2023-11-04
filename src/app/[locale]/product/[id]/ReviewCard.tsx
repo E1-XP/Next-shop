@@ -19,17 +19,17 @@ const ReviewCard = ({ review, product }: Props) => {
 
   return (
     <div className="flex flex-col gap-5">
-      <p className="text font-semibold">
+      <p className="paragraph font-semibold">
         {product.brand} {product.name}
       </p>
-      <p className="text">{review.text}</p>
-      <div className="text flex gap-2 items-center">
+      <p className="paragraph">{review.text}</p>
+      <div className="paragraph flex gap-2 items-center">
         {data.rating}
         <Rating rate={review.rating} />
       </div>
-      <p className="text flex gap-1">
+      <p className="paragraph flex gap-1">
         {data.by}
-        <span className="text font-semibold">{review.authorName}</span>
+        <span className="paragraph font-semibold">{review.authorName}</span>
       </p>
     </div>
   );

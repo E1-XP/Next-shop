@@ -21,7 +21,7 @@ const InstagramSection = () => {
 
   return (
     <section className="my-[52px] text-center wrapper">
-      <Link href="#" className="text font-semibold transition hover:opacity-70">
+      <Link href="#" className="paragraph font-semibold transition hover:opacity-70">
         {data.preHeading}
       </Link>
       <h2 className="heading-2 mt-2">{data.heading}</h2>

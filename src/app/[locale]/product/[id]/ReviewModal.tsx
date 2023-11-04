@@ -133,7 +133,7 @@ const ReviewModal = ({ isOpen, closeModal }: Props) => {
     >
       <form className="flex flex-col gap-12" onSubmit={handleSubmit(onSubmit)}>
         <div className="flex items-center justify-between">
-          <p className="text font-semibold">{data.heading}</p>
+          <p className="paragraph font-semibold">{data.heading}</p>
           <button onClick={closeModal} type="button" className="">
             <PlusIcon className="rotate-45 h-8 w-8 opacity-60 hover:opacity-100 transition" />
           </button>
@@ -175,7 +175,7 @@ const ReviewModal = ({ isOpen, closeModal }: Props) => {
         <div className="flex items-center justify-between gap-8 relative">
           <p
             className={twMerge(
-              "hidden sm:block text",
+              "hidden sm:block paragraph",
               noRatingError ? "text-red-500" : ""
             )}
           >

@@ -60,7 +60,7 @@ const ProductDetails = ({ product, productVariants, productPrices }: Props) => {
     <>
       <div className="flex gap-2 items-center mt-4">
         <Rating rate={calculateRating(productReviews)} />
-        <span className="block text">
+        <span className="block paragraph">
           ({productReviews.length || ""}{" "}
           {t("ratingCount", { count: productReviews.length })})
         </span>

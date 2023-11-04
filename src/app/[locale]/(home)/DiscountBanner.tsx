@@ -33,7 +33,7 @@ const DiscountBanner = () => {
         />
         <div className="wrapper absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 bg-white w-max p-8 md:p-16 rounded-md flex flex-col gap-6 shadow-md max-w-[90%]">
           <h2 className="heading-3 md:headng-2 text-center">{data.heading}</h2>
-          <p className="text">{data.paragraph}</p>
+          <p className="paragraph">{data.paragraph}</p>
           <div className="border-grayWhite border border-dashed rounded-lg flex gap-3 items-center justify-center p-2 px-4 w-min self-center">
             <span className="heading-5 text-xl text-grayWhite font-body">
               {data.couponCode}

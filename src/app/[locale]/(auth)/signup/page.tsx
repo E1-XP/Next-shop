@@ -119,11 +119,11 @@ const SignUpPage = () => {
         onSubmit={handleSubmit((data) => createUser(data))}
       >
         <h2 className="heading-2">{data.heading}</h2>
-        <p className="text">
+        <p className="paragraph">
           {data.paragraph}&nbsp;
           <Link
             href={data.paragraphLinkHref}
-            className="text font-semibold hover:opacity-70 transition"
+            className="paragraph font-semibold hover:opacity-70 transition"
           >
             {data.paragraphLinkText}
           </Link>
@@ -168,7 +168,7 @@ const SignUpPage = () => {
           />
           <p
             className={twMerge(
-              "text",
+              "paragraph",
               errors.termsConfirmation?.message ? "text-red-500" : ""
             )}
           >
@@ -177,7 +177,7 @@ const SignUpPage = () => {
                 <Link
                   key={txt}
                   href="#"
-                  className="text font-semibold hover:opacity-70 transition text-inherit"
+                  className="paragraph font-semibold hover:opacity-70 transition text-inherit"
                 >
                   &nbsp;
                   {txt}&nbsp;

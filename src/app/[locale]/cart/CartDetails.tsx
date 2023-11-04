@@ -36,7 +36,7 @@ const CartDetails = ({ products }: Props) => {
     return (
       <>
         <div className="wrapper flex flex-col gap-8">
-          <p className="text text-center">{data.paragraph} </p>
+          <p className="paragraph text-center">{data.paragraph} </p>
           <Button className="self-center" rounded asLink href={data.href}>
             {data.btnText}
           </Button>

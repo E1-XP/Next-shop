@@ -97,7 +97,7 @@ const HeroSection = () => {
                 <p className="heading-3 max-sm:text-[32px] max-sm:leading-9 sm:heading-2 lg:heading-1 uppercase !text-white">
                   {item.heading}
                 </p>
-                <p className="text text-white">{item.paragraph}</p>
+                <p className="paragraph text-white">{item.paragraph}</p>
                 <Button
                   alt={true}
                   className="flex items-center gap-2 group mt-3"

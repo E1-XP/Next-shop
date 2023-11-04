@@ -107,11 +107,11 @@ const SignInPage = () => {
         onSubmit={handleSubmit(onSubmit)}
       >
         <h2 className="heading-2">{data.heading}</h2>
-        <p className="text">
+        <p className="paragraph">
           {data.paragraph}&nbsp;
           <Link
             href={data.paragraphLinkHref}
-            className="text font-semibold hover:opacity-70 transition"
+            className="paragraph font-semibold hover:opacity-70 transition"
           >
             {data.paragraphLinkText}
           </Link>
@@ -123,7 +123,7 @@ const SignInPage = () => {
           <GithubIcon />
           {data.githubBtnText}
         </Button>
-        <div className="flex items-center justify-between gap-3 text">
+        <div className="flex items-center justify-between gap-3 paragraph">
           <span className="border-dashed border-b border-whiteGray3 block grow mt-1"></span>
           {data.orText}
           <span className="border-dashed border-b border-whiteGray3 block grow mt-1"></span>
@@ -157,10 +157,10 @@ const SignInPage = () => {
             label={data.rememberMeInput.label}
             className="mr-3"
           />
-          <p className="text mr-auto">{data.rememberMeText}</p>
+          <p className="paragraph mr-auto">{data.rememberMeText}</p>
           <Link
             href="#"
-            className="text font-semibold hover:opacity-70 transition ml-1"
+            className="paragraph font-semibold hover:opacity-70 transition ml-1"
           >
             {data.resetPasswordText}
           </Link>

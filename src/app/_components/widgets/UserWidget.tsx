@@ -104,7 +104,7 @@ const UserWidget = () => {
           <p className="heading-5">
             {isAuthenticated ? data.isAuthHeader : data.isUnAuthHeader}
           </p>
-          <p className="text whitespace-nowrap truncate">
+          <p className="paragraph whitespace-nowrap truncate">
             {isAuthenticated ? data.isAuthParagraph : data.isUnAuthParagraph}
           </p>
           <div className="flex flex-col gap-2 w-full">

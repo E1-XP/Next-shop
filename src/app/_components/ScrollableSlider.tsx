@@ -71,7 +71,7 @@ const ScrollableSlider = ({
     >
       <div className="wrapper flex flex-col gap-4 items-center justify-between mx-auto">
         <h2 className="heading-3 md:heading-2">{heading}</h2>
-        {paragraph && <p className="text max-w-[1000px]">{paragraph}</p>}
+        {paragraph && <p className="paragraph max-w-[1000px]">{paragraph}</p>}
       </div>
       <Swiper
         slidesPerView={2.2}

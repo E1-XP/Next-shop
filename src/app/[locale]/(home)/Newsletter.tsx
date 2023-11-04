@@ -25,7 +25,7 @@ const NewsletterSection = () => {
     <section className="bg-whiteGray pt-[140px] pb-[132px]">
       <div className="flex flex-col wrapper max-w-[488px] mx-auto items-center">
         <h2 className="heading-2">{data.heading}</h2>
-        <p className="text text-lg mt-2">{data.paragraph}</p>
+        <p className="paragraph text-lg mt-2">{data.paragraph}</p>
         <Input
           placeholder={data.inputPlaceholder}
           withSubmitButton={data.inputBtnText}

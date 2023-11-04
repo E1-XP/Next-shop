@@ -108,10 +108,10 @@ const CartWidget = () => {
                   height={100}
                 />
                 <div className="flex flex-col truncate mr-auto">
-                  <span className="text font-semibold text-sm leading-[22px] truncate">
+                  <span className="paragraph font-semibold text-sm leading-[22px] truncate">
                     {product.brand}
                   </span>
-                  <span className="text font-normal text-sm leading-[20px] truncate">
+                  <span className="paragraph font-normal text-sm leading-[20px] truncate">
                     {product.name}
                   </span>
                 </div>
@@ -121,7 +121,7 @@ const CartWidget = () => {
           </ul>
         </div>
       ) : (
-        <p className="text whitespace-nowrap truncate mt-auto mb-auto">
+        <p className="paragraph whitespace-nowrap truncate mt-auto mb-auto">
           {data.emptyCartText}
         </p>
       )}

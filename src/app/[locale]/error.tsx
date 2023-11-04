@@ -17,7 +17,7 @@ const ErrorPage = () => {
         <h2 className="heading-2 md:heading-1 text-center">{data.heading}</h2>
       </header>
       <div className="flex flex-col gap-24 items-center">
-        <p className="text-lg font-normal font-body leading-[30px] max-w-[750px]">
+        <p className="text-lg font-normal font-body leading-[30px] content">
           {data.text}
         </p>
       </div>

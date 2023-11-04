@@ -57,7 +57,7 @@ const Input = React.forwardRef<ComponentTypes, Props<any>>(
     ref
   ) => {
     const baseClassName =
-      "h-[52px] rounded-md border border-whiteGray3 p-4 text text-grayWhite";
+      "h-[52px] rounded-md border border-whiteGray3 p-4 paragraph text-grayWhite";
 
     const Text = () => (
       <>

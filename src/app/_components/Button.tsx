@@ -25,7 +25,7 @@ const Button = ({
   href,
   onClick,
 }: React.PropsWithChildren<Props>) => {
-  const standardClassName = "bg-darkGray2 text-white";
+  const standardClassName = "button bg-darkGray2 text-white";
   const altClassName = "bg-white text-darkGray2";
 
   const SelectedTag = asLink ? "a" : "button";
@@ -35,7 +35,7 @@ const Button = ({
       type={asLink ? undefined : type}
       href={asLink ? href : undefined}
       className={twMerge(
-        "py-2.5 px-[26px] h-[52px] flex items-center justify-center hover:opacity-90 transition font-display text-lg font-medium leading-8 -tracking-[0.4px] disabled:cursor-not-allowed",
+        "py-2.5 px-[26px] h-[52px] flex items-center justify-center hover:opacity-90 transition disabled:cursor-not-allowed",
         alt ? altClassName : standardClassName,
         rounded ? "rounded-md" : "",
         className

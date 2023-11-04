@@ -62,7 +62,6 @@ const ProductTable = ({ className }: Props) => {
               className="py-3 first:basis-2/5 button-small max-sm:hidden first:block"
             >
               {header}
-              <span className="sm:hidden">s</span>
             </th>
           ))}
         </tr>

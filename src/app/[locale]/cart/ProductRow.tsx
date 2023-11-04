@@ -54,11 +54,11 @@ const ProductRow = ({ product: data, productPrice }: Props) => {
         <div className="flex sm:flex-col gap-2 justify-between sm:justify-center w-full shrink min-w-0">
           <div className="flex flex-col gap-2 truncate">
             <Link href={`/product/${product.id}`} className="truncate block">
-              <p className="text font-semibold text-sm leading-[22px] truncate">
+              <p className="paragraph font-semibold text-sm leading-[22px] truncate transition hover:opacity-70">
                 {product.name}
               </p>
             </Link>
-            <p className="text font-normal text-sm leading-[20px] truncate flex items-center">
+            <p className="paragraph font-normal text-sm leading-[20px] truncate flex items-center">
               {tableData.sizeText} {size.toUpperCase()}
               {", "}
               {tableData.colorText}:{" "}
@@ -87,7 +87,7 @@ const ProductRow = ({ product: data, productPrice }: Props) => {
               )}
             </span>
             <button
-              className="flex items-center button-xsmall hover:opacity-70 transition gap-1"
+              className="flex items-center button-xsmall hover:text-darkGray transition gap-1"
               onClick={() => removeProduct({ id: product.id, size }, true)}
             >
               <TrashIcon className="stroke-grayWhite w-[18px] h-[18px] shrink-0" />
@@ -104,7 +104,7 @@ const ProductRow = ({ product: data, productPrice }: Props) => {
           className="bg-white border border-whiteGray3 rounded"
         />
       </td>
-      <td className="text text-lg leading-[30px] w-[68px] hidden sm:block">
+      <td className="paragraph text-lg leading-[30px] w-[68px] hidden sm:block">
         {productPrice ? (
           formatPrice(
             productPrice,
@@ -115,7 +115,7 @@ const ProductRow = ({ product: data, productPrice }: Props) => {
           <Skeleton className="w-[60px]" />
         )}
       </td>
-      <td className="pr-0 text text-lg leading-[30px] font-semibold max-md:hidden">
+      <td className="pr-0 paragraph text-lg leading-[30px] font-semibold max-md:hidden">
         {productPrice ? (
           formatPrice(
             productPrice * quantity,
@@ -142,11 +142,11 @@ export const SkeletonRow = () => (
       <div className="flex sm:flex-col gap-2 justify-between sm:justify-center w-full shrink min-w-0">
         <div className="flex flex-col gap-2 truncate">
           <Link href="#" className="truncate block">
-            <p className="text font-semibold text-sm leading-[22px] truncate">
+            <p className="paragraph font-semibold text-sm leading-[22px] truncate">
               <Skeleton className="w-[120px]" />
             </p>
           </Link>
-          <p className="text font-normal text-sm leading-[20px] truncate flex items-center gap-2">
+          <p className="paragraph font-normal text-sm leading-[20px] truncate flex items-center gap-2">
             <Skeleton className="w-[100px]" />
             <Skeleton className="w-[15px]" borderRadius={999} />
           </p>
@@ -163,10 +163,10 @@ export const SkeletonRow = () => (
     <td className="hidden sm:block">
       <Skeleton className="w-[90px]" />
     </td>
-    <td className="text text-lg leading-[30px] w-[68px] hidden sm:block">
+    <td className="paragraph text-lg leading-[30px] w-[68px] hidden sm:block">
       <Skeleton className="w-[70px]" />
     </td>
-    <td className="pr-0 text text-lg leading-[30px] font-semibold max-md:hidden">
+    <td className="pr-0 paragraph text-lg leading-[30px] font-semibold max-md:hidden">
       <Skeleton className="w-[70px]" />
     </td>
   </tr>

@@ -163,8 +163,8 @@ const CartSummary = ({ className }: Props) => {
         ))}
       </fieldset>
       <p className="flex items-center justify-between mt-[29px] py-[13px]">
-        <span className="text">{data.subtotalText}</span>
-        <span className="text font-semibold">
+        <span className="paragraph">{data.subtotalText}</span>
+        <span className="paragraph font-semibold">
           {!isLoadingPrices ? (
             formatPrice(
               getProductsPrice(productsWithPrices),
@@ -177,10 +177,10 @@ const CartSummary = ({ className }: Props) => {
         </span>
       </p>
       <p className="flex items-center justify-between py-[13px] border-t border-whiteGray3 border-opacity-60">
-        <span className="text text-lg font-semibold leading-[30px]">
+        <span className="paragraph text-lg font-semibold leading-[30px]">
           {data.totalText}
         </span>
-        <span className="text text-lg font-semibold leading-[30px]">
+        <span className="paragraph text-lg font-semibold leading-[30px]">
           {!isLoadingPrices ? (
             formatPrice(
               getTotalPrice(),

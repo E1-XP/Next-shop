@@ -25,7 +25,7 @@ const CouponInput = ({ className }: Props) => {
   return (
     <div className={className}>
       <p className="button-large">{data.heading}</p>
-      <p className="text text-grayWhite mt-[7px]">{data.paragraph}</p>
+      <p className="paragraph text-grayWhite mt-[7px]">{data.paragraph}</p>
       <Input
         className="mt-4"
         placeholder={data.inputPlaceholder}
