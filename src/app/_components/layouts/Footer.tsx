@@ -55,7 +55,7 @@ const Footer = () => {
           <ul className="flex gap-4">
             {data.socials.map((item) => (
               <li key={item.name} className="hover:opacity-70 transition">
-                <Link href={item.url}>
+                <Link href={item.url} aria-label={item.name}>
                   <span className="w-10 h-10 bg-white rounded-full flex items-center justify-center">
                     <item.icon className="stroke-darkGray" />
                   </span>

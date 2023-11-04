@@ -68,6 +68,7 @@ const ProductItem = ({ product, productPrices, className }: Props) => {
       <Link
         href={`product/${product.id}`}
         className="absolute top-0 left-0 right-0 bottom-0"
+        aria-label={`${product.brand} - ${product.name}`}
       />
     </div>
   );

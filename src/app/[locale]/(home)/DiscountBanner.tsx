@@ -39,6 +39,7 @@ const DiscountBanner = () => {
               {data.couponCode}
             </span>
             <button
+              aria-label="Copy discount code"
               className="hover:opacity-70 transition"
               onClick={onCopyClick}
             >
