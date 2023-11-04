@@ -19,6 +19,7 @@ export interface Cart {
   products: CartItem[];
   addProduct: (item: CartItem) => void;
   removeProduct: (data: CartItemRemoval, deleteAll?: boolean) => void;
+  clearBasket: () => void;
 }
 
 export const useCartStore = create<Cart>()(
@@ -74,6 +75,11 @@ export const useCartStore = create<Cart>()(
           }
 
           return { ...state };
+        });
+      },
+      clearBasket: () => {
+        set((state) => {
+          return { ...state, products: [] };
         });
       },
     }),

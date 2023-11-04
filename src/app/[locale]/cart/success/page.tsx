@@ -1,10 +1,21 @@
+"use client";
+
 import * as React from "react";
 import { useTranslations } from "next-intl";
 
 import Button from "@/app/_components/Button";
+import { useCartStore } from "@/app/_store/cart";
+import { useHydrate } from "@/app/_hooks/useHydrate";
 
 const CartSuccessPage = () => {
   const t = useTranslations("CartSuccess");
+
+  const { clearBasket } = useCartStore();
+  const isHydrating = useHydrate();
+
+  React.useEffect(() => {
+    if (!isHydrating) clearBasket();
+  }, [isHydrating]);
 
   const data = {
     heading: t("heading"),
