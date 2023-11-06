@@ -29,7 +29,11 @@ const DiscountBanner = () => {
         <Image
           alt="clothing store"
           src={image}
-          className="w-full object-cover h-full max-md:object-[100%_0%]"
+          placeholder="blur"
+          width={1920}
+          height={1080}
+          sizes="100vw"
+          className="w-full object-cover h-full max-md:object-[100%_0%] pointer-events-none"
         />
         <div className="wrapper absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 bg-white w-max p-8 md:p-16 rounded-md flex flex-col gap-6 shadow-md max-w-[90%]">
           <h2 className="heading-3 md:headng-2 text-center">{data.heading}</h2>

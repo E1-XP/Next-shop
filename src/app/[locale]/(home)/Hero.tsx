@@ -85,6 +85,10 @@ const HeroSection = () => {
               <div className="h-full overflow-hidden">
                 <Image
                   priority={i === 0}
+                  placeholder="blur"
+                  width={1920}
+                  height={1080}
+                  sizes="100vw"
                   src={item.img}
                   alt="Product campaign photo"
                   className={twMerge(

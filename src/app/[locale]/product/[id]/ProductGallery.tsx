@@ -59,6 +59,7 @@ const ProductGallery = ({ data, className }: Props) => {
                 alt={data.name}
                 width={1800}
                 height={2600}
+                sizes="30vw"
                 className="pointer-events-none"
               />
             </button>
@@ -77,6 +78,7 @@ const ProductGallery = ({ data, className }: Props) => {
             alt={data.name}
             width={1800}
             height={2600}
+            sizes="100vw"
             className="pointer-events-none group-hover:object-none"
             style={{
               objectPosition: isHovering

@@ -75,7 +75,7 @@ const Footer = () => {
           </div>
         </div>
         <div>
-          <p className="paragraph-small">{data.photoCopyright}</p>
+          <p className="paragraph-small text-center">{data.photoCopyright}</p>
         </div>
       </div>
     </footer>
