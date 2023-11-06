@@ -17,6 +17,7 @@ https://next-shop-dev.vercel.app/
 - Bilingual internationalization (PL/EN)
 - Currency selection (USD or PLN) used during checkout and for product presentation
 - User can write reviews for products and rate them
+- Auth forms and review modal validation
 - Typesafety is maintained by tRPC and Zod
 - Data is stored in PostgreSQL and user actions are persisted in local storage
 - Design loosely inspired by Zalando (https://zalando.pl) and Nayzak Design Store (https://nayzak.design/figma-e-commerce-builder-and-templates)
@@ -26,6 +27,7 @@ https://next-shop-dev.vercel.app/
 - Add product search functionality
 - Expandable header menu (product category links)
 - Working coupon codes during checkout process
+- User profile page
 
 ## Tech Stack
 
