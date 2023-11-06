@@ -75,6 +75,8 @@ const SignUpPage = () => {
     btnText: t("btnText"),
   };
 
+  const [isRedirecting, setIsRedirecting] = React.useState(false);
+
   const {
     register,
     handleSubmit,
@@ -89,6 +91,8 @@ const SignUpPage = () => {
 
   const { mutate: createUser } = trpc.auth.signup.useMutation({
     async onSuccess(data) {
+      setIsRedirecting(true);
+
       await signIn("credentials", {
         email: data.email,
         password: getValues().password,
@@ -191,8 +195,8 @@ const SignUpPage = () => {
         <Button
           type="submit"
           className="rounded-md"
-          disabled={isSubmitting}
-          isLoading={isSubmitting}
+          disabled={isSubmitting || isRedirecting}
+          isLoading={isSubmitting || isRedirecting}
         >
           {data.btnText}
         </Button>

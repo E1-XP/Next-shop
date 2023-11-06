@@ -168,7 +168,7 @@ const SignInPage = () => {
         <Button
           className="rounded-md"
           type="submit"
-          disabled={isSubmitting}
+          disabled={isSubmitting || isRedirecting}
           isLoading={isSubmitting || isRedirecting}
         >
           {data.btnText}
