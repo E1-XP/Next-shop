@@ -28,6 +28,7 @@ https://next-shop-dev.vercel.app/
 - Expandable header menu (product category links)
 - Working coupon codes during checkout process
 - User profile page
+- Add more tests
 
 ## Tech Stack
 
@@ -43,6 +44,7 @@ https://next-shop-dev.vercel.app/
 - Zustand
 - React Hook Form
 - Zod
+- React Testing Library
 
 ## Installation
 
