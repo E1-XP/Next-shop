@@ -48,7 +48,6 @@ const ProductRow = ({ product: data, productPrice }: Props) => {
             alt={product.name}
             width={200}
             height={400}
-            placeholder="blur"
             className="h-[100px] w-auto group-hover:opacity-90 transition"
           />
         </Link>
