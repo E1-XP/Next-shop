@@ -116,6 +116,7 @@ const SignUpPage = () => {
           src={img}
           alt="Model presenting latest fashion"
           className="pointer-events-none object-cover object-[50%_75%] h-full w-full"
+          placeholder="blur"
         />
       </div>
       <form

@@ -48,6 +48,7 @@ const ProductItem = ({ product, productPrices, className }: Props) => {
         alt={product.name}
         width={640}
         height={800}
+        placeholder="blur"
       />
       <div className="py-4 px-2 flex flex-col gap-2">
         <p>{product.brand}</p>

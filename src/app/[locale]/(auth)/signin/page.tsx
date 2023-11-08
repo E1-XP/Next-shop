@@ -99,6 +99,7 @@ const SignInPage = () => {
         <Image
           src={img}
           alt={data.imgAltText}
+          placeholder="blur"
           className="pointer-events-none object-cover object-[50%_75%] h-full w-full"
         />
       </div>
