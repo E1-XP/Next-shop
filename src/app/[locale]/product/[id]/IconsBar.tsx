@@ -26,7 +26,7 @@ const IconsBar = ({}: Props) => {
   ];
 
   return (
-    <div className="flex gap-4 md:gap-8">
+    <div className="flex gap-4 md:gap-6 lg:gap-8">
       {data.map((item) => (
         <button
           key={item.text}

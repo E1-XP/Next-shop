@@ -35,10 +35,11 @@ const CartWidget = () => {
 
   const isUSD = currency === "usd";
 
-  const prices =
-    trpc.payment.getPrices.useQuery({
-      stripeId: products.map((p) => p.product.stripeId),
-    }).data ?? [];
+  const { data: pricesData, isFetching } = trpc.payment.getPrices.useQuery({
+    stripeId: products.map((p) => p.product.stripeId),
+  });
+
+  const prices = pricesData ?? [];
 
   const productsWithPrices = products.map(({ quantity, product }) => {
     const price = prices.find(
@@ -90,7 +91,11 @@ const CartWidget = () => {
       <div className="flex justify-between items-center w-full">
         <p className="heading-5">{data.header}</p>
         <span className="heading-6 font-semibold">
-          {formatPrice(totalCost, currency, locale as (typeof locales)[number])}
+          {isFetching ? (
+            <Skeleton className="h-[26px] w-[56px]" />
+          ) : (
+            formatPrice(totalCost, currency, locale as (typeof locales)[number])
+          )}
         </span>
       </div>
       {products.length ? (
