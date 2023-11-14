@@ -96,8 +96,9 @@ const SignInPage = () => {
       { autoClose: false }
     );
 
-    return () =>
+    return () => {
       credentialsToastId.current && toast.dismiss(credentialsToastId.current);
+    };
   }, []);
 
   return (
