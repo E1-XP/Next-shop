@@ -23,6 +23,7 @@ const Toast = () => {
   return (
     <ToastContainer
       position={toast.POSITION.BOTTOM_RIGHT}
+      theme="dark"
       toastClassName="paragraph leading-6 text-white bg-darkGray rounded-md"
       icon={({ type }) => <QuestionCircleIcon className={iconColors[type]} />}
       progressClassName={(opts) =>

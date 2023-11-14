@@ -157,15 +157,12 @@
         "label": "Hasło"
       }
     },
-    "rememberMeInput": {
-      "label": "Zapamiętaj mnie"
-    },
-    "rememberMeText": "Zapamiętaj mnie",
     "resetPasswordText": "Zapomniałeś hasła?",
     "btnText": "Zaloguj się",
     "toast": {
       "unknownCredentials": "This email/password combination doesn't exist in our database.",
-      "loginSuccess": " Witaj ponownie!"
+      "loginSuccess": " Witaj ponownie!",
+      "credentialsTipText": "Dane testowe:"
     },
     "imgAltText": "Model/ka prezentujący/a najnowszą modę"
   },

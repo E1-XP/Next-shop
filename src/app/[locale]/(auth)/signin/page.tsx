@@ -23,8 +23,11 @@ import { setZodErrorMap } from "@/app/_lib/zod";
 const SignInPage = () => {
   const t = useTranslations("SignIn");
   const locale = useLocale();
+  const router = useRouter();
 
   setZodErrorMap(locale);
+
+  const [isRedirecting, setIsRedirecting] = React.useState(false);
 
   const data = {
     heading: t("heading"),
@@ -47,22 +50,16 @@ const SignInPage = () => {
         id: "password",
       },
     ] as { type: Types; placeholder: string; label: string; id: SchemaKeys }[],
-    rememberMeInput: {
-      type: "checkbox" as Types,
-      label: t("rememberMeInput.label"),
-      id: "rememberMe",
-    },
-    rememberMeText: t("rememberMeText"),
     resetPasswordText: t("resetPasswordText"),
     btnText: t("btnText"),
     toast: {
       unknownCredentials: t("toast.unknownCredentials"),
       loginSuccess: t("toast.loginSuccess"),
+      credentialsTipText: t("toast.credentialsTipText"),
+      credentialsData: "admin@admin.com, Admin123!",
     },
     imgAltText: t("imgAltText"),
   };
-
-  const [isRedirecting, setIsRedirecting] = React.useState(false);
 
   const {
     register,
@@ -73,8 +70,6 @@ const SignInPage = () => {
     reValidateMode: "onChange",
     resolver: zodResolver(signInSchema),
   });
-
-  const router = useRouter();
 
   const onSubmit: SubmitHandler<SchemaType> = async (formData) => {
     const response = await signIn("credentials", {
@@ -92,6 +87,13 @@ const SignInPage = () => {
       requestAnimationFrame(() => toast.success(data.toast.loginSuccess));
     }
   };
+
+  React.useEffect(() => {
+    toast.info(
+      `${data.toast.credentialsTipText} ${data.toast.credentialsData}`,
+      { autoClose: false }
+    );
+  }, []);
 
   return (
     <div className="flex flex-col lg:flex-row min-h-[calc(100vh_-_72px_-_104px)] justify-center">
@@ -152,13 +154,6 @@ const SignInPage = () => {
           ))}
         </div>
         <div className="flex justify-between items-center flex-wrap">
-          <Input
-            type={data.rememberMeInput.type}
-            id={data.rememberMeInput.id}
-            label={data.rememberMeInput.label}
-            className="mr-3"
-          />
-          <p className="paragraph mr-auto">{data.rememberMeText}</p>
           <Link
             href="#"
             className="paragraph font-semibold hover:opacity-70 transition ml-1"
