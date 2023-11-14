@@ -88,11 +88,16 @@ const SignInPage = () => {
     }
   };
 
+  const credentialsToastId = React.useRef<number | string | null>(null);
+
   React.useEffect(() => {
-    toast.info(
+    credentialsToastId.current = toast.info(
       `${data.toast.credentialsTipText} ${data.toast.credentialsData}`,
       { autoClose: false }
     );
+
+    return () =>
+      credentialsToastId.current && toast.dismiss(credentialsToastId.current);
   }, []);
 
   return (
