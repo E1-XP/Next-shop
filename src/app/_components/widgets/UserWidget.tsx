@@ -32,12 +32,6 @@ const UserWidget = () => {
     },
   };
 
-  const [isOpen, setIsOpen] = React.useState(false);
-
-  const toggleIsOpen = () => {
-    setIsOpen(!isOpen);
-  };
-
   const isAuthenticated = session.status === "authenticated";
   const isLoading = session.status === "loading";
   const hasUserAvatar = !!session.data?.user.image;
@@ -47,8 +41,6 @@ const UserWidget = () => {
       signOut();
       setTimeout(() => toast.success(data.toast.logOut), 200);
     } else router.push("/signin");
-
-    toggleIsOpen();
   };
 
   const onProfileButtonClick = () => {
@@ -57,23 +49,32 @@ const UserWidget = () => {
 
   return (
     <Widget
-      referenceContent={() =>
+      referenceContent={(isOpen) =>
         isLoading ? (
           <Skeleton className="w-[26px] h-[26px]" borderRadius={999} />
-        ) : hasUserAvatar ? (
-          <Image
-            src={session.data?.user.image}
-            alt="User avatar"
-            width={26}
-            height={26}
-          />
         ) : (
-          <ProfileIcon
+          <span
             className={twMerge(
-              "stroke-darkGray group-hover:opacity-60 transition",
-              isAuthenticated ? "h-[18px] w-[18px]" : ""
+              "transition",
+              isOpen ? "opacity-60" : "hover:opacity-60"
             )}
-          />
+          >
+            {hasUserAvatar ? (
+              <Image
+                src={session.data?.user.image}
+                alt="User avatar"
+                width={26}
+                height={26}
+              />
+            ) : (
+              <ProfileIcon
+                className={twMerge(
+                  "stroke-darkGray group-hover:opacity-60 transition",
+                  isAuthenticated ? "h-[18px] w-[18px]" : ""
+                )}
+              />
+            )}
+          </span>
         )
       }
       referenceContentClass={twMerge(

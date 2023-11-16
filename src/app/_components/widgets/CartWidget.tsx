@@ -6,6 +6,7 @@ import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { useLocale } from "next-intl";
 import Skeleton from "react-loading-skeleton";
+import { twMerge } from "tailwind-merge";
 
 import Widget from "./Base";
 import Button from "../Button";
@@ -28,8 +29,6 @@ const CartWidget = () => {
   const { products } = useCartStore();
   const { currency } = useGlobalStore();
   const isHydrating = useHydrate();
-
-  const [isOpen, setIsOpen] = React.useState(false);
 
   const cartItemsCount = products.length;
 
@@ -63,28 +62,29 @@ const CartWidget = () => {
     btnUrl: "/cart",
   };
 
-  const toggleIsOpen = () => setIsOpen(!isOpen);
-
   const onButtonClick = () => {
     router.push(data.btnUrl);
-
-    toggleIsOpen();
   };
 
   return (
     <Widget
-      referenceContent={() =>
+      referenceContent={(isOpen) =>
         isHydrating ? (
           <Skeleton className="w-[56px] h-[26px]" borderRadius={999} />
         ) : (
-          <>
-            <ShoppingBagIcon className="stroke-darkGray group-hover:opacity-60 transition h-[24px] w-[24px]" />
+          <span
+            className={twMerge(
+              "flex items-center transition",
+              isOpen ? "opacity-60" : "hover:opacity-60"
+            )}
+          >
+            <ShoppingBagIcon className="stroke-darkGray h-[24px] w-[24px]" />
             {!!cartItemsCount && (
-              <span className="bg-darkGray text-white text-xs font-body font-medium px-[9px] py-0.5 rounded-full ml-2 h-5 group-hover:opacity-70">
+              <span className="bg-darkGray text-white text-xs font-body font-medium px-[9px] py-0.5 rounded-full ml-2 h-5">
                 {cartItemsCount}
               </span>
             )}
-          </>
+          </span>
         )
       }
     >

@@ -9,8 +9,8 @@ import { twMerge } from "tailwind-merge";
 import Hamburger from "../Hamburger";
 import UserWidget from "../widgets/UserWidget";
 import CartWidget from "../widgets/CartWidget";
+import SearchBox, { SearchIconMenu } from "../SearchBox";
 
-import SearchIcon from "../icons/Search";
 import FacebookIcon from "../icons/Facebook";
 import InstagramIcon from "../icons/Instagram";
 import TwitterIcon from "../icons/Twitter";
@@ -18,6 +18,12 @@ import EmailIcon from "../icons/Email";
 
 const Header = () => {
   const t = useTranslations("Header");
+
+  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+  const [isSearchBoxOpen, setIsSearchBoxOpen] = React.useState(false);
+
+  const [prevScrollPos, setPrevScrollPos] = React.useState(0);
+  const [isVisible, setIsVisible] = React.useState(true);
 
   const data = {
     logoText: "Next-shop",
@@ -37,9 +43,9 @@ const Header = () => {
       },
     ],
     actionsMenuItems: [
-      { name: t("actionsMenuItems.0.name"), component: SearchIcon },
-      { name: t("actionsMenuItems.1.name"), component: UserWidget },
-      { name: t("actionsMenuItems.2.name"), component: CartWidget },
+      { name: t("actionsMenuItems.0.name") },
+      { name: t("actionsMenuItems.1.name") },
+      { name: t("actionsMenuItems.2.name") },
     ],
     socials: [
       { name: "Facebook", icon: FacebookIcon, url: "#" },
@@ -48,11 +54,6 @@ const Header = () => {
       { name: "Email", icon: EmailIcon, url: "#" },
     ],
   };
-
-  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
-
-  const [prevScrollPos, setPrevScrollPos] = React.useState(0);
-  const [isVisible, setIsVisible] = React.useState(true);
 
   const onScroll = debounce(() => {
     const scrollPos = window.scrollY;
@@ -83,22 +84,30 @@ const Header = () => {
         </Link>
         <nav
           className={twMerge(
-            "z-40 bg-white max-sm:transition-opacity flex max-sm:gap-16 max-sm:pt-16 sm:justify-between w-full max-sm:flex-col max-sm:absolute max-sm:top-[72px] max-sm:left-0 max-sm:h-[calc(100vh_-_72px)]",
+            "z-40 bg-white max-sm:transition-opacity flex max-sm:gap-16 max-sm:pt-16 sm:justify-between w-full max-sm:flex-col max-sm:absolute max-sm:top-[72px] max-sm:left-0 max-sm:h-[calc(100vh_-_72px)] sm:overflow-hidden sm:h-[72px]",
             isMenuOpen ? "" : "max-sm:opacity-0 max-sm:pointer-events-none"
           )}
         >
-          <ul className="flex gap-4 mx-auto w-fit">
-            {data.mainMenuItems.map((item) => (
-              <li
-                key={item.text}
-                className="link flex items-center opacity-70 hover:opacity-100 transition"
-              >
-                <Link href={item.url} className="">
-                  {item.text}
-                </Link>
-              </li>
-            ))}
-          </ul>
+          <div
+            className={twMerge(
+              "flex flex-col h-max mx-auto w-fit gap-6 sm:py-6 transition",
+              isSearchBoxOpen ? "-translate-y-[62px]" : ""
+            )}
+          >
+            <ul className="flex gap-4 ">
+              {data.mainMenuItems.map((item) => (
+                <li
+                  key={item.text}
+                  className="link flex items-center opacity-70 hover:opacity-100 transition"
+                >
+                  <Link href={item.url} className="">
+                    {item.text}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+            <SearchBox />
+          </div>
           {isMenuOpen && (
             <div className="bg-whiteGray h-full flex justify-center pt-4">
               <ul className="flex md:hidden gap-4 self-start">
@@ -115,17 +124,19 @@ const Header = () => {
             </div>
           )}
         </nav>
-        <nav className="flex gap-2">
+        <nav className="flex gap-2 items-center">
           <ul className="flex gap-3.5 md:gap-4 max-sm:justify-center w-fit max-sm:mx-auto">
-            {data.actionsMenuItems.map((item, i, arr) => (
-              <li
-                key={item.name}
-                className="flex items-center cursor-pointer group"
-              >
-                <span className="sr-only group-hover:opacity-60 transition">
-                  {item.name}
-                </span>
-                <item.component className="stroke-darkGray group-hover:opacity-60 transition" />
+            {data.actionsMenuItems.map((item, i) => (
+              <li key={item.name} className="flex items-center">
+                <span className="sr-only">{item.name}</span>
+                {i === 0 && (
+                  <SearchIconMenu
+                    isSearchBoxOpen={isSearchBoxOpen}
+                    setIsSearchBoxOpen={setIsSearchBoxOpen}
+                  />
+                )}
+                {i === 1 && <UserWidget />}
+                {i === 2 && <CartWidget />}
               </li>
             ))}
           </ul>

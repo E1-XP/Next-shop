@@ -14,7 +14,7 @@ import {
 import { twMerge } from "tailwind-merge";
 
 interface Props {
-  referenceContent: () => React.JSX.Element;
+  referenceContent: (isOpen: boolean) => React.JSX.Element;
   referenceContentClass?: string;
   children: React.ReactNode;
 }
@@ -57,12 +57,12 @@ const Widget = ({
       ref={refs.setReference}
       {...getReferenceProps()}
     >
-      <span
+      <button
         onClick={toggleIsOpen}
         className={twMerge("flex items-center", referenceContentClass)}
       >
-        {referenceContent()}
-      </span>
+        {referenceContent(isOpen)}
+      </button>
       {isMounted && (
         <div
           className="absolute left-0 top-0"
