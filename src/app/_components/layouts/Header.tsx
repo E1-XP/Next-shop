@@ -16,6 +16,9 @@ import InstagramIcon from "../icons/Instagram";
 import TwitterIcon from "../icons/Twitter";
 import EmailIcon from "../icons/Email";
 
+import { useWindowSize } from "@/app/_hooks/useWindowSize";
+import { breakPoints } from "@/app/_styles/constants";
+
 const Header = () => {
   const t = useTranslations("Header");
 
@@ -24,6 +27,8 @@ const Header = () => {
 
   const [prevScrollPos, setPrevScrollPos] = React.useState(0);
   const [isVisible, setIsVisible] = React.useState(true);
+
+  const { width } = useWindowSize();
 
   const data = {
     logoText: "Next-shop",
@@ -71,6 +76,20 @@ const Header = () => {
     return () => window.removeEventListener("scroll", onScroll);
   }, [isVisible, prevScrollPos]);
 
+  const setIsSearchBoxOpenWrapper = (isOpen: boolean) => {
+    const isMobile = width < breakPoints.SM;
+    if (isMobile) setIsMenuOpen(true);
+
+    setIsSearchBoxOpen(isOpen);
+  };
+
+  const setIsMenuOpenWrapper = (isOpen: boolean) => {
+    const isMobile = width < breakPoints.SM;
+    if (isMobile && isSearchBoxOpen) setIsSearchBoxOpen(false);
+
+    setIsMenuOpen(isOpen);
+  };
+
   return (
     <header
       className="h-[72px] flex items-center bg-white z-40 sticky w-full top-0 transition-transform"
@@ -91,7 +110,7 @@ const Header = () => {
           <div
             className={twMerge(
               "flex flex-col h-max mx-auto w-fit gap-6 sm:py-6 transition",
-              isSearchBoxOpen ? "-translate-y-[62px]" : ""
+              isSearchBoxOpen ? "sm:-translate-y-[62px]" : ""
             )}
           >
             <ul className="flex gap-4 ">
@@ -106,11 +125,11 @@ const Header = () => {
                 </li>
               ))}
             </ul>
-            <SearchBox />
+            <SearchBox className={isSearchBoxOpen ? "" : "hidden"} />
           </div>
           {isMenuOpen && (
             <div className="bg-whiteGray h-full flex justify-center pt-4">
-              <ul className="flex md:hidden gap-4 self-start">
+              <ul className="flex sm:hidden gap-4 self-start">
                 {data.socials.map((item) => (
                   <li key={item.name} className="hover:opacity-70 transition">
                     <Link href={item.url}>
@@ -124,15 +143,15 @@ const Header = () => {
             </div>
           )}
         </nav>
-        <nav className="flex gap-2 items-center">
-          <ul className="flex gap-3.5 md:gap-4 max-sm:justify-center w-fit max-sm:mx-auto">
+        <nav className="flex min-[360px]:gap-2 items-center">
+          <ul className="flex gap-0.5 min-[360px]:gap-2 md:gap-4 max-sm:justify-center w-fit max-sm:mx-auto">
             {data.actionsMenuItems.map((item, i) => (
               <li key={item.name} className="flex items-center">
                 <span className="sr-only">{item.name}</span>
                 {i === 0 && (
                   <SearchIconMenu
                     isSearchBoxOpen={isSearchBoxOpen}
-                    setIsSearchBoxOpen={setIsSearchBoxOpen}
+                    setIsSearchBoxOpen={setIsSearchBoxOpenWrapper}
                   />
                 )}
                 {i === 1 && <UserWidget />}
@@ -143,7 +162,7 @@ const Header = () => {
           <Hamburger
             className="sm:hidden"
             isOpen={isMenuOpen}
-            setIsOpen={setIsMenuOpen}
+            setIsOpen={setIsMenuOpenWrapper}
           />
         </nav>
       </div>
