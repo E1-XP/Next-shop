@@ -29,7 +29,7 @@ const CouponInput = ({ className }: Props) => {
       <Input
         className="mt-4"
         placeholder={data.inputPlaceholder}
-        withSubmitButton={data.inputBtnText}
+        withSubmitButtonContent={() => data.inputBtnText}
         label={data.inputLabel}
         id={data.inputLabel}
         onClick={onSubmit}

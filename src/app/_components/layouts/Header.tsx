@@ -24,6 +24,7 @@ const Header = () => {
 
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const [isSearchBoxOpen, setIsSearchBoxOpen] = React.useState(false);
+  const [isSuggestionListOpen, setIsSuggestionListOpen] = React.useState(false);
 
   const [prevScrollPos, setPrevScrollPos] = React.useState(0);
   const [isVisible, setIsVisible] = React.useState(true);
@@ -103,8 +104,10 @@ const Header = () => {
         </Link>
         <nav
           className={twMerge(
-            "z-40 bg-white max-sm:transition-opacity flex max-sm:gap-16 max-sm:pt-16 sm:justify-between w-full max-sm:flex-col max-sm:absolute max-sm:top-[72px] max-sm:left-0 max-sm:h-[calc(100vh_-_72px)] sm:overflow-hidden sm:h-[72px]",
-            isMenuOpen ? "" : "max-sm:opacity-0 max-sm:pointer-events-none"
+            "z-40 bg-white max-sm:transition-opacity flex max-sm:gap-16 max-sm:pt-8 sm:justify-between w-full max-sm:flex-col max-sm:absolute max-sm:top-[72px] max-sm:left-0 max-sm:h-[calc(100vh_-_72px)] sm:h-[72px]",
+            isMenuOpen ? "" : "max-sm:opacity-0 max-sm:pointer-events-none",
+            isSearchBoxOpen ? "" : "sm:overflow-hidden",
+            isSuggestionListOpen ? "" : "overflow-hidden"
           )}
         >
           <div
@@ -113,7 +116,12 @@ const Header = () => {
               isSearchBoxOpen ? "sm:-translate-y-[62px]" : ""
             )}
           >
-            <ul className="flex gap-4 ">
+            <ul
+              className={twMerge(
+                "flex gap-4 justify-center",
+                isSearchBoxOpen ? "max-sm:hidden" : ""
+              )}
+            >
               {data.mainMenuItems.map((item) => (
                 <li
                   key={item.text}
@@ -125,7 +133,13 @@ const Header = () => {
                 </li>
               ))}
             </ul>
-            <SearchBox className={isSearchBoxOpen ? "" : "hidden"} />
+            <SearchBox
+              className={isSearchBoxOpen ? "" : "hidden"}
+              suggestionListControl={[
+                isSuggestionListOpen,
+                setIsSuggestionListOpen,
+              ]}
+            />
           </div>
           {isMenuOpen && (
             <div className="bg-whiteGray h-full flex justify-center pt-4">

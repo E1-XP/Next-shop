@@ -25,9 +25,11 @@ interface Props<T extends ComponentTypes> {
   label: string;
   checked?: boolean;
   defaultChecked?: boolean;
+  autocomplete?: "off" | "on";
   id: string;
   className?: string;
-  withSubmitButton?: string;
+  withSubmitButtonContent?: () => React.ReactNode;
+  withSubmitButtonClassName?: string;
   onChange?: (e: React.ChangeEvent<T>) => void;
   onBlur?: () => void;
   onClick?: (e: React.MouseEvent<T>) => void;
@@ -43,6 +45,7 @@ const Input = React.forwardRef<ComponentTypes, Props<any>>(
       name,
       value,
       placeholder,
+      autocomplete,
       label,
       id,
       checked,
@@ -51,7 +54,8 @@ const Input = React.forwardRef<ComponentTypes, Props<any>>(
       onBlur,
       onClick,
       onFocus,
-      withSubmitButton,
+      withSubmitButtonContent,
+      withSubmitButtonClassName,
       register,
     },
     ref
@@ -68,6 +72,7 @@ const Input = React.forwardRef<ComponentTypes, Props<any>>(
           type="text"
           value={value}
           placeholder={placeholder}
+          autoComplete={autocomplete}
           id={id}
           className={twMerge(baseClassName, className)}
           onChange={onChange}
@@ -90,6 +95,7 @@ const Input = React.forwardRef<ComponentTypes, Props<any>>(
             type="text"
             value={value}
             placeholder={placeholder}
+            autoComplete={autocomplete}
             id={id}
             className={twMerge(baseClassName, "w-full")}
             onChange={onChange}
@@ -98,10 +104,13 @@ const Input = React.forwardRef<ComponentTypes, Props<any>>(
             {...(register && register(id))}
           />
           <button
-            className="button-small absolute right-4 top-1/2 -translate-y-1/2 hover:opacity-70 transition"
+            className={twMerge(
+              "button-small absolute right-4 top-1/2 -translate-y-1/2 hover:opacity-70 transition",
+              withSubmitButtonClassName
+            )}
             onClick={onClick}
           >
-            {withSubmitButton}
+            {withSubmitButtonContent && withSubmitButtonContent()}
           </button>
         </div>
       </>
@@ -116,6 +125,7 @@ const Input = React.forwardRef<ComponentTypes, Props<any>>(
           type="email"
           value={value}
           placeholder={placeholder}
+          autoComplete={autocomplete}
           id={id}
           className={twMerge(baseClassName, className)}
           onChange={onChange}
@@ -140,6 +150,7 @@ const Input = React.forwardRef<ComponentTypes, Props<any>>(
               type={isVisible ? "text" : "password"}
               value={value}
               placeholder={placeholder}
+              autoComplete={autocomplete}
               id={id}
               className={twMerge(baseClassName, "w-full", className)}
               onChange={onChange}
@@ -168,6 +179,7 @@ const Input = React.forwardRef<ComponentTypes, Props<any>>(
           type="radio"
           name={name}
           value={value}
+          autoComplete={autocomplete}
           id={id}
           className={twMerge("h-[18px] w-[18px]", className)}
           checked={checked}
@@ -191,6 +203,7 @@ const Input = React.forwardRef<ComponentTypes, Props<any>>(
           name={name}
           value={value}
           id={id}
+          autoComplete={autocomplete}
           className={twMerge(
             "h-[18px] w-[18px] accent-grayWhite rounded",
             className
@@ -216,6 +229,7 @@ const Input = React.forwardRef<ComponentTypes, Props<any>>(
           placeholder={placeholder}
           id={id}
           className={twMerge(baseClassName, "resize-none", className)}
+          autoComplete={autocomplete}
           onChange={onChange}
           onClick={onClick}
           onFocus={onFocus}
@@ -227,7 +241,7 @@ const Input = React.forwardRef<ComponentTypes, Props<any>>(
 
     switch (type) {
       case "text":
-        return withSubmitButton ? TextWithSubmitButton() : Text();
+        return withSubmitButtonContent ? TextWithSubmitButton() : Text();
 
       case "email":
         return Email();

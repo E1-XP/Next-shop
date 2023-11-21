@@ -28,7 +28,7 @@ const NewsletterSection = () => {
         <p className="paragraph text-lg mt-2">{data.paragraph}</p>
         <Input
           placeholder={data.inputPlaceholder}
-          withSubmitButton={data.inputBtnText}
+          withSubmitButtonContent={() => data.inputBtnText}
           className="mt-8 w-full"
           label={data.inputLabel}
           id={data.inputLabel}

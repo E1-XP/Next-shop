@@ -18,13 +18,35 @@ export const productRouter = router({
   getAll: procedure
     .input(
       z.object({
-        order: z.string().regex(/(?:asc|desc)/i),
+        query: z.string().nonempty().optional(),
+        order: z
+          .string()
+          .regex(/(?:asc|desc)/i)
+          .optional(),
       })
     )
     .query(async (opts) => {
-      const { order } = opts.input;
+      const { order, query } = opts.input;
 
       const products = await prisma.product.findMany({
+        where: query
+          ? {
+              OR: [
+                {
+                  name: {
+                    contains: query,
+                    mode: "insensitive",
+                  },
+                },
+                {
+                  brand: {
+                    contains: query,
+                    mode: "insensitive",
+                  },
+                },
+              ],
+            }
+          : undefined,
         orderBy: { id: order === "asc" ? "asc" : "desc" },
       });
 
