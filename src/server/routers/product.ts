@@ -19,6 +19,7 @@ export const productRouter = router({
     .input(
       z.object({
         query: z.string().nonempty().optional(),
+        limit: z.number().gte(1).optional(),
         order: z
           .string()
           .regex(/(?:asc|desc)/i)
@@ -26,7 +27,7 @@ export const productRouter = router({
       })
     )
     .query(async (opts) => {
-      const { order, query } = opts.input;
+      const { order, query, limit } = opts.input;
 
       const products = await prisma.product.findMany({
         where: query
@@ -48,6 +49,7 @@ export const productRouter = router({
             }
           : undefined,
         orderBy: { id: order === "asc" ? "asc" : "desc" },
+        take: limit,
       });
 
       return products;

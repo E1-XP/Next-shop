@@ -16,7 +16,7 @@ import { trpc } from "../_trpc/client";
 
 interface Props {
   className?: string;
-  suggestionListControl: [boolean, (v: boolean) => void];
+  suggestionListStateControl: [boolean, (v: boolean) => void];
 }
 
 interface IconProps {
@@ -71,17 +71,18 @@ export const SearchIconMenu = ({
   );
 };
 
-const SearchBox = ({ className, suggestionListControl }: Props) => {
+const SearchBox = ({ className, suggestionListStateControl }: Props) => {
   const [query, setQuery] = React.useState("");
   const debouncedSetQuery = debounce(setQuery, 100);
 
-  const [isSuggestionListOpen, setIsSuggestionListOpen] = suggestionListControl;
+  const [isSuggestionListOpen, setIsSuggestionListOpen] =
+    suggestionListStateControl;
 
   const inputRef = React.useRef<HTMLInputElement>(null);
   const wrapperRef = React.useRef<HTMLDivElement>(null);
 
   const { data, isFetching } = trpc.product.getAll.useQuery(
-    { query },
+    { query, limit: 5 },
     { enabled: query.length > 1 }
   );
 
@@ -97,7 +98,7 @@ const SearchBox = ({ className, suggestionListControl }: Props) => {
       return acc.concat([fun(brand), fun(name)]);
     }, [] as string[]),
   ];
-  const suggestions = Array.from(new Set(transformDataToStrings));
+  const suggestions = Array.from(new Set(transformDataToStrings)).slice(0, 6);
 
   React.useEffect(() => {
     if (query.length > 1) setIsSuggestionListOpen(true);
@@ -118,7 +119,7 @@ const SearchBox = ({ className, suggestionListControl }: Props) => {
   }, [isSuggestionListOpen]);
 
   return (
-    <div className="max-w-xs relative" ref={wrapperRef}>
+    <div className="sm:max-w-xs relative" ref={wrapperRef}>
       <Input
         label="search"
         id="search"
@@ -126,7 +127,7 @@ const SearchBox = ({ className, suggestionListControl }: Props) => {
         className={twMerge("w-full", className)}
         value={query}
         onChange={(e) => debouncedSetQuery(e.target.value)}
-        onFocus={() => setIsSuggestionListOpen(true)}
+        onFocus={() => query.length > 1 && setIsSuggestionListOpen(true)}
         autocomplete="off"
         withSubmitButtonClassName={
           isSuggestionListOpen ? "" : " pointer-events-none"
@@ -139,7 +140,7 @@ const SearchBox = ({ className, suggestionListControl }: Props) => {
             )}
           />
         )}
-        onClick={() => setIsSuggestionListOpen(false)}
+        onClick={() => setQuery("")}
         ref={inputRef}
       />
 
@@ -164,7 +165,7 @@ const SearchBox = ({ className, suggestionListControl }: Props) => {
                   <span className="text-darkGray">
                     <SearchIcon />
                   </span>{" "}
-                  {item}
+                  <p className="truncate">{item}</p>
                 </Link>
               </li>
             ))

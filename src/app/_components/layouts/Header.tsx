@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import * as React from "react";
 import debounce from "lodash.debounce";
 import { useTranslations } from "next-intl";
@@ -21,6 +22,7 @@ import { breakPoints } from "@/app/_styles/constants";
 
 const Header = () => {
   const t = useTranslations("Header");
+  const pathName = usePathname();
 
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const [isSearchBoxOpen, setIsSearchBoxOpen] = React.useState(false);
@@ -71,12 +73,6 @@ const Header = () => {
     setPrevScrollPos(scrollPos);
   });
 
-  React.useEffect(() => {
-    window.addEventListener("scroll", onScroll, { passive: true });
-
-    return () => window.removeEventListener("scroll", onScroll);
-  }, [isVisible, prevScrollPos]);
-
   const setIsSearchBoxOpenWrapper = (isOpen: boolean) => {
     const isMobile = width < breakPoints.SM;
     if (isMobile) setIsMenuOpen(true);
@@ -90,6 +86,17 @@ const Header = () => {
 
     setIsMenuOpen(isOpen);
   };
+
+  React.useEffect(() => {
+    window.addEventListener("scroll", onScroll, { passive: true });
+
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [isVisible, prevScrollPos]);
+
+  React.useEffect(() => {
+    setIsMenuOpen(false);
+    setIsSearchBoxOpen(false);
+  }, [pathName]);
 
   return (
     <header
@@ -112,7 +119,7 @@ const Header = () => {
         >
           <div
             className={twMerge(
-              "flex flex-col h-max mx-auto w-fit gap-6 sm:py-6 transition",
+              "flex flex-col h-max mx-auto w-fit gap-6 sm:py-6 transition max-sm:w-[90%]",
               isSearchBoxOpen ? "sm:-translate-y-[62px]" : ""
             )}
           >
@@ -135,7 +142,7 @@ const Header = () => {
             </ul>
             <SearchBox
               className={isSearchBoxOpen ? "" : "hidden"}
-              suggestionListControl={[
+              suggestionListStateControl={[
                 isSuggestionListOpen,
                 setIsSuggestionListOpen,
               ]}
