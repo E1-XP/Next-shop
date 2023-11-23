@@ -2,8 +2,10 @@
 
 import * as React from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { twMerge } from "tailwind-merge";
 import debounce from "lodash.debounce";
+import { useLocale, useTranslations } from "next-intl";
 
 import Input from "./Input";
 import SearchIcon from "./icons/Search";
@@ -72,6 +74,11 @@ export const SearchIconMenu = ({
 };
 
 const SearchBox = ({ className, suggestionListStateControl }: Props) => {
+  const t = useTranslations("SearchPage");
+
+  const router = useRouter();
+  const locale = useLocale();
+
   const [query, setQuery] = React.useState("");
   const debouncedSetQuery = debounce(setQuery, 100);
 
@@ -100,6 +107,18 @@ const SearchBox = ({ className, suggestionListStateControl }: Props) => {
   ];
   const suggestions = Array.from(new Set(transformDataToStrings)).slice(0, 6);
 
+  const onSuggestionSelect = () => {
+    setIsSuggestionListOpen(false);
+    inputRef.current && inputRef.current.blur();
+  };
+
+  const onKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter") {
+      router.push(`/search?query=${query}`);
+      onSuggestionSelect();
+    }
+  };
+
   React.useEffect(() => {
     if (query.length > 1) setIsSuggestionListOpen(true);
     else setIsSuggestionListOpen(false);
@@ -123,11 +142,12 @@ const SearchBox = ({ className, suggestionListStateControl }: Props) => {
       <Input
         label="search"
         id="search"
-        placeholder="Type here to search..."
+        placeholder={t("inputPlaceholder")}
         className={twMerge("w-full", className)}
         value={query}
         onChange={(e) => debouncedSetQuery(e.target.value)}
         onFocus={() => query.length > 1 && setIsSuggestionListOpen(true)}
+        onKeyDown={onKeyDown}
         autocomplete="off"
         withSubmitButtonClassName={
           isSuggestionListOpen ? "" : " pointer-events-none"
@@ -161,7 +181,11 @@ const SearchBox = ({ className, suggestionListStateControl }: Props) => {
                 key={i}
                 className="p-2 py-3 hover:font-medium hover:bg-whiteGray"
               >
-                <Link href={`/search?query=${item}`} className="flex gap-3">
+                <Link
+                  href={`/${locale}/search?query=${item}`}
+                  className="flex gap-3"
+                  onClick={onSuggestionSelect}
+                >
                   <span className="text-darkGray">
                     <SearchIcon />
                   </span>{" "}

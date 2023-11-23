@@ -2,7 +2,11 @@ import HeroSection from "./Hero";
 import ProductList from "@/app/_components/ProductList";
 import NewsletterSection from "./Newsletter";
 import InstagramSection from "./Instagram";
-import { NewArrivalsSlider, SummerCollectionSlider } from "./Sliders";
+import {
+  NewArrivalsSlider,
+  SummerCollectionSlider,
+  PopularProducts,
+} from "./Sliders";
 import DiscountBanner from "./DiscountBanner";
 
 import { serverClient } from "@/app/_trpc/serverClient";
@@ -18,11 +22,7 @@ export default async function Home() {
         products={products.concat([...products, ...products])}
       />
       <DiscountBanner />
-      <ProductList
-        products={products
-          .concat(...products, ...products)
-          .filter((_, i) => i < 10)}
-      />
+      <PopularProducts products={products} />
       <NewsletterSection />
       <InstagramSection />
     </>

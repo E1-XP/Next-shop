@@ -7,7 +7,9 @@ import { useTranslations } from "next-intl";
 import { Product, Review } from "@prisma/client";
 
 import ReviewsList from "./ReviewsList";
+
 import { trpc } from "@/app/_trpc/client";
+import { mapPrismaDateStringsToObjects } from "@/app/_helpers";
 
 interface Props {
   className?: string;
@@ -22,11 +24,7 @@ const ProductTabs = ({ className, aboutData, productData }: Props) => {
 
   const getReviews = trpc.review.get.useQuery({ productId: productData?.id });
   const productReviews =
-    getReviews.data?.map((r) => ({
-      ...r,
-      createdAt: new Date(r.createdAt),
-      updatedAt: new Date(r.updatedAt),
-    })) || [];
+    getReviews.data?.map((r) => mapPrismaDateStringsToObjects(r)) || [];
 
   const data: [string, Review[]] = [aboutData, productReviews];
 

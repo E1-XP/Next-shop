@@ -34,6 +34,7 @@ interface Props<T extends ComponentTypes> {
   onBlur?: () => void;
   onClick?: (e: React.MouseEvent<T>) => void;
   onFocus?: (e: React.FocusEvent<T>) => void;
+  onKeyDown?: (e: React.KeyboardEvent<T>) => void;
   register?: UseFormRegister<any>;
 }
 
@@ -54,6 +55,7 @@ const Input = React.forwardRef<ComponentTypes, Props<any>>(
       onBlur,
       onClick,
       onFocus,
+      onKeyDown,
       withSubmitButtonContent,
       withSubmitButtonClassName,
       register,
@@ -79,6 +81,7 @@ const Input = React.forwardRef<ComponentTypes, Props<any>>(
           onBlur={onBlur}
           onClick={onClick}
           onFocus={onFocus}
+          onKeyDown={onKeyDown}
           ref={ref as React.LegacyRef<HTMLInputElement>}
           {...(register && register(id))}
         />
@@ -100,6 +103,7 @@ const Input = React.forwardRef<ComponentTypes, Props<any>>(
             className={twMerge(baseClassName, "w-full")}
             onChange={onChange}
             onFocus={onFocus}
+            onKeyDown={onKeyDown}
             ref={ref as React.LegacyRef<HTMLInputElement>}
             {...(register && register(id))}
           />
@@ -131,6 +135,7 @@ const Input = React.forwardRef<ComponentTypes, Props<any>>(
           onChange={onChange}
           onClick={onClick}
           onFocus={onFocus}
+          onKeyDown={onKeyDown}
           ref={ref as React.LegacyRef<HTMLInputElement>}
           {...(register && register(id))}
         />
@@ -156,6 +161,7 @@ const Input = React.forwardRef<ComponentTypes, Props<any>>(
               onChange={onChange}
               onClick={onClick}
               onFocus={onFocus}
+              onKeyDown={onKeyDown}
               ref={ref as React.LegacyRef<HTMLInputElement>}
               {...(register && register(id))}
             />
@@ -187,6 +193,7 @@ const Input = React.forwardRef<ComponentTypes, Props<any>>(
           onChange={onChange}
           onClick={onClick}
           onFocus={onFocus}
+          onKeyDown={onKeyDown}
           ref={ref as React.LegacyRef<HTMLInputElement>}
           {...(register && register(id))}
         />
@@ -213,6 +220,7 @@ const Input = React.forwardRef<ComponentTypes, Props<any>>(
           onChange={onChange}
           onClick={onClick}
           onFocus={onFocus}
+          onKeyDown={onKeyDown}
           ref={ref as React.LegacyRef<HTMLInputElement>}
           {...(register && register(id))}
         />
@@ -233,6 +241,7 @@ const Input = React.forwardRef<ComponentTypes, Props<any>>(
           onChange={onChange}
           onClick={onClick}
           onFocus={onFocus}
+          onKeyDown={onKeyDown}
           ref={ref as React.LegacyRef<HTMLTextAreaElement>}
           {...(register && register(id))}
         />

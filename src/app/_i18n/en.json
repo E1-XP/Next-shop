@@ -43,7 +43,8 @@
       "inputPlaceholder": "Email address",
       "inputLabel": "Newsletter",
       "inputBtnText": "Signup"
-    }
+    },
+    "productListHeading": "Popular products"
   },
   "Product": {
     "ratingCount": "{count, plural, =0 {No reviews yet} =1 {Review} other {Reviews}}",
@@ -142,6 +143,16 @@
     "heading": "Payment rejected",
     "paragraph": "Oh no! Looks like your payment process didn't finish. Its either your decision or we encountered some technical issues. Please try again. If this problem repeats please contact our support team.",
     "btnText": "Return to main page"
+  },
+  "SearchPage": {
+    "inputPlaceholder": "Type here to search...",
+    "heading": "Search results",
+    "paragraph": "{count, plural, =0 {Nothing found using query} =1 {Found one product using query} other {Found # products using query}}",
+    "noProductsText": "Nothing found.",
+    "sortingOptions": {
+      "0": "Name: ascending",
+      "1": "Name: descending"
+    }
   },
   "SignIn": {
     "heading": "Sign in",
@@ -278,7 +289,6 @@
   },
   "components": {
     "ProductList": {
-      "heading": "Trending products",
       "noProductsText": "Nothing found."
     },
     "QuantityInput": {

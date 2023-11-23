@@ -41,7 +41,8 @@
       "inputPlaceholder": "Adres email",
       "inputLabel": "Newsletter",
       "inputBtnText": "Zapisz się"
-    }
+    },
+    "productListHeading": "Popularne produkty"
   },
   "Product": {
     "ratingCount": "{count, plural, =0 {Brak ocen} =1 {Ocena} few {Oceny} other {Ocen}}",
@@ -140,6 +141,16 @@
     "heading": "Płatność odrzucona",
     "paragraph": "O nie! Wygląda na to, że Twoja płatność nie doszła do skutku. To albo twoja decyzja, albo problemy techniczne nasze lub naszych partnerów. Spróbuj ponownie. Jeśli ten problem się powtarza skontaktuj się z naszą linią wsparcia.",
     "btnText": "Przejdź do strony głównej"
+  },
+  "SearchPage": {
+    "inputPlaceholder": "Pisz tutaj aby wyszukać...",
+    "heading": "Wyniki wyszukiwania",
+    "paragraph": "{count, plural, =0 {Nie znaleziono niczego dla zapytania} =1 {Znaleziono jeden produkt dla zapytania} few {Znaleziono # produkty dla zapytania} other {Znaleziono # produktów dla zapytania}}",
+    "noProductsText": "Nic nie znaleziono.",
+    "sortingOptions": {
+      "0": "Nazwa: rosnąco",
+      "1": "Nazwa: malejąco"
+    }
   },
   "SignIn": {
     "heading": "Zaloguj się",
@@ -276,7 +287,6 @@
   },
   "components": {
     "ProductList": {
-      "heading": "Popularne produkty",
       "noProductsText": "Nic nie znaleziono."
     },
     "QuantityInput": {

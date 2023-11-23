@@ -2,6 +2,7 @@ import * as React from "react";
 import { useTranslations } from "next-intl";
 
 import ScrollableSlider from "../../_components/ScrollableSlider";
+import ProductList from "@/app/_components/ProductList";
 
 import { Product } from "@prisma/client";
 
@@ -28,6 +29,19 @@ export const SummerCollectionSlider = ({
       heading={data.heading}
       paragraph={data.paragraph}
       bgColor="#FFC107"
+    />
+  );
+};
+
+export const PopularProducts = ({ products }: { products: Product[] }) => {
+  const t = useTranslations("Home");
+
+  return (
+    <ProductList
+      heading={t("productListHeading")}
+      products={products
+        .concat(...products, ...products)
+        .filter((_, i) => i < 10)}
     />
   );
 };

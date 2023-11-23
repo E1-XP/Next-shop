@@ -23,3 +23,14 @@ export const calculateRating = (reviews: { rating: number }[]) => {
   const sum = reviews.reduce((acc, r) => acc + r.rating, 0);
   return Math.floor(sum / reviews.length);
 };
+
+export const mapPrismaDateStringsToObjects = <T>(
+  item: T & {
+    createdAt: string;
+    updatedAt: string;
+  }
+) => ({
+  ...item,
+  createdAt: new Date(item.createdAt),
+  updatedAt: new Date(item.updatedAt),
+});
