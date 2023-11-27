@@ -11,67 +11,12 @@ import Input from "./Input";
 import SearchIcon from "./icons/Search";
 import PlusIcon from "./icons/Plus";
 
-import { useWindowSize } from "@/app/_hooks/useWindowSize";
-import { breakPoints } from "@/app/_styles/constants";
-
 import { trpc } from "../_trpc/client";
 
 interface Props {
   className?: string;
   suggestionListStateControl: [boolean, (v: boolean) => void];
 }
-
-interface IconProps {
-  className?: string;
-  isSearchBoxOpen: boolean;
-  setIsSearchBoxOpen: (v: boolean) => void;
-}
-
-export const SearchIconMenu = ({
-  className,
-  isSearchBoxOpen,
-  setIsSearchBoxOpen,
-}: IconProps) => {
-  const { width } = useWindowSize();
-
-  return (
-    <div className="h-[72px] overflow-hidden">
-      <div
-        className={twMerge(
-          "flex flex-col gap-6 py-6 transition",
-          isSearchBoxOpen ? "sm:!-translate-y-[46px]" : ""
-        )}
-      >
-        <button
-          onClick={() => setIsSearchBoxOpen(!isSearchBoxOpen)}
-          disabled={width < breakPoints.SM && isSearchBoxOpen}
-          className={twMerge(
-            "flex justify-center",
-            isSearchBoxOpen ? "max-sm:opacity-0" : ""
-          )}
-        >
-          <SearchIcon
-            className={twMerge(
-              "transition stroke-darkGray hover:opacity-60",
-              className
-            )}
-          />
-        </button>
-        <button
-          onClick={() => setIsSearchBoxOpen(!isSearchBoxOpen)}
-          className="flex justify-center"
-        >
-          <PlusIcon
-            className={twMerge(
-              "transition stroke-darkGray hover:opacity-60 rotate-45 w-8 h-8 -mt-[5px]",
-              className
-            )}
-          />
-        </button>
-      </div>
-    </div>
-  );
-};
 
 const SearchBox = ({ className, suggestionListStateControl }: Props) => {
   const t = useTranslations("SearchPage");
@@ -89,20 +34,22 @@ const SearchBox = ({ className, suggestionListStateControl }: Props) => {
   const wrapperRef = React.useRef<HTMLDivElement>(null);
 
   const { data, isFetching } = trpc.product.getAll.useQuery(
-    { query, limit: 5 },
+    { query, perPage: 10, page: 1 },
     { enabled: query.length > 1 }
   );
 
   const transformDataToStrings = [
     query,
-    ...(data ?? []).reduce((acc, { name, brand }) => {
+    ...(data?.products ?? []).reduce((acc, { name, brand }) => {
       const combinedProductName = `${brand} - ${name}`;
 
-      const getStringContainingQuery = (s: string) =>
+      const getStringContainingQueryOrFullProductName = (s: string) =>
         s.toLowerCase().includes(query.toLowerCase()) ? s : combinedProductName;
-      const fun = getStringContainingQuery;
 
-      return acc.concat([fun(brand), fun(name)]);
+      return acc.concat([
+        getStringContainingQueryOrFullProductName(brand),
+        getStringContainingQueryOrFullProductName(name),
+      ]);
     }, [] as string[]),
   ];
   const suggestions = Array.from(new Set(transformDataToStrings)).slice(0, 6);

@@ -5,7 +5,7 @@ import { serverClient } from "@/app/_trpc/serverClient";
 import CartHeader from "./CartHeader";
 
 const CartPage = async () => {
-  const products = await serverClient.product.getAll({ order: "asc" });
+  const { products } = await serverClient.product.getAll({ order: "asc" });
 
   return (
     <div className="flex flex-col gap-[52px] py-[52px]">

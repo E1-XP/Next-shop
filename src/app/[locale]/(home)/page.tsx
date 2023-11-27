@@ -12,7 +12,7 @@ import DiscountBanner from "./DiscountBanner";
 import { serverClient } from "@/app/_trpc/serverClient";
 
 export default async function Home() {
-  const products = await serverClient.product.getAll({ order: "asc" });
+  const { products } = await serverClient.product.getAll({ order: "asc" });
 
   return (
     <>

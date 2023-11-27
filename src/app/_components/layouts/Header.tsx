@@ -10,7 +10,8 @@ import { twMerge } from "tailwind-merge";
 import Hamburger from "../Hamburger";
 import UserWidget from "../widgets/UserWidget";
 import CartWidget from "../widgets/CartWidget";
-import SearchBox, { SearchIconMenu } from "../SearchBox";
+import SearchMenuSwitcher from "../SearchMenuSwitcher";
+import SearchBox from "../SearchBox";
 
 import FacebookIcon from "../icons/Facebook";
 import InstagramIcon from "../icons/Instagram";
@@ -170,7 +171,7 @@ const Header = () => {
               <li key={item.name} className="flex items-center">
                 <span className="sr-only">{item.name}</span>
                 {i === 0 && (
-                  <SearchIconMenu
+                  <SearchMenuSwitcher
                     isSearchBoxOpen={isSearchBoxOpen}
                     setIsSearchBoxOpen={setIsSearchBoxOpenWrapper}
                   />
