@@ -147,6 +147,7 @@ const Header = () => {
                 isSuggestionListOpen,
                 setIsSuggestionListOpen,
               ]}
+              isMenuOpenStateControl={[isMenuOpen, setIsMenuOpen]}
             />
           </div>
           {isMenuOpen && (

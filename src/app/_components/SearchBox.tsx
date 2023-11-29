@@ -16,9 +16,14 @@ import { trpc } from "../_trpc/client";
 interface Props {
   className?: string;
   suggestionListStateControl: [boolean, (v: boolean) => void];
+  isMenuOpenStateControl: [boolean, (v: boolean) => void];
 }
 
-const SearchBox = ({ className, suggestionListStateControl }: Props) => {
+const SearchBox = ({
+  className,
+  suggestionListStateControl,
+  isMenuOpenStateControl,
+}: Props) => {
   const t = useTranslations("SearchPage");
 
   const suggestionListItemsRef = React.useRef<Array<HTMLLIElement | null>>([]);
@@ -28,17 +33,30 @@ const SearchBox = ({ className, suggestionListStateControl }: Props) => {
   const locale = useLocale();
 
   const [query, setQuery] = React.useState("");
-  const debouncedSetQuery = debounce(setQuery, 100);
+  const [shouldFetch, setShouldFetch] = React.useState(true);
+
+  const debouncedShouldFetch = React.useCallback(
+    debounce(() => setShouldFetch(true), 500),
+    []
+  );
+
+  const onSearchChange = (s: string) => {
+    setQuery(s);
+
+    setShouldFetch(false);
+    debouncedShouldFetch();
+  };
 
   const [isSuggestionListOpen, setIsSuggestionListOpen] =
     suggestionListStateControl;
+  const [isMenuOpen, setIsMenuOpen] = isMenuOpenStateControl;
 
   const inputRef = React.useRef<HTMLInputElement>(null);
   const wrapperRef = React.useRef<HTMLDivElement>(null);
 
   const { data, isFetching } = trpc.product.getAll.useQuery(
     { query, perPage: 10, page: 1 },
-    { enabled: query.length > 1 }
+    { enabled: query.length > 1 && shouldFetch }
   );
 
   const transformDataToStrings = [
@@ -59,6 +77,8 @@ const SearchBox = ({ className, suggestionListStateControl }: Props) => {
 
   const onSuggestionSelect = () => {
     setIsSuggestionListOpen(false);
+    setIsMenuOpen(false);
+
     inputRef.current && inputRef.current.blur();
   };
 
@@ -72,8 +92,10 @@ const SearchBox = ({ className, suggestionListStateControl }: Props) => {
         const selectedSuggestion = suggestions[selectedListItemIdx];
 
         setQuery(selectedSuggestion);
-        router.push(`/search?query=${selectedSuggestion}`);
-      } else router.push(`/search?query=${query}`);
+        router.push(
+          `/search?${new URLSearchParams({ query: selectedSuggestion })}`
+        );
+      } else router.push(`/search?${new URLSearchParams({ query })}`);
 
       onSuggestionSelect();
     }
@@ -130,7 +152,7 @@ const SearchBox = ({ className, suggestionListStateControl }: Props) => {
         placeholder={t("inputPlaceholder")}
         className={twMerge("w-full", className)}
         value={query}
-        onChange={(e) => debouncedSetQuery(e.target.value)}
+        onChange={(e) => onSearchChange(e.target.value)}
         onFocus={() => query.length > 1 && setIsSuggestionListOpen(true)}
         onKeyDown={onKeyDown}
         autocomplete="off"
@@ -165,7 +187,7 @@ const SearchBox = ({ className, suggestionListStateControl }: Props) => {
               Loading...
             </li>
           ) : (
-            suggestions.map((item, i) => (
+            suggestions.map((hint, i) => (
               <li
                 key={i}
                 className={twMerge(
@@ -176,14 +198,16 @@ const SearchBox = ({ className, suggestionListStateControl }: Props) => {
                 ref={(el) => (suggestionListItemsRef.current[i] = el)}
               >
                 <Link
-                  href={`/${locale}/search?query=${item}`}
+                  href={`/${locale}/search?${new URLSearchParams({
+                    query: hint,
+                  })}`}
                   className="flex gap-3"
                   onClick={onSuggestionSelect}
                 >
                   <span className="text-darkGray">
                     <SearchIcon />
                   </span>{" "}
-                  <p className="truncate">{item}</p>
+                  <p className="truncate">{hint}</p>
                 </Link>
               </li>
             ))
