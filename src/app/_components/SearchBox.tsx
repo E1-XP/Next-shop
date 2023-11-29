@@ -21,6 +21,9 @@ interface Props {
 const SearchBox = ({ className, suggestionListStateControl }: Props) => {
   const t = useTranslations("SearchPage");
 
+  const suggestionListItemsRef = React.useRef<Array<HTMLLIElement | null>>([]);
+  const [selectedListItemIdx, setSelectedListItemIdx] = React.useState(-1);
+
   const router = useRouter();
   const locale = useLocale();
 
@@ -60,11 +63,44 @@ const SearchBox = ({ className, suggestionListStateControl }: Props) => {
   };
 
   const onKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "Escape") {
+      setIsSuggestionListOpen(false);
+    }
+
     if (e.key === "Enter") {
-      router.push(`/search?query=${query}`);
+      if (selectedListItemIdx !== -1) {
+        const selectedSuggestion = suggestions[selectedListItemIdx];
+
+        setQuery(selectedSuggestion);
+        router.push(`/search?query=${selectedSuggestion}`);
+      } else router.push(`/search?query=${query}`);
+
       onSuggestionSelect();
     }
+
+    if (e.key === "ArrowDown") {
+      if (!suggestionListItemsRef.current) return;
+
+      if (selectedListItemIdx < suggestionListItemsRef.current.length - 1) {
+        setSelectedListItemIdx(selectedListItemIdx + 1);
+      } else setSelectedListItemIdx(0);
+    }
+
+    if (e.key === "ArrowUp") {
+      if (!suggestionListItemsRef.current) return;
+
+      if (selectedListItemIdx > 0) {
+        setSelectedListItemIdx(selectedListItemIdx - 1);
+      } else setSelectedListItemIdx(suggestionListItemsRef.current.length - 1);
+    }
   };
+
+  React.useEffect(() => {
+    suggestionListItemsRef.current = suggestionListItemsRef.current.slice(
+      0,
+      suggestions.length
+    );
+  }, [suggestions]);
 
   React.useEffect(() => {
     if (query.length > 1) setIsSuggestionListOpen(true);
@@ -79,6 +115,8 @@ const SearchBox = ({ className, suggestionListStateControl }: Props) => {
         setIsSuggestionListOpen(false);
       }
     };
+
+    if (!isSuggestionListOpen) setSelectedListItemIdx(-1);
 
     document.addEventListener("click", handleOutsideClick);
     return () => document.removeEventListener("click", handleOutsideClick);
@@ -119,14 +157,23 @@ const SearchBox = ({ className, suggestionListStateControl }: Props) => {
       >
         <ul className="flex flex-col text">
           {isFetching ? (
-            <li key={"loading"} className="p-2 py-3 cursor-pointer">
+            <li
+              key={"loading"}
+              className="p-2 py-3 cursor-pointer"
+              tabIndex={0}
+            >
               Loading...
             </li>
           ) : (
             suggestions.map((item, i) => (
               <li
                 key={i}
-                className="p-2 py-3 hover:font-medium hover:bg-whiteGray"
+                className={twMerge(
+                  "p-2 py-3 hover:font-medium hover:bg-whiteGray",
+                  selectedListItemIdx === i ? "bg-whiteGray font-medium" : ""
+                )}
+                tabIndex={0}
+                ref={(el) => (suggestionListItemsRef.current[i] = el)}
               >
                 <Link
                   href={`/${locale}/search?query=${item}`}

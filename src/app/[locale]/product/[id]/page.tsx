@@ -30,7 +30,7 @@ const ProductPage = async ({ params }: Props) => {
     stripeId: product?.stripeId,
   });
 
-  const modelProducts: Product[] = await serverClient.product.getModelVariants({
+  const modelProducts = await serverClient.product.getModelVariants({
     modelId: product?.modelId,
   });
 

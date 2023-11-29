@@ -70,7 +70,7 @@ export const productRouter = router({
         where: { modelId },
       });
 
-      return { products };
+      return products;
     }),
 });
 
