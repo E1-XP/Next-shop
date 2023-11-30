@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { twMerge } from "tailwind-merge";
 import debounce from "lodash.debounce";
 import { useLocale, useTranslations } from "next-intl";
@@ -31,6 +31,7 @@ const SearchBox = ({
 
   const router = useRouter();
   const locale = useLocale();
+  const pathname = usePathname();
 
   const [query, setQuery] = React.useState("");
   const [shouldFetch, setShouldFetch] = React.useState(true);
@@ -130,6 +131,10 @@ const SearchBox = ({
 
     inputRef.current && inputRef.current.focus();
   }, [query]);
+
+  React.useEffect(() => {
+    if (!pathname.endsWith("/search")) setQuery("");
+  }, [pathname]);
 
   React.useEffect(() => {
     const handleOutsideClick = (e: any) => {

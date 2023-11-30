@@ -92,7 +92,7 @@ const HeroSection = () => {
                   src={item.img}
                   alt="Product campaign photo"
                   className={twMerge(
-                    "pointer-events-none w-full h-full object-cover object-center md:object-[24%_48%] mask-image max-sm:!basis-1/2 max-sm:scale-110 max-sm:translate-x-[-5%] max-sm:translate-y-[-1%]",
+                    "pointer-events-none w-full h-full object-cover object-center md:object-[24%_42%] mask-image max-sm:!basis-1/2 max-sm:scale-110 max-sm:translate-x-[-5%] max-sm:translate-y-[-1%]",
                     i === 2 ? "max-sm:object-center max-md:object-left" : ""
                   )}
                 />

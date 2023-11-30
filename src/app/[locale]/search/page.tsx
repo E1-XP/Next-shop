@@ -56,20 +56,23 @@ const SearchPage = () => {
             {`${data.paragraph} "${query}".`}
           </p>
         )}
-        <div className="items-center justify-end w-full flex">
-          <Dropdown
-            options={sortingOptionsText}
-            onOptionSelect={onSortingSelect}
-          />
-        </div>
+
+        {(products.length !== 0 || isFetching) && (
+          <div className="items-center justify-end w-full flex">
+            {isFetching ? (
+              <Skeleton className="w-[200px]" />
+            ) : (
+              <Dropdown
+                options={sortingOptionsText}
+                onOptionSelect={onSortingSelect}
+              />
+            )}
+          </div>
+        )}
       </header>
       <div className="flex flex-col gap-24 items-center">
-        {isFetching || products.length ? (
+        {(products.length !== 0 || isFetching) && (
           <ProductList products={products} isLoading={isFetching} />
-        ) : (
-          <p className="text-lg font-normal font-body leading-[30px] content">
-            {data.noProductsText}
-          </p>
         )}
       </div>
       {!!fetchedData?.products.length && fetchedData.total > perPage && (
