@@ -1,6 +1,6 @@
 # Next-shop
 
-Clothing shop written in SSR framework Next.js.
+Clothing store written in SSR framework Next.js.
 
 ## Screenshots
 
@@ -16,6 +16,7 @@ https://next-shop-dev.vercel.app/
 - Checkout handling with Stripe
 - Bilingual internationalization (PL/EN)
 - Currency selection (USD or PLN) used during checkout and for product presentation
+- Product search functionality
 - User can write reviews for products and rate them
 - Auth forms and review modal validation
 - Typesafety is maintained by tRPC and Zod
@@ -24,7 +25,6 @@ https://next-shop-dev.vercel.app/
 
 ## TODOs
 
-- Add product search functionality
 - Expandable header menu (product category links)
 - Working coupon codes during checkout process
 - User profile page
