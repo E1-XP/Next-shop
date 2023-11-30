@@ -75,7 +75,7 @@ const ProductList = ({
         {products.length
           ? products.map((product, i) => (
               <ProductItem
-                key={i}
+                key={product.id}
                 product={product}
                 productPrices={productsWithPrices[i]}
               />

@@ -32,6 +32,10 @@ export const productRouter = router({
     .query(async (opts) => {
       const { order, query, perPage, page } = opts.input;
 
+      const fullNameInQuery = query?.split(" - ");
+      const brandProvided = fullNameInQuery ? fullNameInQuery[0] : undefined;
+      const nameProvided = fullNameInQuery ? fullNameInQuery[1] : undefined;
+
       const where: Prisma.ProductWhereInput = {
         OR: [
           {
@@ -49,17 +53,39 @@ export const productRouter = router({
         ],
       };
 
+      const whereCaseFullNameQuery: Prisma.ProductWhereInput = {
+        AND: [
+          {
+            name: {
+              contains: nameProvided,
+              mode: "insensitive",
+            },
+          },
+          {
+            brand: {
+              contains: brandProvided,
+              mode: "insensitive",
+            },
+          },
+        ],
+      };
+
+      const determineWhereVariant =
+        nameProvided && brandProvided ? whereCaseFullNameQuery : where;
+
       const [count, products] = await prisma.$transaction([
-        prisma.product.count(query ? { where } : undefined),
+        prisma.product.count(
+          query ? { where: determineWhereVariant } : undefined
+        ),
         prisma.product.findMany({
-          where: query ? where : undefined,
+          where: query ? determineWhereVariant : undefined,
           orderBy: { name: order === "asc" ? "asc" : "desc" },
           take: perPage,
           skip: perPage ? (page ?? 0) * perPage - perPage : undefined,
         }),
       ]);
 
-      return { products, total: count, page: page };
+      return { products, total: count, page };
     }),
   getModelVariants: procedure
     .input(z.object({ modelId: z.string().nonempty() }))

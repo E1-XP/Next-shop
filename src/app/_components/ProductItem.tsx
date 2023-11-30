@@ -28,8 +28,6 @@ const ProductItem = ({ product, productPrices, className }: Props) => {
   const { currency } = useGlobalStore();
   useHydrate();
 
-  const [currImage, setcurrImage] = React.useState(product.images[0]);
-
   const transformUrl = (url: string) => {
     const splitBy = "/upload/";
     const twoParts = url.split(splitBy);
@@ -37,18 +35,17 @@ const ProductItem = ({ product, productPrices, className }: Props) => {
     return twoParts[0].concat(splitBy, "h_500/", twoParts[1]);
   };
 
+  const [currImage, setcurrImage] = React.useState(
+    transformUrl(product.images[0])
+  );
+
   return (
     <div
       className={twMerge("relative", className)}
-      onMouseMove={() => setcurrImage(product.images[1])}
-      onMouseLeave={() => setcurrImage(product.images[0])}
+      onMouseMove={() => setcurrImage(transformUrl(product.images[1]))}
+      onMouseLeave={() => setcurrImage(transformUrl(product.images[0]))}
     >
-      <Image
-        src={transformUrl(currImage)}
-        alt={product.name}
-        width={640}
-        height={800}
-      />
+      <Image src={currImage} alt={product.name} width={640} height={800} />
       <div className="py-4 px-2 flex flex-col gap-2">
         <p>{product.brand}</p>
         <p className="truncate">{product.name}</p>

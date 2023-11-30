@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import * as React from "react";
 import debounce from "lodash.debounce";
 import { useTranslations } from "next-intl";
@@ -24,6 +24,8 @@ import { breakPoints } from "@/app/_styles/constants";
 const Header = () => {
   const t = useTranslations("Header");
   const pathName = usePathname();
+  const params = useSearchParams();
+  const query = params.get("query") || "";
 
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const [isSearchBoxOpen, setIsSearchBoxOpen] = React.useState(false);
@@ -97,7 +99,7 @@ const Header = () => {
   React.useEffect(() => {
     setIsMenuOpen(false);
     setIsSearchBoxOpen(false);
-  }, [pathName]);
+  }, [pathName, query]);
 
   return (
     <header

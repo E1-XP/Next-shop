@@ -31,7 +31,7 @@ describe("getProductsPrice", () => {
 });
 
 describe("calculateRating", () => {
-  it("returns correct sum of product prices", () => {
+  it("calculates correct sum of product reviews", () => {
     const testData = [{ rating: 1 }, { rating: 5 }];
 
     const expected = 3;
