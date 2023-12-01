@@ -17,12 +17,14 @@ interface Props {
   referenceContent: (isOpen: boolean) => React.JSX.Element;
   referenceContentClass?: string;
   children: React.ReactNode;
+  buttonLabelText: string;
 }
 
 const Widget = ({
   children,
   referenceContent,
   referenceContentClass,
+  buttonLabelText,
 }: Props) => {
   const [isOpen, setIsOpen] = React.useState(false);
 
@@ -60,6 +62,7 @@ const Widget = ({
       <button
         onClick={toggleIsOpen}
         className={twMerge("flex items-center", referenceContentClass)}
+        aria-label={buttonLabelText}
       >
         {referenceContent(isOpen)}
       </button>

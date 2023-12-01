@@ -49,6 +49,7 @@ const UserWidget = () => {
 
   return (
     <Widget
+      buttonLabelText="Open user widget"
       referenceContent={(isOpen) =>
         isLoading ? (
           <Skeleton className="w-[26px] h-[26px]" borderRadius={999} />

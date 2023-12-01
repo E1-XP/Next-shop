@@ -35,6 +35,7 @@ const SearchMenuSwitcher = ({
             "flex justify-center",
             isSearchBoxOpen ? "max-sm:opacity-0" : ""
           )}
+          aria-label="Open search box"
         >
           <SearchIcon
             className={twMerge(
@@ -46,6 +47,7 @@ const SearchMenuSwitcher = ({
         <button
           onClick={() => setIsSearchBoxOpen(!isSearchBoxOpen)}
           className="flex justify-center"
+          aria-label="close search box"
         >
           <PlusIcon
             className={twMerge(

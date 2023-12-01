@@ -208,6 +208,7 @@ const SearchBox = ({
                   })}`}
                   className="flex gap-3"
                   onClick={onSuggestionSelect}
+                  aria-label={hint}
                 >
                   <span className="text-darkGray">
                     <SearchIcon />

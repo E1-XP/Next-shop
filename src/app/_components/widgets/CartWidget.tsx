@@ -68,6 +68,7 @@ const CartWidget = () => {
 
   return (
     <Widget
+      buttonLabelText="Open cart widget"
       referenceContent={(isOpen) =>
         isHydrating ? (
           <Skeleton className="w-[56px] h-[26px]" borderRadius={999} />
