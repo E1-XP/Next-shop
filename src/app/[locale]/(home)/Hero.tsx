@@ -104,6 +104,8 @@ const HeroSection = () => {
                 <p className="paragraph text-white">{item.paragraph}</p>
                 <Button
                   alt={true}
+                  asLink
+                  href={"/search"}
                   className="flex items-center gap-2 group mt-3"
                 >
                   {data.buttonText}
