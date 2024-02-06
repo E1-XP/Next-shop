@@ -1,10 +1,10 @@
 "use client";
 
-import Link from "next/link";
 import { useParams } from "next/navigation";
 import * as React from "react";
 import { twMerge } from "tailwind-merge";
 
+import { Link } from "@/navigation";
 import { Product } from "@prisma/client";
 
 interface Props {

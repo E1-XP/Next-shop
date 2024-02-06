@@ -1,7 +1,6 @@
 "use client";
 
 import * as React from "react";
-import Link from "next/link";
 import Image from "next/image";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -14,6 +13,7 @@ import Input, { Types } from "@/app/_components/Input";
 
 import img from "@/../public/images/chris-ghinda-NYQyBIUCs_A-unsplash.webp";
 
+import { Link } from "@/navigation";
 import { SchemaKeys, SchemaType, signUpSchema } from "./validation";
 import { trpc } from "@/app/_trpc/client";
 import { setZodErrorMap } from "@/app/_lib/zod";

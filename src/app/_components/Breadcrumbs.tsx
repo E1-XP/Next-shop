@@ -1,5 +1,5 @@
-import Link from "next/link";
 import * as React from "react";
+import { Link } from "@/navigation";
 
 interface Item {
   text: string;

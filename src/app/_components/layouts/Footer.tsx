@@ -1,6 +1,8 @@
 import * as React from "react";
-import Link from "next/link";
 import { useTranslations } from "next-intl";
+
+import { Link } from "@/navigation";
+import { currencies } from "@/app/_helpers/constants";
 
 import LanguageDropdown from "../dropdowns/LanguageDropdown";
 import CurrencyDropdown from "../dropdowns/CurrencyDropdown";
@@ -12,7 +14,6 @@ import EmailIcon from "../icons/Email";
 
 import USAFlag from "@/../public/images/USAFlag.svg";
 import PolishFlag from "@/../public/images/PolishFlag.svg";
-import { currencies } from "@/app/_helpers/constants";
 
 const Footer = () => {
   const t = useTranslations("Footer");

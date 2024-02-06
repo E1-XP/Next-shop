@@ -1,7 +1,8 @@
 import Image from "next/image";
-import Link from "next/link";
 import * as React from "react";
 import { useTranslations } from "next-intl";
+
+import { Link } from "@/navigation";
 
 import img from "@/../public/images/instagram/david-lezcano-NfZiOJzZgcg-unsplash.webp";
 import img2 from "@/../public/images/instagram/evangeline-sarney-NnsqpLjiA94-unsplash.webp";
@@ -21,7 +22,10 @@ const InstagramSection = () => {
 
   return (
     <section className="my-[52px] text-center wrapper">
-      <Link href="#" className="paragraph font-semibold transition hover:opacity-70">
+      <Link
+        href="#"
+        className="paragraph font-semibold transition hover:opacity-70"
+      >
         {data.preHeading}
       </Link>
       <h2 className="heading-2 mt-2">{data.heading}</h2>

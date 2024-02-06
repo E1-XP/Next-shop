@@ -1,7 +1,6 @@
 "use client";
 
 import * as React from "react";
-import Link from "next/link";
 import Image from "next/image";
 import { signIn } from "next-auth/react";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -17,6 +16,7 @@ import Input, { Types } from "@/app/_components/Input";
 import img from "@/../public/images/chris-ghinda-n4L__DFy43s-unsplash.webp";
 import GithubIcon from "@/app/_components/icons/Github";
 
+import { Link } from "@/navigation";
 import { SchemaKeys, SchemaType, signInSchema } from "./validation";
 import { setZodErrorMap } from "@/app/_lib/zod";
 

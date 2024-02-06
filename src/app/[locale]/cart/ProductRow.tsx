@@ -1,13 +1,13 @@
 "use client";
 import * as React from "react";
 import Image from "next/image";
-import Link from "next/link";
 import Skeleton from "react-loading-skeleton";
 import { useLocale, useTranslations } from "next-intl";
 
 import QuantityInput from "@/app/_components/QuantityInput";
 import TrashIcon from "@/app/_components/icons/Trash";
 
+import { Link } from "@/navigation";
 import { formatPrice } from "@/app/_helpers";
 import { locales } from "@/app/_helpers/constants";
 import { CartItem, useCartStore } from "@/app/_store/cart";

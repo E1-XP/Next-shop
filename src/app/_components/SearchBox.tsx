@@ -1,7 +1,6 @@
 "use state";
 
 import * as React from "react";
-import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { twMerge } from "tailwind-merge";
 import debounce from "lodash.debounce";
@@ -11,6 +10,7 @@ import Input from "./Input";
 import SearchIcon from "./icons/Search";
 import PlusIcon from "./icons/Plus";
 
+import { Link } from "@/navigation";
 import { trpc } from "../_trpc/client";
 
 interface Props {

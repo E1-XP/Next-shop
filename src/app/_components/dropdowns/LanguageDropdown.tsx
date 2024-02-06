@@ -2,8 +2,9 @@
 
 import * as React from "react";
 import Image from "next/image";
-import { usePathname, useRouter } from "next-intl/client";
 import { useLocale } from "next-intl";
+
+import { usePathname, useRouter } from "@/navigation";
 
 import Dropdown from "./Base";
 

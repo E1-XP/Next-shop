@@ -3,11 +3,11 @@
 import { Product, Review } from "@prisma/client";
 import Image from "next/image";
 import * as React from "react";
-import Link from "next/link";
 import { twMerge } from "tailwind-merge";
 import { useLocale } from "next-intl";
 import Skeleton from "react-loading-skeleton";
 
+import { Link } from "@/navigation";
 import { formatPrice } from "../_helpers";
 import { useGlobalStore } from "../_store/global";
 import { useHydrate } from "../_hooks/useHydrate";
