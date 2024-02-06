@@ -1,4 +1,4 @@
-import { NextIntlProvider } from "next-intl";
+import { IntlProvider } from "next-intl";
 import { ReactNode } from "react";
 
 import messages from "@/app/_i18n/en.json";
@@ -11,9 +11,9 @@ interface Props {
 export const RootMock = ({ children }: Props) => {
   return (
     <TrpcQueryProvider>
-      <NextIntlProvider messages={messages} locale="en">
+      <IntlProvider messages={messages} locale="en">
         {children}
-      </NextIntlProvider>
+      </IntlProvider>
     </TrpcQueryProvider>
   );
 };
