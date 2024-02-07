@@ -1,6 +1,6 @@
 "use client";
 
-import { usePathname, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import * as React from "react";
 import debounce from "lodash.debounce";
 import { useTranslations } from "next-intl";
@@ -17,7 +17,7 @@ import InstagramIcon from "../icons/Instagram";
 import TwitterIcon from "../icons/Twitter";
 import EmailIcon from "../icons/Email";
 
-import { Link } from "@/navigation";
+import { Link, usePathname } from "@/navigation";
 import { useWindowSize } from "@/app/_hooks/useWindowSize";
 import { breakPoints } from "@/app/_styles/constants";
 

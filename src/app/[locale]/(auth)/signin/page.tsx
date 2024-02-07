@@ -7,7 +7,6 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "react-toastify";
 import { useLocale, useTranslations } from "next-intl";
-import { useRouter } from "next/navigation";
 import { twMerge } from "tailwind-merge";
 
 import Button from "@/app/_components/Button";
@@ -16,7 +15,7 @@ import Input, { Types } from "@/app/_components/Input";
 import img from "@/../public/images/chris-ghinda-n4L__DFy43s-unsplash.webp";
 import GithubIcon from "@/app/_components/icons/Github";
 
-import { Link } from "@/navigation";
+import { Link, useRouter } from "@/navigation";
 import { SchemaKeys, SchemaType, signInSchema } from "./validation";
 import { setZodErrorMap } from "@/app/_lib/zod";
 

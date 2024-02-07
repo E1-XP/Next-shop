@@ -2,16 +2,17 @@
 
 import * as React from "react";
 import { signOut, useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import Skeleton from "react-loading-skeleton";
 import { twMerge } from "tailwind-merge";
 import { toast } from "react-toastify";
+import Image from "next/image";
+
+import { useRouter } from "@/navigation";
 
 import Widget from "./Base";
 import Button from "../Button";
 import ProfileIcon from "../icons/Profile";
-import Image from "next/image";
 
 const UserWidget = () => {
   const session = useSession();

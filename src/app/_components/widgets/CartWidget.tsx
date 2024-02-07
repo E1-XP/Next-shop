@@ -1,7 +1,6 @@
 "use client";
 
 import * as React from "react";
-import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { useLocale } from "next-intl";
@@ -15,6 +14,7 @@ import ShoppingBagIcon from "../icons/ShoppingBag";
 import { formatPrice, getProductsPrice } from "@/app/_helpers";
 import { locales } from "@/app/_helpers/constants";
 
+import { useRouter } from "@/navigation";
 import { useCartStore } from "@/app/_store/cart";
 import { useHydrate } from "@/app/_hooks/useHydrate";
 import { useGlobalStore } from "@/app/_store/global";

@@ -3,7 +3,6 @@
 import * as React from "react";
 import { twMerge } from "tailwind-merge";
 import { useLocale, useTranslations } from "next-intl";
-import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { toast } from "react-toastify";
 import Skeleton from "react-loading-skeleton";
@@ -18,6 +17,7 @@ import { useCartStore } from "@/app/_store/cart";
 import { useGlobalStore } from "@/app/_store/global";
 import { useHydrate } from "@/app/_hooks/useHydrate";
 import { trpc } from "@/app/_trpc/client";
+import { useRouter } from "@/navigation";
 
 interface Props {
   className?: string;
